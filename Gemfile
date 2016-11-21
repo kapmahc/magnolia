@@ -63,6 +63,7 @@ gem 'rolify'
 gem 'devise'
 gem 'devise-i18n'
 gem 'devise-bootstrap-views'
+gem 'attr_encrypted', '~> 3.0.0'
 
 gem 'kaminari'
 gem 'bootstrap4-kaminari-views'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161121193838) do
+ActiveRecord::Schema.define(version: 20161121195859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,31 @@ ActiveRecord::Schema.define(version: 20161121193838) do
     t.index ["code"], name: "index_shop_currencies_on_code", using: :btree
     t.index ["country"], name: "index_shop_currencies_on_country", using: :btree
     t.index ["name"], name: "index_shop_currencies_on_name", using: :btree
+  end
+
+  create_table "shop_payment_methods", force: :cascade do |t|
+    t.string   "name",                                           null: false
+    t.string   "flag",                 limit: 8,                 null: false
+    t.text     "description"
+    t.text     "encrypted_profile"
+    t.string   "encrypted_profile_iv"
+    t.boolean  "active",                         default: false, null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.index ["flag"], name: "index_shop_payment_methods_on_flag", using: :btree
+    t.index ["name"], name: "index_shop_payment_methods_on_name", unique: true, using: :btree
+  end
+
+  create_table "shop_shipping_methods", force: :cascade do |t|
+    t.string   "name",                                 null: false
+    t.string   "tracking",                             null: false
+    t.text     "description"
+    t.text     "encrypted_profile"
+    t.string   "encrypted_profile_iv"
+    t.boolean  "active",               default: false, null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.index ["name"], name: "index_shop_shipping_methods_on_name", unique: true, using: :btree
   end
 
   create_table "shop_states", force: :cascade do |t|

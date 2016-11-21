@@ -84,6 +84,8 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (7.1.4)
+    attr_encrypted (3.0.3)
+      encryptor (~> 3.0.0)
     autoprefixer-rails (6.5.3)
       execjs
     bcrypt (3.1.11)
@@ -120,6 +122,7 @@ GEM
     devise-i18n (1.1.1)
     emoji (1.0.7)
       json
+    encryptor (3.0.0)
     erubis (2.7.0)
     execjs (2.7.0)
     ffi (1.9.14)
@@ -270,6 +273,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  attr_encrypted (~> 3.0.0)
   bootstrap
   bootstrap4-kaminari-views
   browser
