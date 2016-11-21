@@ -24,3 +24,4 @@
 
 # Build
 /public/assets
+/node_modules

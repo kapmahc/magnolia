@@ -73,6 +73,8 @@ gem 'meta-tags'
 gem 'settingslogic'
 gem 'browser'
 gem 'closure_tree'
+gem 'friendly_id'
+gem 'emoji'
 
 gem 'sidekiq'
 gem 'sinatra', require: nil

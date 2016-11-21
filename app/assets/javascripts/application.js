@@ -15,4 +15,5 @@
 //= require turbolinks
 //= require tether
 //= require bootstrap
+//= require remarkable/dist/remarkable
 //= require_tree .
