@@ -1,3 +1,47 @@
+GIT
+  remote: https://github.com/kapmahc/forum.git
+  revision: 8251e8ec20e0f7c54e019744b4aea8848603e2a2
+  specs:
+
+GIT
+  remote: https://github.com/kapmahc/ops.git
+  revision: e6f8ebfff7e76841f5f999f7966e4a1c5a41261a
+  specs:
+
+GIT
+  remote: https://github.com/kapmahc/reading.git
+  revision: efd1d8c3512669b33e0c305a2ecda18cdcb3006b
+  specs:
+
+GIT
+  remote: https://github.com/kapmahc/shop.git
+  revision: 445f7770c835b2ece8af8d24406699276ec5e73b
+  specs:
+
+PATH
+  remote: ../forum
+  specs:
+    forum (0.1.0)
+      rails (~> 5.0.0, >= 5.0.0.1)
+
+PATH
+  remote: ../ops
+  specs:
+    ops (0.1.0)
+      rails (~> 5.0.0, >= 5.0.0.1)
+
+PATH
+  remote: ../reading
+  specs:
+    reading (0.1.0)
+      rails (~> 5.0.0, >= 5.0.0.1)
+
+PATH
+  remote: ../shop
+  specs:
+    shop (0.1.0)
+      rails (~> 5.0.0, >= 5.0.0.1)
+
 GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
@@ -195,17 +239,21 @@ DEPENDENCIES
   devise
   devise-bootstrap-views
   devise-i18n
+  forum!
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
+  ops!
   pg (~> 0.18)
   puma (~> 3.0)
   pundit
   rails (~> 5.0.0, >= 5.0.0.1)
   rails-assets-tether (>= 1.1.0)!
   rails-i18n (~> 5.0.0)
+  reading!
   rolify
   sass-rails (~> 5.0)
+  shop!
   slim-rails
   spring
   spring-watcher-listen (~> 2.0.0)

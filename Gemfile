@@ -63,3 +63,10 @@ gem 'rolify'
 gem 'devise'
 gem 'devise-i18n'
 gem 'devise-bootstrap-views'
+
+group :production do
+  gem 'reading', git: 'https://github.com/kapmahc/reading.git', path: '../reading'
+  gem 'forum', git: 'https://github.com/kapmahc/forum.git', path: '../forum'
+  gem 'shop', git: 'https://github.com/kapmahc/shop.git', path: '../shop'
+  gem 'ops', git: 'https://github.com/kapmahc/ops.git', path: '../ops'
+end

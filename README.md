@@ -3,12 +3,12 @@ Magnolia is a complete open source e-commerce solution for Ruby on Rails.
 
 ## Ruby version
 * Install zsh
-```
+```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 ```
 
 * Install rbenv
-```
+```bash
 git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 cd ~/.rbenv && src/configure && make -C src
 git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
@@ -16,7 +16,7 @@ git clone https://github.com/rbenv/rbenv-vars.git ~/.rbenv/plugins/rbenv-vars
 ```
 
 * Setup rbenv
-```
+```bash
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.zshrc
 echo 'eval "$(rbenv init -)"' >> ~/.zshrc
 ```
@@ -28,7 +28,7 @@ rbenv install 2.3.1
 ```
 
 ## Database creation
-```
+```bash
 psql -U postgres
 CREATE DATABASE db-name WITH ENCODING = 'UTF8';
 CREATE USER user-name WITH PASSWORD 'change-me';
@@ -42,7 +42,7 @@ initdb  -D '/var/lib/postgres/data'
 ```
 
 ## For development
-```
+```bash
 git clone https://github.com/kapmahc/magnolia.git
 cd magnolia
 
@@ -56,10 +56,12 @@ rails s
 ```
 
 ## Deployment instructions
-* Run on server
-```
+
+```bash
+cap production deploy
 ```
 
-* Run on local
-```
-```
+## Contributing
+
+## License
+The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
