@@ -2,6 +2,7 @@ require 'forum'
 require 'shop'
 require 'reading'
 require 'ops'
+require 'sidekiq/web'
 
 Rails.application.routes.draw do
   scope '/:locale' do
@@ -10,7 +11,12 @@ Rails.application.routes.draw do
     mount Reading::Engine => '/reading'
     mount Ops::Engine => '/ops'
   end
+
   devise_for :users
+
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   root to: 'home#index'
 

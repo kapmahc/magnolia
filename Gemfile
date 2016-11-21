@@ -67,6 +67,13 @@ gem 'devise-bootstrap-views'
 gem 'kaminari'
 gem 'bootstrap4-kaminari-views'
 
+gem 'chartkick'
+gem 'simple_form'
+gem 'meta-tags'
+gem 'settingslogic'
+gem 'browser'
+gem 'closure_tree'
+
 
 group :production do
   gem 'reading', path: '../reading' #, git: 'https://github.com/kapmahc/reading.git'
