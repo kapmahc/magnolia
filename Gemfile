@@ -46,3 +46,14 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# My
+gem 'rails-i18n', '~> 5.0.0'
+
+gem 'slim'
+
+# https://github.com/twbs/bootstrap-rubygem/blob/master/README.md
+gem 'bootstrap'
+source 'https://rails-assets.org' do
+  gem 'rails-assets-tether', '>= 1.1.0'
+end
