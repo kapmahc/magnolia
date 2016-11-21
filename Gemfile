@@ -74,6 +74,9 @@ gem 'settingslogic'
 gem 'browser'
 gem 'closure_tree'
 
+gem 'sidekiq'
+gem 'sinatra', require: nil
+
 
 group :production do
   gem 'reading', path: '../reading' #, git: 'https://github.com/kapmahc/reading.git'
