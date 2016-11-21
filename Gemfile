@@ -81,9 +81,10 @@ gem 'sidekiq'
 gem 'sinatra', require: nil
 
 
-group :production do
-  gem 'reading', path: '../reading' #, git: 'https://github.com/kapmahc/reading.git'
-  gem 'forum', path: '../forum' #, git: 'https://github.com/kapmahc/forum.git'
-  gem 'shop', path: '../shop' #, git: 'https://github.com/kapmahc/shop.git'
-  gem 'ops', path: '../ops' #, git: 'https://github.com/kapmahc/ops.git'
+gem 'reading', path: '../reading', git: 'https://github.com/kapmahc/reading.git'
+gem 'forum', path: '../forum', git: 'https://github.com/kapmahc/forum.git'
+gem 'shop', path: '../shop', git: 'https://github.com/kapmahc/shop.git'
+gem 'ops', path: '../ops', git: 'https://github.com/kapmahc/ops.git'
+
+group :development do
 end

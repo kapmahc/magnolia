@@ -15,6 +15,9 @@ if User.count == 0
   user = User.new email: email, password: password, password_confirmation: password
   user.skip_confirmation!
   user.save
+
   %w(admin root).each {|r| user.grant r}
 
 end
+
+Rails.application.config.engines.each {|e| Object.const_get("#{e}::Engine").load_seed}

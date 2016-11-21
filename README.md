@@ -61,6 +61,22 @@ rails s
 cap production deploy
 ```
 
+## Notes
+
+* sqlite3
+```
+.tables # show tables
+.schema ?TABLE? # Show the CREATE statements
+```
+
+* rails
+```
+rails new magnolia -d postgresql
+rails plugin new forum --mountable
+rails g controller Home index --no-assets --no-helper
+rails railties:install:migrations
+```
+
 ## Contributing
 
 ## License

@@ -1,15 +1,8 @@
-require 'forum'
-require 'shop'
-require 'reading'
-require 'ops'
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
   scope '/:locale' do
-    mount Forum::Engine => '/forum'
-    mount Shop::Engine => '/shop'
-    mount Reading::Engine => '/reading'
-    mount Ops::Engine => '/ops'
+    Rails.application.config.engines.each {|e| mount Object.const_get("#{e}::Engine") => e.downcase}
   end
 
   devise_for :users

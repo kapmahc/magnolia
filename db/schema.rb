@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161121075417) do
+ActiveRecord::Schema.define(version: 20161121193838) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,40 @@ ActiveRecord::Schema.define(version: 20161121075417) do
     t.datetime "updated_at"
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
     t.index ["name"], name: "index_roles_on_name", using: :btree
+  end
+
+  create_table "shop_countries", force: :cascade do |t|
+    t.string   "name",                       null: false
+    t.boolean  "active",     default: false, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["name"], name: "index_shop_countries_on_name", unique: true, using: :btree
+  end
+
+  create_table "shop_currencies", force: :cascade do |t|
+    t.string   "cid",        limit: 3,                                          null: false
+    t.string   "code",       limit: 3,                                          null: false
+    t.string   "name",                                                          null: false
+    t.string   "country",                                                       null: false
+    t.decimal  "rate",                 precision: 12, scale: 4
+    t.string   "units",      limit: 8,                                          null: false
+    t.boolean  "active",                                        default: false, null: false
+    t.datetime "created_at",                                                    null: false
+    t.datetime "updated_at",                                                    null: false
+    t.index ["cid"], name: "index_shop_currencies_on_cid", using: :btree
+    t.index ["code"], name: "index_shop_currencies_on_code", using: :btree
+    t.index ["country"], name: "index_shop_currencies_on_country", using: :btree
+    t.index ["name"], name: "index_shop_currencies_on_name", using: :btree
+  end
+
+  create_table "shop_states", force: :cascade do |t|
+    t.string   "name",            null: false
+    t.integer  "shop_country_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["name", "shop_country_id"], name: "index_shop_states_on_name_and_shop_country_id", unique: true, using: :btree
+    t.index ["name"], name: "index_shop_states_on_name", using: :btree
+    t.index ["shop_country_id"], name: "index_shop_states_on_shop_country_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -57,4 +91,5 @@ ActiveRecord::Schema.define(version: 20161121075417) do
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
   end
 
+  add_foreign_key "shop_states", "shop_countries"
 end
