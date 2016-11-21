@@ -57,3 +57,9 @@ gem 'bootstrap'
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
 end
+
+gem 'pundit'
+gem 'rolify'
+gem 'devise'
+gem 'devise-i18n'
+gem 'devise-bootstrap-views'
