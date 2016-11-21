@@ -5,3 +5,16 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+cli = HighLine.new
+
+if User.count == 0
+  email = cli.ask('Email? ') { |q| q.default = 'admin@change-me.com' }
+  password = cli.ask('Password? ') { |q| q.default = 'change-me' }
+
+  user = User.new email: email, password: password, password_confirmation: password
+  user.skip_confirmation!
+  user.save
+  %w(admin root).each {|r| user.grant r}
+
+end

@@ -75,6 +75,7 @@ gem 'browser'
 gem 'closure_tree'
 gem 'friendly_id'
 gem 'emoji'
+gem 'highline'
 
 gem 'sidekiq'
 gem 'sinatra', require: nil
