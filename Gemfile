@@ -50,7 +50,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # My
 gem 'rails-i18n', '~> 5.0.0'
 
-gem 'slim'
+gem 'slim-rails'
 
 # https://github.com/twbs/bootstrap-rubygem/blob/master/README.md
 gem 'bootstrap'
