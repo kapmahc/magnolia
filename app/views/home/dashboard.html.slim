@@ -1,7 +1,19 @@
 - @title = t '.title'
 
-h2 #{@title}
-hr
-div class="btn-group" role="group" aria-label="personal"
-  = link_to(t('devise.registrations.edit.title'), edit_user_registration_path, {class: 'btn btn-secondary'})
-  = link_to(t('personal.logs.title'), personal_logs_path, {class: 'btn btn-secondary'})
+div class="row block"
+  h2 #{@title}
+  hr
+  div class="btn-group" role="group" aria-label="personal"
+    = link_to(t('devise.registrations.edit.title'), edit_user_registration_path, {class: 'btn btn-secondary'})
+    = link_to(t('personal.logs.title'), personal_logs_path, {class: 'btn btn-secondary'})
+
+- Rails.application.config.engines.each do |e|
+  - en = Object.const_get(e).dashboard(current_user)
+
+  - unless en.nil?
+    div class="row block"
+      h3 #{t en.fetch(:label)}
+      hr
+      div class="btn-group" role="group" aria-label="#{e}-bar"
+        - en.fetch(:links).each do |l|
+          = link_to t(l.fetch(:label)), send(e.downcase).send(l.fetch(:href)), {class: 'btn btn-secondary'}

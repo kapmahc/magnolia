@@ -10,14 +10,24 @@ html
       = link_to Setting.site_info(:title)||'', main_app.root_path, {class: 'navbar-brand'}
       ul class="nav navbar-nav"
         li class="nav-item active"
-          a class="nav-link" href="#{main_app.root_path}"
-            = t 'shared.header.home'
+          a class="nav-link" href="#{main_app.dashboard_path}"
+            = t 'shared.personal-bar.dashboard'
             span class="sr-only" (current)
-        li class="nav-item"
-          = link_to t('home.dashboard.title'), main_app.dashboard_path, {class: 'nav-link'}
+
+        li class="nav-item dropdown"
+          a class="nav-link dropdown-toggle" id="top-personal-bar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" #{t 'home.dashboard.title'}
+          div class="dropdown-menu" aria-labelledby="top-personal-bar"
+            = link_to t('devise.registrations.edit.title'), main_app.edit_user_registration_path, {class: 'dropdown-item'}
+            = link_to t('personal.logs.title'), main_app.personal_logs_path, {class: 'dropdown-item'}
+
         - Rails.application.config.engines.each do |e|
-          li class="nav-item"
-            = link_to t("#{e}.dashboard.title"), send(e.downcase).dashboard_path, {class: 'nav-link'}
+          - en = Object.const_get(e).dashboard(current_user)
+          - unless en.nil?
+            li class="nav-item dropdown"
+              a class="nav-link dropdown-toggle" id="top-#{en}-bar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" #{t en.fetch(:label)}
+              div class="dropdown-menu" aria-labelledby="top-#{en}-bar"
+                - en.fetch(:links).each do |l|
+                  = link_to(t(l.fetch(:label)), send(e.downcase).send(l.fetch(:href)), {class: 'dropdown-item'})
 
         = render 'shared/personal-bar'
         = render 'shared/language-bar'

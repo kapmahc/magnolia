@@ -19,6 +19,7 @@ zh-CN:
     language-bar:
       switch: 切换语言
     personal-bar:
+      dashboard: 控制面板
       welcome: 欢迎你, %{name}
       sign-in-up: 登录/注册
       sign_out: 安全退出
