@@ -17,7 +17,7 @@ html
           = link_to t('home.dashboard.title'), main_app.dashboard_path, {class: 'nav-link'}
         - Rails.application.config.engines.each do |e|
           li class="nav-item"
-            = link_to t("#{e}.dashboard.title"), eval("#{e.downcase.to_sym}.dashboard_path"), {class: 'nav-link'}
+            = link_to t("#{e}.dashboard.title"), send(e.downcase).dashboard_path, {class: 'nav-link'}
 
         = render 'shared/personal-bar'
         = render 'shared/language-bar'
