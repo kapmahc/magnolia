@@ -2,3 +2,10 @@ en:
   messages:
     success: Success
     fail: Failed
+  languages:
+    en: English
+    zh-CN: 简体中文
+    zh-TW: 正體中文
+  shared:
+    language-bar:
+      switch: Switch language

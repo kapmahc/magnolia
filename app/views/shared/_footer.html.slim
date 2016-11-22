@@ -2,7 +2,10 @@ hr
 
 footer
   p class="float-xs-right"
-    a href="#" Back to top
+    | #{t '.other-languages'} :
+    - Setting.languages.each do |l|
+      | &nbsp;
+      = link_to t("languages.#{l}"), {locale: locale}
   p
     | &copy; 2014 Company, Inc. &middot;
     a href="#" Privacy
