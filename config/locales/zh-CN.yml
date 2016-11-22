@@ -22,5 +22,7 @@ zh-CN:
     flash:
       success: 操作成功
       fail: 操作失败
+    header:
+      home: 主页
     footer:
       other-languages: 本站其他语言版本

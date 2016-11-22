@@ -7,7 +7,8 @@ footer
       | &nbsp;
       = link_to t("languages.#{l}"), {locale: locale}
   p
-    | &copy; 2014 Company, Inc. &middot;
-    a href="#" Privacy
-    | &middot;
-    a href="#" Terms
+    | &copy; #{Setting.site_info :copyright}
+    -if Setting.bottom_links
+      = Setting.bottom_links.each do |l|
+        | &middot;
+        =link_to t(l.label), l.href

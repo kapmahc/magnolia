@@ -1,15 +1,13 @@
 nav class="navbar navbar-fixed-top navbar-dark bg-inverse"
-  a href="#" class="navbar-brand" Carousel
+  = link_to Setting.site_info(:title)||'', root_path, {class: 'navbar-brand'}
   ul class="nav navbar-nav"
     li class="nav-item active"
-      a class="nav-link" href="#"
-        | Home
+      a class="nav-link" href="#{root_path}"
+        = t '.home'
         span class="sr-only" (current)
-    li class="nav-item"
-      a class="nav-link" href="#" Features
-    li class="nav-item">
-      a class="nav-link" href="#" Pricing
-    li class="nav-item">
-      a class="nav-link" href="#" About
+    -if Setting.top_links
+      = Setting.top_links.each do |l|
+        li class="nav-item"
+          =link_to t(l.label), l.href, {class: 'nav-link'}
     = render 'shared/personal-bar'
     = render 'shared/language-bar'
