@@ -118,7 +118,6 @@ GEM
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
-    devise-bootstrap-views (0.0.9)
     devise-i18n (1.1.1)
     emoji (1.0.7)
       json
@@ -287,7 +286,6 @@ DEPENDENCIES
   closure_tree
   coffee-rails (~> 4.2)
   devise
-  devise-bootstrap-views
   devise-i18n
   emoji
   forum!

@@ -12,7 +12,10 @@ if User.count == 0
   email = cli.ask('Email? ') { |q| q.default = 'admin@change-me.com' }
   password = cli.ask('Password? ') { |q| q.default = 'change-me' }
 
-  user = User.new email: email, password: password, password_confirmation: password
+  user = User.new name: 'administrator',
+                  email: email,
+                  password: password,
+                  password_confirmation: password
   user.skip_confirmation!
   user.save
 
