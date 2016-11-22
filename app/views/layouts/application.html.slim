@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    = display_meta_tags site: Setting.site_info(:title), keywords: Setting.site_info(:keywords), description: Setting.site_info(:description), author: Setting.site_info(:author)
+    = display_meta_tags site: Setting.site_info(:title), title: @title, keywords: Setting.site_info(:keywords), description: Setting.site_info(:description), author: Setting.site_info(:author)
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track'=> 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'

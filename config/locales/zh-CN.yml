@@ -11,13 +11,20 @@ zh-CN:
       attributes:
         user:
           name: 姓名
+  devise:
+    registrations:
+       edit:
+        title: 个人信息
+  layouts:
+    dashboard:
+      home: 控制面板
   shared:
     language-bar:
       switch: 切换语言
     personal-bar:
       welcome: 欢迎你, %{name}
       sign-in-up: 登录/注册
-      profile: 个人信息
+      dashboard: 控制面板
       sign_out: 安全退出
     flash:
       success: 操作成功
