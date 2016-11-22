@@ -1,1 +1,7 @@
-p dashboard
+- @title = t 'shared.personal-bar.dashboard'
+
+- dashboard_links.each do |i|
+  h4 #{t i.fetch(:label)}
+  div class="btn-group" role="group" aria-label="#{t i.fetch(:label)}"
+    - i.fetch(:links).each do |j|
+      = link_to t(j.fetch(:label)), j.fetch(:href), {class: 'btn btn-secondary'}

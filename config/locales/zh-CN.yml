@@ -33,3 +33,8 @@ zh-CN:
       home: 主页
     footer:
       other-languages: 本站其他语言版本
+  personal:
+    index: 个人中心
+    logs:
+      title: 日志列表
+

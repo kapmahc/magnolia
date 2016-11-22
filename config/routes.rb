@@ -3,6 +3,7 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   scope '/:locale' do
     get '/dashboard' => 'home#dashboard'
+    get 'personal/logs'
 
     Rails.application.config.engines.each {|e| mount Object.const_get("#{e}::Engine") => e.downcase}
   end

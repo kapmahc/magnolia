@@ -14,9 +14,18 @@ html
             = t 'shared.personal-bar.dashboard'
             span class="sr-only" (current)
 
+        - dashboard_links.each do |i|
+          li class="nav-item dropdown"
+            a class="nav-link dropdown-toggle" id="#{i.fetch(:label)}-bar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" #{t i.fetch(:label)}
+            div class="dropdown-menu" aria-labelledby="#{i.fetch(:label)}-bar"
+              - i.fetch(:links).each do |j|
+                = link_to(t(j.fetch(:label)), j.fetch(:href), {class: 'dropdown-item'})
+
         = render 'shared/personal-bar'
         = render 'shared/language-bar'
     div class="container"
+      h2 #{@title}
+      hr
       = render 'shared/flash'
       = yield
       = render 'shared/footer'
