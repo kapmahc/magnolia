@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
   def set_locale
     I18n.locale = params[:locale] || browser.accept_language.first.full #I18n.default_locale
   end
+
   def configure_permitted_parameters
     added_attrs = [:name, :password, :password_confirmation, :remember_me]
     devise_parameter_sanitizer.permit :sign_up, keys: added_attrs + [:email]

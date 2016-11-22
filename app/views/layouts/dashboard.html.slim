@@ -7,25 +7,21 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
     nav class="navbar navbar-fixed-top navbar-dark bg-inverse"
-      = link_to Setting.site_info(:title)||'', root_path, {class: 'navbar-brand'}
+      = link_to Setting.site_info(:title)||'', main_app.root_path, {class: 'navbar-brand'}
       ul class="nav navbar-nav"
         li class="nav-item active"
-          a class="nav-link" href="#{root_path}"
-            = t 'shared.personal-bar.dashboard'
+          a class="nav-link" href="#{main_app.root_path}"
+            = t 'shared.header.home'
             span class="sr-only" (current)
-
-        - dashboard_links.each do |i|
-          li class="nav-item dropdown"
-            a class="nav-link dropdown-toggle" id="#{i.fetch(:label)}-bar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" #{t i.fetch(:label)}
-            div class="dropdown-menu" aria-labelledby="#{i.fetch(:label)}-bar"
-              - i.fetch(:links).each do |j|
-                = link_to(t(j.fetch(:label)), j.fetch(:href), {class: 'dropdown-item'})
+        li class="nav-item"
+          = link_to t('home.dashboard.title'), main_app.dashboard_path, {class: 'nav-link'}
+        - Rails.application.config.engines.each do |e|
+          li class="nav-item"
+            = link_to t("#{e}.dashboard.title"), eval("#{e.downcase.to_sym}.dashboard_path"), {class: 'nav-link'}
 
         = render 'shared/personal-bar'
         = render 'shared/language-bar'
     div class="container"
-      h2 #{@title}
-      hr
       = render 'shared/flash'
       = yield
       = render 'shared/footer'

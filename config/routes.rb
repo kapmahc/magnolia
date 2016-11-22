@@ -10,11 +10,11 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  # authenticate :user, lambda { |u| u.admin? } do
+  authenticate :user, lambda { |u| u.is_admin? } do
     mount Sidekiq::Web => '/sidekiq'
-  # end
+  end
 
-  root to: 'home#index'
+  root 'home#index'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
