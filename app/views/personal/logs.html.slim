@@ -1,4 +1,7 @@
--@title = t '.title'
+h2
+  =@title = t '.title'
+hr
+
 ul class="list-group"
   - current_user.logs.order(id: :desc).limit(120).each do |i|
     li class="list-group-item" #{time_ago_in_words i.created_at}: #{i.message}
