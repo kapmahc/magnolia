@@ -77,6 +77,7 @@ gem 'closure_tree'
 gem 'friendly_id'
 gem 'emoji'
 gem 'highline'
+gem 'lograge'
 
 gem 'sidekiq'
 gem 'sinatra', require: nil

@@ -77,6 +77,10 @@ rails g controller Home index --no-assets --no-helper
 rails railties:install:migrations
 ```
 
+## Documents
+
+- http://guides.rubyonrails.org/
+
 ## Contributing
 
 ## License

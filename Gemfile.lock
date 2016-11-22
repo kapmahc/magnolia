@@ -15,7 +15,7 @@ GIT
 
 GIT
   remote: https://github.com/kapmahc/shop.git
-  revision: 186d0d60ba60b6732d5e4c1cb97254212bef142e
+  revision: 6d66d619549cf5f78353c04e0ee2f010d7a7bd9b
   specs:
 
 PATH
@@ -146,6 +146,10 @@ GEM
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
+    lograge (0.4.1)
+      actionpack (>= 4, < 5.1)
+      activesupport (>= 4, < 5.1)
+      railties (>= 4, < 5.1)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -292,6 +296,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   listen (~> 3.0.5)
+  lograge
   meta-tags
   ops!
   pg (~> 0.18)
