@@ -1,21 +1,21 @@
 GIT
   remote: https://github.com/kapmahc/forum.git
-  revision: 8251e8ec20e0f7c54e019744b4aea8848603e2a2
+  revision: 8bc5aeac27af044c6bbd429850ccff65459cdbcd
   specs:
 
 GIT
   remote: https://github.com/kapmahc/ops.git
-  revision: e6f8ebfff7e76841f5f999f7966e4a1c5a41261a
+  revision: 206d2271026f4dab8266f31a663ef1db3df35ea3
   specs:
 
 GIT
   remote: https://github.com/kapmahc/reading.git
-  revision: 4573520bd936301c9391028b7a227f0ef225fb57
+  revision: 6d510ff90ba856624399ddf95593f92a1d87dcf1
   specs:
 
 GIT
   remote: https://github.com/kapmahc/shop.git
-  revision: 6d66d619549cf5f78353c04e0ee2f010d7a7bd9b
+  revision: 65fa4ec103802807f2bc89a22c2266226e057d1e
   specs:
 
 PATH
@@ -167,7 +167,7 @@ GEM
       mini_portile2 (~> 2.1.0)
     orm_adapter (0.5.0)
     pg (0.19.0)
-    puma (3.6.1)
+    puma (3.6.2)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
     rack (2.0.1)

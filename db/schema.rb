@@ -10,16 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161122052600) do
+ActiveRecord::Schema.define(version: 20161123151142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "leave_words", force: :cascade do |t|
+    t.string   "lang",       null: false
+    t.string   "email",      null: false
+    t.string   "username"
+    t.string   "phone"
+    t.text     "body",       null: false
+    t.datetime "created_at", null: false
+    t.index ["email"], name: "index_leave_words_on_email", using: :btree
+    t.index ["lang"], name: "index_leave_words_on_lang", using: :btree
+    t.index ["phone"], name: "index_leave_words_on_phone", using: :btree
+    t.index ["username"], name: "index_leave_words_on_username", using: :btree
+  end
 
   create_table "logs", force: :cascade do |t|
     t.string   "message",    null: false
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.index ["user_id"], name: "index_logs_on_user_id", using: :btree
+  end
+
+  create_table "notices", force: :cascade do |t|
+    t.string   "lang",       null: false
+    t.text     "body",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lang"], name: "index_notices_on_lang", using: :btree
   end
 
   create_table "roles", force: :cascade do |t|
