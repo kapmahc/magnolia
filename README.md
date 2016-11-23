@@ -22,9 +22,9 @@ echo 'eval "$(rbenv init -)"' >> ~/.zshrc
 ```
 
 * Install ruby
-```
+```bash
 rbenv install -l
-rbenv install 2.3.1
+rbenv install 2.3.3
 ```
 
 ## Database creation
@@ -37,7 +37,7 @@ GRANT ALL PRIVILEGES ON DATABASE db-name TO user-name;
 
 * ExecStartPre=/usr/bin/postgresql-check-db-dir ${PGROOT}/data (code=exited, status=1/FAILURE)
 
-```
+```bash
 initdb  -D '/var/lib/postgres/data'
 ```
 
@@ -64,13 +64,13 @@ cap production deploy
 ## Notes
 
 * sqlite3
-```
+```bash
 .tables # show tables
 .schema ?TABLE? # Show the CREATE statements
 ```
 
 * rails
-```
+```bash
 rails new magnolia -d postgresql
 rails plugin new forum --mountable
 rails g controller Home index --no-assets --no-helper
