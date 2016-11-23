@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161123151142) do
+ActiveRecord::Schema.define(version: 20161123194516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,51 @@ ActiveRecord::Schema.define(version: 20161123151142) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["lang"], name: "index_notices_on_lang", using: :btree
+  end
+
+  create_table "reading_books", force: :cascade do |t|
+    t.string   "author",                   null: false
+    t.string   "publisher",                null: false
+    t.string   "title",                    null: false
+    t.string   "version",                  null: false
+    t.string   "lang",                     null: false
+    t.string   "subject",                  null: false
+    t.string   "file",                     null: false
+    t.integer  "vote",         default: 0, null: false
+    t.date     "published_at",             null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["author"], name: "index_reading_books_on_author", using: :btree
+    t.index ["file"], name: "index_reading_books_on_file", unique: true, using: :btree
+    t.index ["lang"], name: "index_reading_books_on_lang", using: :btree
+    t.index ["publisher"], name: "index_reading_books_on_publisher", using: :btree
+    t.index ["subject"], name: "index_reading_books_on_subject", using: :btree
+    t.index ["title"], name: "index_reading_books_on_title", using: :btree
+    t.index ["version"], name: "index_reading_books_on_version", using: :btree
+  end
+
+  create_table "reading_favorites", force: :cascade do |t|
+    t.string   "resource_type", null: false
+    t.integer  "resource_id",   null: false
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["resource_type", "resource_id", "user_id"], name: "idx_reading_favorites_ids", unique: true, using: :btree
+    t.index ["resource_type"], name: "index_reading_favorites_on_resource_type", using: :btree
+    t.index ["user_id"], name: "index_reading_favorites_on_user_id", using: :btree
+  end
+
+  create_table "reading_notes", force: :cascade do |t|
+    t.string   "flag",            limit: 8,             null: false
+    t.text     "body",                                  null: false
+    t.integer  "vote",                      default: 0, null: false
+    t.integer  "reading_book_id"
+    t.integer  "user_id"
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.index ["flag"], name: "index_reading_notes_on_flag", using: :btree
+    t.index ["reading_book_id"], name: "index_reading_notes_on_reading_book_id", using: :btree
+    t.index ["user_id"], name: "index_reading_notes_on_user_id", using: :btree
   end
 
   create_table "roles", force: :cascade do |t|
@@ -157,5 +202,8 @@ ActiveRecord::Schema.define(version: 20161123151142) do
   end
 
   add_foreign_key "logs", "users"
+  add_foreign_key "reading_favorites", "users"
+  add_foreign_key "reading_notes", "reading_books"
+  add_foreign_key "reading_notes", "users"
   add_foreign_key "shop_states", "shop_countries"
 end
