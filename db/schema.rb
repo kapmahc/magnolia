@@ -10,10 +10,52 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161123215927) do
+ActiveRecord::Schema.define(version: 20161123230019) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "forum_articles", force: :cascade do |t|
+    t.string   "title",                                     null: false
+    t.text     "body",                                      null: false
+    t.string   "lang",                                      null: false
+    t.string   "flag",       limit: 8, default: "markdown", null: false
+    t.integer  "vote",                 default: 0,          null: false
+    t.integer  "user_id"
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.index ["lang"], name: "index_forum_articles_on_lang", using: :btree
+    t.index ["title"], name: "index_forum_articles_on_title", using: :btree
+    t.index ["user_id"], name: "index_forum_articles_on_user_id", using: :btree
+  end
+
+  create_table "forum_articles_tags", id: false, force: :cascade do |t|
+    t.integer "forum_article_id"
+    t.integer "forum_tag_id"
+    t.index ["forum_article_id", "forum_tag_id"], name: "index_forum_articles_tags_on_forum_article_id_and_forum_tag_id", unique: true, using: :btree
+    t.index ["forum_article_id"], name: "index_forum_articles_tags_on_forum_article_id", using: :btree
+    t.index ["forum_tag_id"], name: "index_forum_articles_tags_on_forum_tag_id", using: :btree
+  end
+
+  create_table "forum_comments", force: :cascade do |t|
+    t.text     "body",                                            null: false
+    t.string   "flag",             limit: 8, default: "markdown", null: false
+    t.integer  "forum_article_id"
+    t.integer  "vote",                       default: 0,          null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.index ["flag"], name: "index_forum_comments_on_flag", using: :btree
+    t.index ["forum_article_id"], name: "index_forum_comments_on_forum_article_id", using: :btree
+  end
+
+  create_table "forum_tags", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.string   "lang",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lang"], name: "index_forum_tags_on_lang", using: :btree
+    t.index ["name"], name: "index_forum_tags_on_name", unique: true, using: :btree
+  end
 
   create_table "leave_words", force: :cascade do |t|
     t.string   "lang",                       null: false
@@ -76,13 +118,13 @@ ActiveRecord::Schema.define(version: 20161123215927) do
   end
 
   create_table "reading_notes", force: :cascade do |t|
-    t.string   "flag",            limit: 8,             null: false
-    t.text     "body",                                  null: false
-    t.integer  "vote",                      default: 0, null: false
+    t.string   "flag",            limit: 8, default: "markdown", null: false
+    t.text     "body",                                           null: false
+    t.integer  "vote",                      default: 0,          null: false
     t.integer  "reading_book_id"
     t.integer  "user_id"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
     t.index ["flag"], name: "index_reading_notes_on_flag", using: :btree
     t.index ["reading_book_id"], name: "index_reading_notes_on_reading_book_id", using: :btree
     t.index ["user_id"], name: "index_reading_notes_on_user_id", using: :btree
@@ -200,6 +242,10 @@ ActiveRecord::Schema.define(version: 20161123215927) do
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
   end
 
+  add_foreign_key "forum_articles", "users"
+  add_foreign_key "forum_articles_tags", "forum_articles"
+  add_foreign_key "forum_articles_tags", "forum_tags"
+  add_foreign_key "forum_comments", "forum_articles"
   add_foreign_key "logs", "users"
   add_foreign_key "reading_favorites", "users"
   add_foreign_key "reading_notes", "reading_books"
