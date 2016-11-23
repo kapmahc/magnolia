@@ -11,6 +11,8 @@ zh-CN:
     edit: 编辑
     remove: 删除
     manage: 管理
+    view: 查看
+    favorite: 收藏
   activerecord:
     attributes:
       user:

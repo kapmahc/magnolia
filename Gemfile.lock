@@ -10,13 +10,22 @@ GIT
 
 GIT
   remote: https://github.com/kapmahc/reading.git
-  revision: 4f194c6f0c2ebed00e07e133f3423714cc6bcdb5
+  revision: 41a34c5db7da929ada22eb46c7a8e855a3bb7e45
   specs:
 
 GIT
   remote: https://github.com/kapmahc/shop.git
   revision: 65fa4ec103802807f2bc89a22c2266226e057d1e
   specs:
+
+GIT
+  remote: https://github.com/klacointe/bootstrap-kaminari-views.git
+  revision: 674a32f34f537b5e92bffa0cef3d0cd1c4e499b5
+  branch: bootstrap4
+  specs:
+    bootstrap-kaminari-views (0.0.5)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
 
 PATH
   remote: ../forum
@@ -97,9 +106,6 @@ GEM
     bootstrap (4.0.0.alpha5)
       autoprefixer-rails (>= 6.0.3)
       sass (>= 3.4.19)
-    bootstrap4-kaminari-views (1.0.0)
-      kaminari (>= 0.13)
-      rails (>= 3.1)
     browser (2.3.0)
     builder (3.2.2)
     byebug (9.0.6)
@@ -153,6 +159,9 @@ GEM
     kaminari (0.17.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    kaminari-i18n (0.4.0)
+      kaminari
+      rails
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -292,7 +301,7 @@ PLATFORMS
 DEPENDENCIES
   attr_encrypted (~> 3.0.0)
   bootstrap
-  bootstrap4-kaminari-views
+  bootstrap-kaminari-views!
   browser
   byebug
   chartkick
@@ -307,6 +316,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   kaminari
+  kaminari-i18n
   listen (~> 3.0.5)
   lograge
   meta-tags

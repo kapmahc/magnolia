@@ -65,7 +65,9 @@ gem 'devise-i18n'
 gem 'attr_encrypted', '~> 3.0.0'
 
 gem 'kaminari'
-gem 'bootstrap4-kaminari-views'
+# fixme
+gem 'bootstrap-kaminari-views', git:'https://github.com/klacointe/bootstrap-kaminari-views.git', branch: 'bootstrap4'
+gem 'kaminari-i18n'
 
 gem 'chartkick'
 gem 'simple_form'
