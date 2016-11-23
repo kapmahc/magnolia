@@ -19,7 +19,6 @@ zh-CN:
     language-bar:
       switch: 切换语言
     personal-bar:
-      dashboard: 控制面板
       welcome: 欢迎你, %{name}
       sign-in-up: 登录/注册
       sign_out: 安全退出
@@ -32,7 +31,8 @@ zh-CN:
       other-languages: 本站其他语言版本
   home:
     dashboard:
-      title: 个人中心
+      profile: 个人中心
+      title: 控制面板
   personal:
     logs:
       title: 日志列表

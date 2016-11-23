@@ -1,7 +1,7 @@
 - @title = t '.title'
 
 div class="row block"
-  h4 #{@title}
+  h4 #{t '.profile'}
   hr
   div class="btn-group" role="group" aria-label="personal"
     = link_to(t('devise.registrations.edit.title'), edit_user_registration_path, {class: 'btn btn-secondary'})
