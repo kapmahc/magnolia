@@ -1,7 +1,7 @@
 - @title = t '.title'
 
 div class="row block"
-  h2 #{@title}
+  h4 #{@title}
   hr
   div class="btn-group" role="group" aria-label="personal"
     = link_to(t('devise.registrations.edit.title'), edit_user_registration_path, {class: 'btn btn-secondary'})
@@ -12,7 +12,7 @@ div class="row block"
 
   - unless en.nil?
     div class="row block"
-      h3 #{t en.fetch(:label)}
+      h4 #{t en.fetch(:label)}
       hr
       div class="btn-group" role="group" aria-label="#{e}-bar"
         - en.fetch(:links).each do |l|
