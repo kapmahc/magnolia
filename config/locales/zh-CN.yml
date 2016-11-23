@@ -7,10 +7,22 @@ zh-CN:
     are_you_sure: 你确定么？
   buttons:
     submit: 提交
+    new: 新建
+    edit: 编辑
+    remove: 删除
+    manage: 管理
   activerecord:
-      attributes:
-        user:
-          name: 姓名
+    attributes:
+      user:
+        name: 姓名
+      notice:
+        body: 正文
+      leave_word:
+        username: 姓名
+        body: 内容
+        email: 联系邮箱
+        phone: 联系电话
+        created_at: 创建时间
   devise:
     registrations:
        edit:
@@ -36,4 +48,10 @@ zh-CN:
   personal:
     logs:
       title: 日志列表
+  notices:
+    index:
+      title: 站点通知
+  leave_words:
+    new:
+      title: 给我留言
 

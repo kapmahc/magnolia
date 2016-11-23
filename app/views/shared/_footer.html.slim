@@ -5,7 +5,7 @@ footer
     | #{t '.other-languages'} :
     - Setting.languages.each do |l|
       | &nbsp;
-      = link_to t("languages.#{l}"), {locale: locale}
+      = link_to t("languages.#{l}"), {locale: l}
   p
     | &copy; #{Setting.site_info :copyright}
     -if Setting.bottom_links

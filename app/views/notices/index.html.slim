@@ -1,0 +1,8 @@
+h2
+  = @title = t '.title'
+hr
+- Notice.all.order(updated_at: :desc).each do |i|
+  blockquote class="blockquote"
+    p class="mb-0" #{i.body}
+    footer class="blockquote-footer" #{time_ago_in_words i.updated_at}
+

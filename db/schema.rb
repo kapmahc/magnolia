@@ -16,12 +16,13 @@ ActiveRecord::Schema.define(version: 20161123151142) do
   enable_extension "plpgsql"
 
   create_table "leave_words", force: :cascade do |t|
-    t.string   "lang",       null: false
-    t.string   "email",      null: false
-    t.string   "username"
+    t.string   "lang",                       null: false
+    t.string   "email",                      null: false
+    t.string   "username",                   null: false
     t.string   "phone"
-    t.text     "body",       null: false
-    t.datetime "created_at", null: false
+    t.text     "body",                       null: false
+    t.boolean  "processed",  default: false, null: false
+    t.datetime "created_at",                 null: false
     t.index ["email"], name: "index_leave_words_on_email", using: :btree
     t.index ["lang"], name: "index_leave_words_on_lang", using: :btree
     t.index ["phone"], name: "index_leave_words_on_phone", using: :btree

@@ -1,3 +1,3 @@
 class LeaveWord < ApplicationRecord
-  validates :body, :email, :username, :phone, presence: true
+  validates :body, :email, :username, presence: true
 end
