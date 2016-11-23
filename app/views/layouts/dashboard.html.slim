@@ -27,7 +27,7 @@ html
               a class="nav-link dropdown-toggle" id="top-#{en}-bar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" #{t en.fetch(:label)}
               div class="dropdown-menu" aria-labelledby="top-#{en}-bar"
                 - en.fetch(:links).each do |l|
-                  = link_to(t(l.fetch(:label)), send(e.downcase).send(l.fetch(:href)), {class: 'dropdown-item'})
+                  = link_to(t(l.fetch(:label)), send(e.downcase).send(l.fetch(:href)), {class: 'dropdown-item', target: (l[:blank] ? :_blank : :_parent)})
 
         = render 'shared/personal-bar'
         = render 'shared/language-bar'

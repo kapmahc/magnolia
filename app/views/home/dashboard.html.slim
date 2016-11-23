@@ -16,4 +16,4 @@ div class="row block"
       hr
       div class="btn-group" role="group" aria-label="#{e}-bar"
         - en.fetch(:links).each do |l|
-          = link_to t(l.fetch(:label)), send(e.downcase).send(l.fetch(:href)), {class: 'btn btn-secondary'}
+          = link_to t(l.fetch(:label)), send(e.downcase).send(l.fetch(:href)), {class: 'btn btn-secondary', target: (l[:blank] ? :_blank : :_parent)}

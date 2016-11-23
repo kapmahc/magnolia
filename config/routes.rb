@@ -1,5 +1,3 @@
-require 'sidekiq/web'
-
 Rails.application.routes.draw do
   scope '/:locale' do
     get '/dashboard' => 'home#dashboard'
@@ -9,10 +7,6 @@ Rails.application.routes.draw do
   end
 
   devise_for :users
-
-  authenticate :user, lambda { |u| u.is_admin? } do
-    mount Sidekiq::Web => '/sidekiq'
-  end
 
   root 'home#index'
 
