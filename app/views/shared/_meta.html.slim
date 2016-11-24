@@ -1,0 +1,7 @@
+= csrf_meta_tags
+= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track'=> 'reload'
+javascript:
+  window.UEDITOR_HOME_URL = '/3rd/ueditor1_4_3_3/';
+  window.UEDITOR_SERVER_URL = '#{main_app.ueditor_api_path}';
+= javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+= javascript_include_tag '/3rd/ueditor1_4_3_3/ueditor.all.min.js'

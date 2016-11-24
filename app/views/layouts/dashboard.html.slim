@@ -2,13 +2,7 @@ doctype html
 html
   head
     = display_meta_tags site: Setting.site_info(:title), title: @title
-    = csrf_meta_tags
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track'=> 'reload'
-    javascript:
-      window.UEDITOR_HOME_URL = '/3rd/ueditor1_4_3_3/';
-      window.UEDITOR_SERVER_URL = '#{main_app.ueditor_api_path}';
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag '/3rd/ueditor1_4_3_3/ueditor.all.min.js'
+    = render 'shared/meta'
   body
     nav class="navbar navbar-fixed-top navbar-dark bg-inverse"
       = link_to Setting.site_info(:title)||'', main_app.root_path, {class: 'navbar-brand'}
