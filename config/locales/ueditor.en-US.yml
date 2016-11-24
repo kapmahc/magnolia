@@ -1,0 +1,9 @@
+en-US:
+  ueditor:
+    api:
+      success: SUCCESS
+      error: ERROR
+      not_picture: not picture
+      http_error: HTTP error
+      bad_callback: Bad callback
+      bad_request: Bad request

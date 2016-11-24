@@ -21,6 +21,7 @@
 /.idea
 *.swp
 *.un~
+/public/3rd/*
 
 # Build
 /public/assets
