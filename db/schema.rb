@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161124003231) do
+ActiveRecord::Schema.define(version: 20161124061630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attachments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "title",        null: false
+    t.string   "content_type", null: false
+    t.integer  "size",         null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "avatar"
+    t.index ["content_type"], name: "index_attachments_on_content_type", using: :btree
+    t.index ["title"], name: "index_attachments_on_title", using: :btree
+    t.index ["user_id"], name: "index_attachments_on_user_id", using: :btree
+  end
 
   create_table "forum_articles", force: :cascade do |t|
     t.string   "title",                                     null: false
@@ -245,6 +258,7 @@ ActiveRecord::Schema.define(version: 20161124003231) do
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
   end
 
+  add_foreign_key "attachments", "users"
   add_foreign_key "forum_articles", "users"
   add_foreign_key "forum_articles_tags", "forum_articles"
   add_foreign_key "forum_articles_tags", "forum_tags"
