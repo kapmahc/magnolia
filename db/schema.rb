@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161123230019) do
+ActiveRecord::Schema.define(version: 20161124003231) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "forum_articles", force: :cascade do |t|
     t.string   "title",                                     null: false
+    t.string   "summary",                                   null: false
     t.text     "body",                                      null: false
     t.string   "lang",                                      null: false
     t.string   "flag",       limit: 8, default: "markdown", null: false
@@ -40,12 +41,14 @@ ActiveRecord::Schema.define(version: 20161123230019) do
   create_table "forum_comments", force: :cascade do |t|
     t.text     "body",                                            null: false
     t.string   "flag",             limit: 8, default: "markdown", null: false
-    t.integer  "forum_article_id"
     t.integer  "vote",                       default: 0,          null: false
+    t.integer  "forum_article_id"
+    t.integer  "user_id"
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.index ["flag"], name: "index_forum_comments_on_flag", using: :btree
     t.index ["forum_article_id"], name: "index_forum_comments_on_forum_article_id", using: :btree
+    t.index ["user_id"], name: "index_forum_comments_on_user_id", using: :btree
   end
 
   create_table "forum_tags", force: :cascade do |t|
@@ -246,6 +249,7 @@ ActiveRecord::Schema.define(version: 20161123230019) do
   add_foreign_key "forum_articles_tags", "forum_articles"
   add_foreign_key "forum_articles_tags", "forum_tags"
   add_foreign_key "forum_comments", "forum_articles"
+  add_foreign_key "forum_comments", "users"
   add_foreign_key "logs", "users"
   add_foreign_key "reading_favorites", "users"
   add_foreign_key "reading_notes", "reading_books"

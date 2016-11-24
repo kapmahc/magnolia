@@ -80,6 +80,8 @@ gem 'emoji'
 gem 'highline'
 gem 'lograge'
 
+gem 'country_select'
+
 gem 'sidekiq'
 gem 'sinatra', require: nil
 
