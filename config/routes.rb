@@ -8,6 +8,10 @@ Rails.application.routes.draw do
     get 'personal/logs'
   end
 
+  get '/google(*id).html', to: 'home#google', as: :google_verify
+  get '/baidu_verify_(*id).html', to: 'home#baidu', as: :baidu_verify
+  get '/robots', to: 'home#robots', as: :robots_txt, constraints: {format: :txt}
+
   Rails.application.config.engines.each {|e| mount Object.const_get("#{e}::Engine") => e.downcase}
 
   devise_for :users
