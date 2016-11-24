@@ -24,7 +24,7 @@ html
             = link_to t('devise.registrations.edit.title'), main_app.edit_user_registration_path, {class: 'dropdown-item'}
             = link_to t('personal.logs.title'), main_app.personal_logs_path, {class: 'dropdown-item'}
 
-        - Rails.application.config.engines.each do |e|
+        - Rails.application.config.magnolia['engines'].each do |e|
           - en = Object.const_get(e).dashboard(current_user)
           - unless en.nil?
             li class="nav-item dropdown"

@@ -1,0 +1,16 @@
+default: &default
+  engines:
+    - Forum
+    - Reading
+    - Shop
+    - Ops
+
+
+development:
+  <<: *default
+
+production:
+  <<: *default
+
+test:
+  <<: *default

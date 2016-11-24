@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get 'baidu_verify_(*id).html', to: 'home#baidu', as: :baidu_verify
   get 'robots', to: 'home#robots', as: :robots_txt, constraints: {format: :txt}
 
-  Rails.application.config.engines.each {|e| mount Object.const_get("#{e}::Engine") => e.downcase}
+  Rails.application.config.magnolia['engines'].each {|e| mount Object.const_get("#{e}::Engine") => e.downcase}
 
   devise_for :users
 

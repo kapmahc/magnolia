@@ -7,7 +7,7 @@ div class="row block"
     = link_to(t('devise.registrations.edit.title'), edit_user_registration_path, {class: 'btn btn-secondary'})
     = link_to(t('personal.logs.title'), personal_logs_path, {class: 'btn btn-secondary'})
 
-- Rails.application.config.engines.each do |e|
+- Rails.application.config.magnolia['engines'].each do |e|
   - en = Object.const_get(e).dashboard(current_user)
 
   - unless en.nil?

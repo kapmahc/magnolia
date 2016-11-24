@@ -1,1 +1,0 @@
-Rails.application.config.engines = %w(Forum Reading Shop Ops)
