@@ -90,6 +90,7 @@ gem 'fog'
 gem 'sidekiq'
 gem 'sinatra', require: nil
 
+gem 'geoip'
 
 gem 'reading', path: '../reading', git: 'https://github.com/kapmahc/reading.git'
 gem 'forum', path: '../forum', git: 'https://github.com/kapmahc/forum.git'

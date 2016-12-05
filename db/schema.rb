@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161124061630) do
+ActiveRecord::Schema.define(version: 20161205220313) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -166,12 +166,52 @@ ActiveRecord::Schema.define(version: 20161124061630) do
     t.index ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true, using: :btree
   end
 
+  create_table "shop_addresses", force: :cascade do |t|
+    t.string   "full_name",               null: false
+    t.string   "address1",                null: false
+    t.string   "address2",                null: false
+    t.string   "phone",                   null: false
+    t.string   "zip_code",      limit: 8, null: false
+    t.string   "country",                 null: false
+    t.string   "state",                   null: false
+    t.string   "city",                    null: false
+    t.integer  "shop_state_id"
+    t.integer  "user_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.index ["address1"], name: "index_shop_addresses_on_address1", using: :btree
+    t.index ["city"], name: "index_shop_addresses_on_city", using: :btree
+    t.index ["country"], name: "index_shop_addresses_on_country", using: :btree
+    t.index ["full_name"], name: "index_shop_addresses_on_full_name", using: :btree
+    t.index ["phone"], name: "index_shop_addresses_on_phone", using: :btree
+    t.index ["shop_state_id"], name: "index_shop_addresses_on_shop_state_id", using: :btree
+    t.index ["state"], name: "index_shop_addresses_on_state", using: :btree
+    t.index ["user_id"], name: "index_shop_addresses_on_user_id", using: :btree
+    t.index ["zip_code"], name: "index_shop_addresses_on_zip_code", using: :btree
+  end
+
   create_table "shop_countries", force: :cascade do |t|
-    t.string   "name",                       null: false
-    t.boolean  "active",     default: false, null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.string   "name",                                       null: false
+    t.string   "alpha_2",         limit: 2,                  null: false
+    t.string   "alpha_3",         limit: 3,                  null: false
+    t.string   "code",            limit: 3,                  null: false
+    t.string   "iso3166_2",       limit: 16,                 null: false
+    t.string   "region",          limit: 16,                 null: false
+    t.string   "sub_region",      limit: 32,                 null: false
+    t.string   "region_code",     limit: 3,                  null: false
+    t.string   "sub_region_code", limit: 3,                  null: false
+    t.boolean  "active",                     default: false, null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.index ["alpha_2"], name: "index_shop_countries_on_alpha_2", using: :btree
+    t.index ["alpha_3"], name: "index_shop_countries_on_alpha_3", using: :btree
+    t.index ["code"], name: "index_shop_countries_on_code", using: :btree
+    t.index ["iso3166_2"], name: "index_shop_countries_on_iso3166_2", using: :btree
     t.index ["name"], name: "index_shop_countries_on_name", unique: true, using: :btree
+    t.index ["region"], name: "index_shop_countries_on_region", using: :btree
+    t.index ["region_code"], name: "index_shop_countries_on_region_code", using: :btree
+    t.index ["sub_region"], name: "index_shop_countries_on_sub_region", using: :btree
+    t.index ["sub_region_code"], name: "index_shop_countries_on_sub_region_code", using: :btree
   end
 
   create_table "shop_currencies", force: :cascade do |t|
@@ -184,10 +224,6 @@ ActiveRecord::Schema.define(version: 20161124061630) do
     t.boolean  "active",                                        default: false, null: false
     t.datetime "created_at",                                                    null: false
     t.datetime "updated_at",                                                    null: false
-    t.index ["cid"], name: "index_shop_currencies_on_cid", using: :btree
-    t.index ["code"], name: "index_shop_currencies_on_code", using: :btree
-    t.index ["country"], name: "index_shop_currencies_on_country", using: :btree
-    t.index ["name"], name: "index_shop_currencies_on_name", using: :btree
   end
 
   create_table "shop_payment_methods", force: :cascade do |t|
@@ -199,7 +235,6 @@ ActiveRecord::Schema.define(version: 20161124061630) do
     t.boolean  "active",                         default: false, null: false
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
-    t.index ["flag"], name: "index_shop_payment_methods_on_flag", using: :btree
     t.index ["name"], name: "index_shop_payment_methods_on_name", unique: true, using: :btree
   end
 
@@ -221,7 +256,6 @@ ActiveRecord::Schema.define(version: 20161124061630) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.index ["name", "shop_country_id"], name: "index_shop_states_on_name_and_shop_country_id", unique: true, using: :btree
-    t.index ["name"], name: "index_shop_states_on_name", using: :btree
     t.index ["shop_country_id"], name: "index_shop_states_on_shop_country_id", using: :btree
   end
 
@@ -268,5 +302,7 @@ ActiveRecord::Schema.define(version: 20161124061630) do
   add_foreign_key "reading_favorites", "users"
   add_foreign_key "reading_notes", "reading_books"
   add_foreign_key "reading_notes", "users"
+  add_foreign_key "shop_addresses", "shop_states"
+  add_foreign_key "shop_addresses", "users"
   add_foreign_key "shop_states", "shop_countries"
 end

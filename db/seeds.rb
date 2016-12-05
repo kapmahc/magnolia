@@ -23,4 +23,4 @@ if User.count == 0
 
 end
 
-Rails.application.config.engines.each {|e| Object.const_get("#{e}::Engine").load_seed}
+Rails.application.config.magnolia['engines'].each {|e| Object.const_get("#{e}::Engine").load_seed}
