@@ -1,21 +1,21 @@
 GIT
   remote: https://github.com/kapmahc/forum.git
-  revision: 7385245afb7a376c45bbff8f74f65515606bb2c5
+  revision: 514fad9a03748b62fa25f0afb355a68aea50d0f8
   specs:
 
 GIT
   remote: https://github.com/kapmahc/ops.git
-  revision: 47c6833bd13a4dacb6ad495ee95a1a828bfd46ce
+  revision: 71ee9def0b240b5cd59a8fc89a1c4017e819f069
   specs:
 
 GIT
   remote: https://github.com/kapmahc/reading.git
-  revision: f5fc8dfbec01fbc9c1719cdc70b836040378617c
+  revision: 550df7cf3d61018a88e99d0da410e2c0f55a26f5
   specs:
 
 GIT
   remote: https://github.com/kapmahc/shop.git
-  revision: 65fa4ec103802807f2bc89a22c2266226e057d1e
+  revision: 93bec8c52478ee31deb126b983befc7b8707f335
   specs:
 
 GIT
@@ -56,7 +56,7 @@ GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
   specs:
-    CFPropertyList (2.3.3)
+    CFPropertyList (2.3.4)
     actioncable (5.0.0.1)
       actionpack (= 5.0.0.1)
       nio4r (~> 1.2)
@@ -101,7 +101,7 @@ GEM
     arel (7.1.4)
     attr_encrypted (3.0.3)
       encryptor (~> 3.0.0)
-    autoprefixer-rails (6.5.3)
+    autoprefixer-rails (6.5.3.1)
       execjs
     bcrypt (3.1.11)
     bootstrap (4.0.0.alpha5)
@@ -116,7 +116,7 @@ GEM
       json (>= 1.7)
       mime-types (>= 1.16)
       mimemagic (>= 0.3.0)
-    chartkick (2.1.1)
+    chartkick (2.2.1)
     closure_tree (6.2.0)
       activerecord (>= 4.1.0)
       with_advisory_lock (>= 3.0.0)
@@ -126,16 +126,16 @@ GEM
     coffee-script (2.4.1)
       coffee-script-source
       execjs
-    coffee-script-source (1.10.0)
+    coffee-script-source (1.11.1)
     concurrent-ruby (1.0.2)
     connection_pool (2.2.1)
-    countries (1.2.5)
-      currencies (~> 0.4.2)
+    countries (2.0.4)
       i18n_data (~> 0.7.0)
-    country_select (2.5.2)
-      countries (~> 1.2.0)
+      money (~> 6.7)
+      unicode_utils (~> 1.4)
+    country_select (3.0.0)
+      countries (~> 2.0)
       sort_alphabetical (~> 1.0)
-    currencies (0.4.2)
     debug_inspector (0.0.2)
     devise (4.2.0)
       bcrypt (~> 3.0)
@@ -195,7 +195,7 @@ GEM
     fog-atmos (0.1.0)
       fog-core
       fog-xml
-    fog-aws (0.12.0)
+    fog-aws (0.13.0)
       fog-core (~> 1.38)
       fog-json (~> 1.0)
       fog-xml (~> 0.1)
@@ -229,7 +229,7 @@ GEM
       multi_json (~> 1.10)
     fog-local (0.3.1)
       fog-core (~> 1.27)
-    fog-openstack (0.1.17)
+    fog-openstack (0.1.18)
       fog-core (>= 1.40)
       fog-json (>= 1.0)
       ipaddress (>= 0.8)
@@ -274,7 +274,7 @@ GEM
     fog-voxel (0.1.0)
       fog-core
       fog-xml
-    fog-vsphere (1.5.1)
+    fog-vsphere (1.5.2)
       fog-core
       rbvmomi (~> 1.9)
     fog-xenserver (0.2.3)
@@ -284,7 +284,7 @@ GEM
       fog-core
       nokogiri (~> 1.5, >= 1.5.11)
     formatador (0.2.5)
-    friendly_id (5.1.0)
+    friendly_id (5.2.0)
       activerecord (>= 4.0.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
@@ -294,7 +294,7 @@ GEM
     inflecto (0.0.2)
     io-like (0.3.0)
     ipaddress (0.8.3)
-    jbuilder (2.6.0)
+    jbuilder (2.6.1)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
     jquery-rails (4.2.1)
@@ -326,9 +326,12 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
     mimemagic (0.3.2)
-    mini_magick (4.5.1)
+    mini_magick (4.6.0)
     mini_portile2 (2.1.0)
-    minitest (5.9.1)
+    minitest (5.10.1)
+    money (6.7.1)
+      i18n (>= 0.6.4, <= 0.7.0)
+      sixarm_ruby_unaccent (>= 1.1.1, < 2)
     multi_json (1.12.1)
     nio4r (1.2.1)
     nokogiri (1.6.8.1)
@@ -356,7 +359,7 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 5.0.0.1)
       sprockets-rails (>= 2.0.0)
-    rails-assets-tether (1.3.7)
+    rails-assets-tether (1.4.0)
     rails-dom-testing (2.0.1)
       activesupport (>= 4.2.0, < 6.0)
       nokogiri (~> 1.6.0)
@@ -394,7 +397,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    sidekiq (4.2.6)
+    sidekiq (4.2.7)
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
       rack-protection (>= 1.5.0)
@@ -404,6 +407,7 @@ GEM
       activemodel (> 4, < 5.1)
     sinatra (1.0)
       rack (>= 1.0)
+    sixarm_ruby_unaccent (1.1.1)
     slim (3.0.7)
       temple (~> 0.7.6)
       tilt (>= 1.3.3, < 2.1)
@@ -426,7 +430,7 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     temple (0.7.7)
-    thor (0.19.1)
+    thor (0.19.4)
     thread_safe (0.3.5)
     tilt (2.0.5)
     trollop (2.1.2)
@@ -435,7 +439,7 @@ GEM
     turbolinks-source (5.0.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uglifier (3.0.3)
+    uglifier (3.0.4)
       execjs (>= 0.3.0, < 3)
     unicode_utils (1.4.0)
     warden (1.2.6)
