@@ -17,13 +17,16 @@ ActiveRecord::Schema.define(version: 20161205233463) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "title",        null: false
-    t.string   "content_type", null: false
-    t.integer  "size",         null: false
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.string   "resource_type", null: false
+    t.integer  "resource_id",   null: false
+    t.string   "title",         null: false
+    t.string   "content_type",  null: false
+    t.integer  "size",          null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.string   "avatar"
     t.index ["content_type"], name: "index_attachments_on_content_type", using: :btree
+    t.index ["resource_type"], name: "index_attachments_on_resource_type", using: :btree
     t.index ["title"], name: "index_attachments_on_title", using: :btree
     t.index ["user_id"], name: "index_attachments_on_user_id", using: :btree
   end

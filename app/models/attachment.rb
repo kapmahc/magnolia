@@ -1,6 +1,6 @@
 class Attachment < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
-  validates :title, :content_type, :size, presence: true
+  validates :title, :content_type, :size, :resource_type, :resource_id, presence: true
 
   belongs_to :user
 
