@@ -11,6 +11,5 @@ footer
     - links = Setting['nav://bottom']
     - unless links.nil?
       - links.each do |l|
-        - en = l.fetch(:engine).downcase
         | &middot;
-        =link_to t("#{en}.#{l.fetch :label}"), send(en).send(l.fetch(:path))
+        =link_to t("#{l.fetch(:engine)}.#{l.fetch :label}"), send(l.fetch(:engine)).send(l.fetch(:path))
