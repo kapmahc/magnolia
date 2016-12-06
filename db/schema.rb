@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161205235028) do
+ActiveRecord::Schema.define(version: 20161206153070) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -170,18 +170,18 @@ ActiveRecord::Schema.define(version: 20161205235028) do
   end
 
   create_table "shop_addresses", force: :cascade do |t|
-    t.string   "full_name",                 null: false
-    t.string   "content",                   null: false
-    t.string   "phone",                     null: false
-    t.string   "zip_code",        limit: 8, null: false
-    t.integer  "shop_country_id"
+    t.string   "full_name",            null: false
+    t.string   "content",              null: false
+    t.string   "phone",                null: false
+    t.string   "zip_code",   limit: 8, null: false
+    t.string   "country",              null: false
     t.integer  "user_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.index ["content"], name: "index_shop_addresses_on_content", using: :btree
+    t.index ["country"], name: "index_shop_addresses_on_country", using: :btree
     t.index ["full_name"], name: "index_shop_addresses_on_full_name", using: :btree
     t.index ["phone"], name: "index_shop_addresses_on_phone", using: :btree
-    t.index ["shop_country_id"], name: "index_shop_addresses_on_shop_country_id", using: :btree
     t.index ["user_id"], name: "index_shop_addresses_on_user_id", using: :btree
     t.index ["zip_code"], name: "index_shop_addresses_on_zip_code", using: :btree
   end
@@ -206,39 +206,6 @@ ActiveRecord::Schema.define(version: 20161205235028) do
     t.datetime "updated_at",      null: false
     t.index ["shop_product_id"], name: "index_shop_comments_on_shop_product_id", using: :btree
     t.index ["user_id"], name: "index_shop_comments_on_user_id", using: :btree
-  end
-
-  create_table "shop_countries", force: :cascade do |t|
-    t.string   "name",                       null: false
-    t.string   "alpha_2",         limit: 2,  null: false
-    t.string   "alpha_3",         limit: 3,  null: false
-    t.string   "code",            limit: 3,  null: false
-    t.string   "iso3166_2",       limit: 16, null: false
-    t.string   "region",          limit: 16, null: false
-    t.string   "sub_region",      limit: 32, null: false
-    t.string   "region_code",     limit: 3,  null: false
-    t.string   "sub_region_code", limit: 3,  null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.index ["alpha_2"], name: "index_shop_countries_on_alpha_2", using: :btree
-    t.index ["alpha_3"], name: "index_shop_countries_on_alpha_3", using: :btree
-    t.index ["code"], name: "index_shop_countries_on_code", using: :btree
-    t.index ["iso3166_2"], name: "index_shop_countries_on_iso3166_2", using: :btree
-    t.index ["name"], name: "index_shop_countries_on_name", unique: true, using: :btree
-    t.index ["region"], name: "index_shop_countries_on_region", using: :btree
-    t.index ["region_code"], name: "index_shop_countries_on_region_code", using: :btree
-    t.index ["sub_region"], name: "index_shop_countries_on_sub_region", using: :btree
-    t.index ["sub_region_code"], name: "index_shop_countries_on_sub_region_code", using: :btree
-  end
-
-  create_table "shop_currencies", force: :cascade do |t|
-    t.string   "cid",        limit: 3, null: false
-    t.string   "code",       limit: 3, null: false
-    t.string   "name",                 null: false
-    t.string   "country",              null: false
-    t.string   "units",      limit: 8, null: false
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
   end
 
   create_table "shop_inventory_units", force: :cascade do |t|
@@ -375,23 +342,6 @@ ActiveRecord::Schema.define(version: 20161205235028) do
     t.index ["name"], name: "index_shop_shipping_methods_on_name", unique: true, using: :btree
   end
 
-  create_table "shop_shipping_methods_countries", id: false, force: :cascade do |t|
-    t.integer "shop_shipping_method_id"
-    t.integer "shop_country_id"
-    t.index ["shop_country_id"], name: "idx_shop_shipping_methods_countries_c", using: :btree
-    t.index ["shop_shipping_method_id", "shop_country_id"], name: "idx_shop_shipping_methods_countries", unique: true, using: :btree
-    t.index ["shop_shipping_method_id"], name: "idx_shop_shipping_methods_countries_s", using: :btree
-  end
-
-  create_table "shop_states", force: :cascade do |t|
-    t.string   "name",            null: false
-    t.integer  "shop_country_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.index ["name", "shop_country_id"], name: "index_shop_states_on_name_and_shop_country_id", unique: true, using: :btree
-    t.index ["shop_country_id"], name: "index_shop_states_on_shop_country_id", using: :btree
-  end
-
   create_table "shop_tags", force: :cascade do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
@@ -457,7 +407,6 @@ ActiveRecord::Schema.define(version: 20161205235028) do
   add_foreign_key "reading_favorites", "users"
   add_foreign_key "reading_notes", "reading_books"
   add_foreign_key "reading_notes", "users"
-  add_foreign_key "shop_addresses", "shop_countries"
   add_foreign_key "shop_addresses", "users"
   add_foreign_key "shop_chargebacks", "shop_orders"
   add_foreign_key "shop_comments", "shop_products"
@@ -478,8 +427,5 @@ ActiveRecord::Schema.define(version: 20161205235028) do
   add_foreign_key "shop_return_authorizations", "shop_shipping_methods"
   add_foreign_key "shop_shipments", "shop_orders"
   add_foreign_key "shop_shipments", "shop_shipping_methods"
-  add_foreign_key "shop_shipping_methods_countries", "shop_countries"
-  add_foreign_key "shop_shipping_methods_countries", "shop_shipping_methods"
-  add_foreign_key "shop_states", "shop_countries"
   add_foreign_key "shop_variants", "shop_products"
 end

@@ -5,7 +5,7 @@ GIT
 
 GIT
   remote: https://github.com/kapmahc/ops.git
-  revision: 71ee9def0b240b5cd59a8fc89a1c4017e819f069
+  revision: f72c0e5b59ab649864c2567a704625667781406b
   specs:
 
 GIT
@@ -15,7 +15,7 @@ GIT
 
 GIT
   remote: https://github.com/kapmahc/shop.git
-  revision: 93bec8c52478ee31deb126b983befc7b8707f335
+  revision: 1a22e1387f3060eb2aa9001bd87d066c30d653ad
   specs:
 
 GIT
@@ -50,6 +50,9 @@ PATH
   remote: ../shop
   specs:
     shop (2016.12.24)
+      country_select
+      money
+      paypal-sdk-rest
       rails (~> 5.0.0, >= 5.0.0.1)
 
 GEM
@@ -338,6 +341,9 @@ GEM
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
     orm_adapter (0.5.0)
+    paypal-sdk-rest (1.6.0)
+      multi_json (~> 1.0)
+      xml-simple
     pg (0.19.0)
     public_suffix (2.0.4)
     puma (3.6.2)
@@ -377,7 +383,7 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (11.3.0)
+    rake (12.0.0)
     rb-fsevent (0.9.8)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
@@ -471,7 +477,6 @@ DEPENDENCIES
   chartkick
   closure_tree
   coffee-rails (~> 4.2)
-  country_select
   devise
   devise-i18n
   emoji

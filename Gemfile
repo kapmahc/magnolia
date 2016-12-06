@@ -80,8 +80,6 @@ gem 'emoji'
 gem 'highline'
 gem 'lograge'
 
-gem 'country_select'
-
 
 gem 'carrierwave'
 gem 'mini_magick'
