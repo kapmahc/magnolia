@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161205233463) do
+ActiveRecord::Schema.define(version: 20161205235028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -197,6 +197,17 @@ ActiveRecord::Schema.define(version: 20161205233463) do
     t.index ["state"], name: "index_shop_chargebacks_on_state", using: :btree
   end
 
+  create_table "shop_comments", force: :cascade do |t|
+    t.text     "body",            null: false
+    t.integer  "point",           null: false
+    t.integer  "shop_product_id"
+    t.integer  "user_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["shop_product_id"], name: "index_shop_comments_on_shop_product_id", using: :btree
+    t.index ["user_id"], name: "index_shop_comments_on_user_id", using: :btree
+  end
+
   create_table "shop_countries", force: :cascade do |t|
     t.string   "name",                       null: false
     t.string   "alpha_2",         limit: 2,  null: false
@@ -313,6 +324,14 @@ ActiveRecord::Schema.define(version: 20161205233463) do
     t.index ["name"], name: "index_shop_products_on_name", using: :btree
   end
 
+  create_table "shop_products_tags", id: false, force: :cascade do |t|
+    t.integer "shop_products_id"
+    t.integer "shop_tags_id"
+    t.index ["shop_products_id", "shop_tags_id"], name: "idx_shop_products_tags", unique: true, using: :btree
+    t.index ["shop_products_id"], name: "index_shop_products_tags_on_shop_products_id", using: :btree
+    t.index ["shop_tags_id"], name: "index_shop_products_tags_on_shop_tags_id", using: :btree
+  end
+
   create_table "shop_return_authorizations", force: :cascade do |t|
     t.string   "tracking",                                                    null: false
     t.string   "uid",                                                         null: false
@@ -371,6 +390,13 @@ ActiveRecord::Schema.define(version: 20161205233463) do
     t.datetime "updated_at",      null: false
     t.index ["name", "shop_country_id"], name: "index_shop_states_on_name_and_shop_country_id", unique: true, using: :btree
     t.index ["shop_country_id"], name: "index_shop_states_on_shop_country_id", using: :btree
+  end
+
+  create_table "shop_tags", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_shop_tags_on_name", unique: true, using: :btree
   end
 
   create_table "shop_variants", force: :cascade do |t|
@@ -434,6 +460,8 @@ ActiveRecord::Schema.define(version: 20161205233463) do
   add_foreign_key "shop_addresses", "shop_countries"
   add_foreign_key "shop_addresses", "users"
   add_foreign_key "shop_chargebacks", "shop_orders"
+  add_foreign_key "shop_comments", "shop_products"
+  add_foreign_key "shop_comments", "users"
   add_foreign_key "shop_inventory_units", "shop_orders"
   add_foreign_key "shop_inventory_units", "shop_return_authorizations"
   add_foreign_key "shop_inventory_units", "shop_shipments"
@@ -444,6 +472,8 @@ ActiveRecord::Schema.define(version: 20161205233463) do
   add_foreign_key "shop_orders", "users"
   add_foreign_key "shop_payments", "shop_orders"
   add_foreign_key "shop_payments", "shop_payment_methods"
+  add_foreign_key "shop_products_tags", "shop_products", column: "shop_products_id"
+  add_foreign_key "shop_products_tags", "shop_tags", column: "shop_tags_id"
   add_foreign_key "shop_return_authorizations", "shop_orders"
   add_foreign_key "shop_return_authorizations", "shop_shipping_methods"
   add_foreign_key "shop_shipments", "shop_orders"

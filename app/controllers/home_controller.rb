@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   before_action :authenticate_user!, only: [:dashboard]
 
   def index
+    redirect_to send(Setting.home).root_path 
   end
 
   def dashboard
