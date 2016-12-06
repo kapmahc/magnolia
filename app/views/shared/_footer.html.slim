@@ -8,7 +8,9 @@ footer
       = link_to t("languages.#{l}"), {locale: l}
   p
     | &copy; #{Setting.site_info :copyright}
-    -if Setting.bottom_links
-      = Setting.bottom_links.each do |l|
+    - links = Setting['nav://bottom']
+    - unless links.nil?
+      - links.each do |l|
+        - en = l.fetch(:engine).downcase
         | &middot;
-        =link_to t(l.label), l.href
+        =link_to t("#{en}.#{l.fetch :label}"), send(en).send(l.fetch(:path))

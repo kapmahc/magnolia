@@ -19,6 +19,8 @@ zh-CN:
     attributes:
       user:
         name: 姓名
+        email: 邮箱
+        last_sign_in_at: 上次登录
       notice:
         body: 正文
       leave_word:

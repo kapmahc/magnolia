@@ -5,9 +5,13 @@ nav class="navbar navbar-fixed-top navbar-dark bg-inverse"
       a class="nav-link" href="#{main_app.root_path}"
         = t '.home'
         span class="sr-only" (current)
-    -if Setting.top_links
-      = Setting.top_links.each do |l|
+
+    - links = Setting['nav://top']
+    - unless links.nil?
+      - links.each do |l|
         li class="nav-item"
-          =link_to t(l.label), l.href, {class: 'nav-link'}
+          - en = l.fetch(:engine).downcase
+          =link_to t("#{en}.#{l.fetch :label}"), send(en).send(l.fetch(:path)), {class: 'nav-link'}
+
     = render 'shared/personal-bar'
     = render 'shared/language-bar'

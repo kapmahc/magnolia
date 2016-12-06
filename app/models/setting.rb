@@ -6,4 +6,5 @@ class Setting < RailsSettings::Base
   def self.site_info(k)
     self["#{I18n.locale}://site/#{k}"]
   end
+
 end
