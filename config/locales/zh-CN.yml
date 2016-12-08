@@ -64,4 +64,9 @@ zh-CN:
   leave_words:
     new:
       title: 给我留言
+  attachments:
+    index:
+      title: 附件列表
+    new:
+      title: 上传附件
 

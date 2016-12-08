@@ -1,0 +1,15 @@
+h2
+  = @title = t '.title'
+  | &nbsp;
+  = link_to t('buttons.upload'), new_attachment_path(params.permit(:resource_type, :resource_id)), class: 'btn btn-link'
+hr
+ul class="list-group"
+  -@attachments.each do |i|
+    li class='list-group-item'
+      - if i.image?
+        h5 #{i.title}
+        = image_tag i.avatar.url
+      - else
+        = link_to i.title, i.avatar.url, target: :_blank
+      div class="btn-group btn-group-sm"
+        =render 'shared/btn-remove', url:attachment_path(i)

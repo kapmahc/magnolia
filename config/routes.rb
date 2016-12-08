@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-
-  get 'ueditor/demo'
+   #get 'ueditor/demo'
 
   scope '/:locale' do
+    resources :attachments, only: [:index, :new, :create, :destroy]
     resources :notices, only: :index
     resources :leave_words, only: [:new, :create]
 

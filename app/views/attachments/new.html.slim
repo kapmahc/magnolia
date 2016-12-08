@@ -1,0 +1,11 @@
+h2 #{@title = t '.title'}
+hr
+= simple_form_for @attachment, html: {multipart: true} do |f|
+  - if @attachment.errors.any?
+    =@attachment.errors.full_messages.inspect
+
+  = f.input :resource_id, as: :hidden
+  = f.input :resource_type, as: :hidden
+  = f.input :file, as: :file
+  = f.input :sort_order, collection: -10..10
+  = f.button :submit, t('buttons.submit')
