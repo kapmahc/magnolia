@@ -15,7 +15,7 @@ GIT
 
 GIT
   remote: https://github.com/kapmahc/shop.git
-  revision: 1a22e1387f3060eb2aa9001bd87d066c30d653ad
+  revision: a551067b7c36d82cd4bd2a3e381a5849203f9ba5
   specs:
 
 GIT
@@ -296,6 +296,8 @@ GEM
       activesupport (>= 4.1.0)
     highline (1.7.8)
     i18n (0.7.0)
+    i18n-active_record (0.1.2)
+      i18n (>= 0.5.0)
     i18n_data (0.7.0)
     inflecto (0.0.2)
     io-like (0.3.0)
@@ -325,7 +327,7 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
-    meta-tags (2.3.1)
+    meta-tags (2.4.0)
       actionpack (>= 3.2.0, <= 5.1.0)
     method_source (0.8.2)
     mime-types (3.1)
@@ -509,6 +511,7 @@ DEPENDENCIES
   friendly_id
   geoip
   highline
+  i18n-active_record
   jbuilder (~> 2.5)
   jquery-rails
   kaminari

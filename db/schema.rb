@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161206205834) do
+ActiveRecord::Schema.define(version: 20161208175834) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20161206205834) do
     t.string   "title",         null: false
     t.string   "content_type",  null: false
     t.integer  "size",          null: false
+    t.integer  "sort_order",    null: false
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.string   "avatar"
@@ -187,12 +188,13 @@ ActiveRecord::Schema.define(version: 20161206205834) do
   end
 
   create_table "shop_chargebacks", force: :cascade do |t|
-    t.string   "state",         limit: 16,           null: false
-    t.money    "amount",                   scale: 2
+    t.string   "state",           limit: 16,                 null: false
+    t.integer  "amount_cents",               default: 0,     null: false
+    t.string   "amount_currency",            default: "USD", null: false
     t.integer  "operator_id"
     t.integer  "shop_order_id"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
     t.index ["shop_order_id"], name: "index_shop_chargebacks_on_shop_order_id", using: :btree
     t.index ["state"], name: "index_shop_chargebacks_on_state", using: :btree
   end
@@ -225,30 +227,35 @@ ActiveRecord::Schema.define(version: 20161206205834) do
   end
 
   create_table "shop_line_items", force: :cascade do |t|
-    t.integer  "quantity",                  null: false
-    t.money    "price",           scale: 2
+    t.integer  "quantity",                        null: false
+    t.integer  "price_cents",     default: 0,     null: false
+    t.string   "price_currency",  default: "USD", null: false
     t.integer  "shop_variant_id"
     t.integer  "shop_order_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.index ["shop_order_id"], name: "index_shop_line_items_on_shop_order_id", using: :btree
     t.index ["shop_variant_id"], name: "index_shop_line_items_on_shop_variant_id", using: :btree
   end
 
   create_table "shop_orders", force: :cascade do |t|
-    t.string   "uid",              limit: 36,           null: false
-    t.string   "state",            limit: 8,            null: false
-    t.string   "shipment_state",   limit: 8,            null: false
-    t.string   "payment_state",    limit: 8,            null: false
-    t.string   "address",                               null: false
-    t.money    "item_total",                  scale: 2
-    t.money    "total",                       scale: 2
-    t.money    "adjustment_total",            scale: 2
-    t.money    "payment_total",               scale: 2
+    t.string   "uid",                       limit: 36,                 null: false
+    t.string   "state",                     limit: 8,                  null: false
+    t.string   "shipment_state",            limit: 8,                  null: false
+    t.string   "payment_state",             limit: 8,                  null: false
+    t.string   "address",                                              null: false
+    t.integer  "item_total_cents",                     default: 0,     null: false
+    t.string   "item_total_currency",                  default: "USD", null: false
+    t.integer  "total_cents",                          default: 0,     null: false
+    t.string   "total_currency",                       default: "USD", null: false
+    t.integer  "adjustment_total_cents",               default: 0,     null: false
+    t.string   "adjustment_total_currency",            default: "USD", null: false
+    t.integer  "payment_total_cents",                  default: 0,     null: false
+    t.string   "payment_total_currency",               default: "USD", null: false
     t.integer  "user_id"
     t.datetime "completed_at"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
     t.index ["payment_state"], name: "index_shop_orders_on_payment_state", using: :btree
     t.index ["shipment_state"], name: "index_shop_orders_on_shipment_state", using: :btree
     t.index ["state"], name: "index_shop_orders_on_state", using: :btree
@@ -269,14 +276,15 @@ ActiveRecord::Schema.define(version: 20161206205834) do
   end
 
   create_table "shop_payments", force: :cascade do |t|
-    t.string   "state",                  limit: 8,           null: false
+    t.string   "state",                  limit: 8,                 null: false
     t.string   "response_code"
     t.string   "avs_response"
-    t.money    "amount",                           scale: 2
+    t.integer  "amount_cents",                     default: 0,     null: false
+    t.string   "amount_currency",                  default: "USD", null: false
     t.integer  "shop_order_id"
     t.integer  "shop_payment_method_id"
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
     t.index ["shop_order_id"], name: "index_shop_payments_on_shop_order_id", using: :btree
     t.index ["shop_payment_method_id"], name: "index_shop_payments_on_shop_payment_method_id", using: :btree
     t.index ["state"], name: "index_shop_payments_on_state", using: :btree
@@ -299,31 +307,33 @@ ActiveRecord::Schema.define(version: 20161206205834) do
   end
 
   create_table "shop_return_authorizations", force: :cascade do |t|
-    t.string   "tracking",                                     null: false
-    t.string   "uid",                                          null: false
-    t.string   "state",                   limit: 16,           null: false
-    t.money    "amount",                             scale: 2
-    t.text     "reason",                                       null: false
+    t.string   "tracking",                                           null: false
+    t.string   "uid",                                                null: false
+    t.string   "state",                   limit: 16,                 null: false
+    t.integer  "amount_cents",                       default: 0,     null: false
+    t.string   "amount_currency",                    default: "USD", null: false
+    t.text     "reason",                                             null: false
     t.integer  "enter_by"
     t.datetime "enter_at"
     t.integer  "shop_order_id"
     t.integer  "shop_shipping_method_id"
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
     t.index ["shop_order_id"], name: "index_shop_return_authorizations_on_shop_order_id", using: :btree
     t.index ["shop_shipping_method_id"], name: "index_shop_return_authorizations_on_shop_shipping_method_id", using: :btree
   end
 
   create_table "shop_shipments", force: :cascade do |t|
-    t.string   "tracking",                                     null: false
-    t.string   "uid",                                          null: false
-    t.string   "state",                   limit: 16,           null: false
-    t.money    "cost",                               scale: 2
+    t.string   "tracking",                                           null: false
+    t.string   "uid",                                                null: false
+    t.string   "state",                   limit: 16,                 null: false
+    t.integer  "cost_cents",                         default: 0,     null: false
+    t.string   "cost_currency",                      default: "USD", null: false
     t.datetime "shipped_at"
     t.integer  "shop_order_id"
     t.integer  "shop_shipping_method_id"
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
     t.index ["shop_order_id"], name: "index_shop_shipments_on_shop_order_id", using: :btree
     t.index ["shop_shipping_method_id"], name: "index_shop_shipments_on_shop_shipping_method_id", using: :btree
     t.index ["uid"], name: "index_shop_shipments_on_uid", unique: true, using: :btree
@@ -359,16 +369,18 @@ ActiveRecord::Schema.define(version: 20161206205834) do
   end
 
   create_table "shop_variants", force: :cascade do |t|
-    t.string   "sku",             limit: 36,                          null: false
-    t.money    "price",                                     scale: 2
-    t.money    "cost_price",                                scale: 2
-    t.decimal  "weight",                     precision: 12, scale: 2
-    t.decimal  "height",                     precision: 12, scale: 2
-    t.decimal  "width",                      precision: 12, scale: 2
-    t.decimal  "length",                     precision: 12, scale: 2
+    t.string   "sku",                 limit: 36,                                          null: false
+    t.integer  "price_cents",                                             default: 0,     null: false
+    t.string   "price_currency",                                          default: "USD", null: false
+    t.integer  "cost_price_cents",                                        default: 0,     null: false
+    t.string   "cost_price_currency",                                     default: "USD", null: false
+    t.decimal  "weight",                         precision: 12, scale: 2
+    t.decimal  "height",                         precision: 12, scale: 2
+    t.decimal  "width",                          precision: 12, scale: 2
+    t.decimal  "length",                         precision: 12, scale: 2
     t.integer  "shop_product_id"
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
+    t.datetime "created_at",                                                              null: false
+    t.datetime "updated_at",                                                              null: false
     t.index ["shop_product_id"], name: "index_shop_variants_on_shop_product_id", using: :btree
     t.index ["sku"], name: "index_shop_variants_on_sku", unique: true, using: :btree
   end

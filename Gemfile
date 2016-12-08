@@ -49,6 +49,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # My
 gem 'rails-i18n', '~> 5.0.0'
+gem 'i18n-active_record', :require => 'i18n/active_record'
 
 gem 'slim-rails'
 
