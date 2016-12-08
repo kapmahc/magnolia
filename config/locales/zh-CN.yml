@@ -15,8 +15,12 @@ zh-CN:
     manage: 管理
     view: 查看
     favorite: 收藏
+    upload: 上传
   activerecord:
     attributes:
+      attachment:
+        sort_order: 排序
+        file: 文件
       user:
         name: 姓名
         email: 邮箱

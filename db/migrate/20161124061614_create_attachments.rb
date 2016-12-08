@@ -10,6 +10,8 @@ class CreateAttachments < ActiveRecord::Migration[5.0]
       t.string :content_type, null: false, index: true
       t.integer :size, null: false
 
+      t.integer :sort_order, null:false
+
       t.timestamps
     end
   end

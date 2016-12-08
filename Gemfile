@@ -74,7 +74,6 @@ gem 'simple_form'
 gem 'meta-tags'
 gem 'rails-settings-cached'
 gem 'browser'
-gem 'closure_tree'
 gem 'friendly_id'
 gem 'emoji'
 gem 'highline'
@@ -96,4 +95,8 @@ gem 'shop', path: '../shop', git: 'https://github.com/kapmahc/shop.git'
 gem 'ops', path: '../ops', git: 'https://github.com/kapmahc/ops.git'
 
 group :development do
+end
+
+group :production do
+  gem 'redis-rails'
 end

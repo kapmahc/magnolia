@@ -8,11 +8,10 @@ class Attachment < ApplicationRecord
     self.content_type.start_with? 'image'
   end
 
-  def read!(file)
-    name = file.original_filename
-    self.content_type = file.content_type
-    self.title = name
-    self.size = File.size file.tempfile
-    self.avatar = file
+  def read!
+    self.content_type = self.avatar.content_type
+    self.title = self.avatar.filename
+    self.size = self.avatar.size
+    # self.size = File.size self.avatar.tempfile
   end
 end
