@@ -1,0 +1,17 @@
+div id="#{id}" class="carousel slide" data-ride="carousel"
+  ol class="carousel-indicators"
+    - pictures.each_with_index do |img, idx|
+      li data-target="##{id}" data-slide-to="#{idx}" class="#{'active' if idx == 0}"
+
+  div class="carousel-inner" role="listbox"
+    - pictures.each_with_index do |img, idx|
+      div class="carousel-item #{'active' if idx == 0}"
+        = image_tag img.avatar.url, alt: img.title
+
+  a class="left carousel-control" href="##{id}" role="button" data-slide="prev"
+    span class="icon-prev" aria-hidden="true"
+    span class="sr-only" #{t 'buttons.previous'}
+
+  a class="right carousel-control" href="##{id}" role="button" data-slide="next"
+    span class="icon-next" aria-hidden="true"
+    span class="sr-only" #{t 'buttons.next'}

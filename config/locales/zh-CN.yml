@@ -18,6 +18,8 @@ zh-CN:
     upload: 上传
     reload: 重新载入
     refresh: 刷新
+    previous: 上一个
+    next: 下一个
   activerecord:
     attributes:
       translation:
