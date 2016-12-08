@@ -16,8 +16,13 @@ zh-CN:
     view: 查看
     favorite: 收藏
     upload: 上传
+    reload: 重新载入
+    refresh: 刷新
   activerecord:
     attributes:
+      translation:
+        key: 键
+        value: 值
       attachment:
         sort_order: 排序
         file: 文件

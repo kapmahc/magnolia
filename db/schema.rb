@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161208175834) do
+ActiveRecord::Schema.define(version: 20161208181716) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -383,6 +383,19 @@ ActiveRecord::Schema.define(version: 20161208175834) do
     t.datetime "updated_at",                                                              null: false
     t.index ["shop_product_id"], name: "index_shop_variants_on_shop_product_id", using: :btree
     t.index ["sku"], name: "index_shop_variants_on_sku", unique: true, using: :btree
+  end
+
+  create_table "translations", force: :cascade do |t|
+    t.string   "locale",                         null: false
+    t.string   "key",                            null: false
+    t.text     "value",                          null: false
+    t.text     "interpolations"
+    t.boolean  "is_proc",        default: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.index ["key"], name: "index_translations_on_key", using: :btree
+    t.index ["locale", "key"], name: "index_translations_on_locale_and_key", unique: true, using: :btree
+    t.index ["locale"], name: "index_translations_on_locale", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
