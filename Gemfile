@@ -96,6 +96,12 @@ gem 'shop', path: '../shop', git: 'https://github.com/kapmahc/shop.git'
 gem 'ops', path: '../ops', git: 'https://github.com/kapmahc/ops.git'
 
 group :development do
+  gem 'capistrano', '~> 3.6'
+  gem 'capistrano-rails', '~> 1.1'
+  gem 'capistrano-rbenv', '~> 2.0'
+  gem 'capistrano-npm'
+  gem 'capistrano3-puma', git: 'https://github.com/seuros/capistrano-puma.git'
+  gem 'capistrano-sidekiq', git: 'https://github.com/seuros/capistrano-sidekiq.git'
 end
 
 group :production do
