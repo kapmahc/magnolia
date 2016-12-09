@@ -25,6 +25,8 @@ echo 'eval "$(rbenv init -)"' >> ~/.zshrc
 ```bash
 rbenv install -l
 rbenv install 2.3.3
+rbenv local 2.3.3
+gem install bundler
 ```
 
 ## Database creation
@@ -46,7 +48,6 @@ initdb  -D '/var/lib/postgres/data'
 git clone https://github.com/kapmahc/magnolia.git
 cd magnolia
 
-gem install bundler
 bundle install
 
 rake db:migrate
