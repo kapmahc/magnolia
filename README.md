@@ -43,6 +43,16 @@ GRANT ALL PRIVILEGES ON DATABASE db-name TO user-name;
 initdb  -D '/var/lib/postgres/data'
 ```
 
+* Peer authentication failed for user
+Need edit file "/etc/postgresql/9.5/main/pg_hba.conf" change line:
+```
+local   all             all                                     peer
+```
+to:
+```
+local   all             all                                     md5
+```
+
 ## For development
 ```bash
 git clone https://github.com/kapmahc/magnolia.git
@@ -59,7 +69,18 @@ rails s
 ## Deployment instructions
 
 ```bash
-cap production deploy
+# deploy
+bundle exec cap production deploy
+# upload puma.conf
+bundle exec cap production puma:config
+# upload nginx config file
+bundle exec cap production puma:nginx_config
+# create sitemap.xml.gz
+bundle exec cap production deploy:sitemap:create
+```
+
+```bash
+bundle exec rake db:seed
 ```
 
 ## Notes
