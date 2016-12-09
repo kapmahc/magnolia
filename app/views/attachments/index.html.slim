@@ -7,7 +7,7 @@ ul class="list-group"
   -@attachments.each do |i|
     li class='list-group-item'
       - if i.image?
-        h5 #{i.title}
+        h5 #{i.sort_order}: #{i.title}
         = image_tag i.avatar.url
       - else
         = link_to i.title, i.avatar.url, target: :_blank

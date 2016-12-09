@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161208181716) do
+ActiveRecord::Schema.define(version: 20161209014967) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -291,10 +291,12 @@ ActiveRecord::Schema.define(version: 20161208181716) do
   end
 
   create_table "shop_products", force: :cascade do |t|
-    t.string   "name",        null: false
-    t.text     "description", null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "name",                     null: false
+    t.text     "description",              null: false
+    t.integer  "latest_order", default: 0, null: false
+    t.integer  "hot_order",    default: 0, null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.index ["name"], name: "index_shop_products_on_name", using: :btree
   end
 
@@ -304,6 +306,31 @@ ActiveRecord::Schema.define(version: 20161208181716) do
     t.index ["shop_product_id", "shop_tag_id"], name: "idx_shop_products_tags", unique: true, using: :btree
     t.index ["shop_product_id"], name: "index_shop_products_tags_on_shop_product_id", using: :btree
     t.index ["shop_tag_id"], name: "index_shop_products_tags_on_shop_tag_id", using: :btree
+  end
+
+  create_table "shop_properties", force: :cascade do |t|
+    t.text     "value",                  null: false
+    t.integer  "shop_variant_id"
+    t.integer  "shop_property_field_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["shop_property_field_id"], name: "index_shop_properties_on_shop_property_field_id", using: :btree
+    t.index ["shop_variant_id", "shop_property_field_id"], name: "idx_shop_properties", unique: true, using: :btree
+    t.index ["shop_variant_id"], name: "index_shop_properties_on_shop_variant_id", using: :btree
+  end
+
+  create_table "shop_property_fields", force: :cascade do |t|
+    t.string   "name",                        null: false
+    t.string   "lang",                        null: false
+    t.string   "flag",       default: "text", null: false
+    t.integer  "sort_order",                  null: false
+    t.text     "profile"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.index ["flag"], name: "index_shop_property_fields_on_flag", using: :btree
+    t.index ["lang", "name"], name: "index_shop_property_fields_on_lang_and_name", unique: true, using: :btree
+    t.index ["lang"], name: "index_shop_property_fields_on_lang", using: :btree
+    t.index ["name"], name: "index_shop_property_fields_on_name", using: :btree
   end
 
   create_table "shop_return_authorizations", force: :cascade do |t|
@@ -369,6 +396,7 @@ ActiveRecord::Schema.define(version: 20161208181716) do
   end
 
   create_table "shop_variants", force: :cascade do |t|
+    t.string   "name",                                                                    null: false
     t.string   "sku",                 limit: 36,                                          null: false
     t.integer  "price_cents",                                             default: 0,     null: false
     t.string   "price_currency",                                          default: "USD", null: false
@@ -381,6 +409,7 @@ ActiveRecord::Schema.define(version: 20161208181716) do
     t.integer  "shop_product_id"
     t.datetime "created_at",                                                              null: false
     t.datetime "updated_at",                                                              null: false
+    t.index ["name"], name: "index_shop_variants_on_name", using: :btree
     t.index ["shop_product_id"], name: "index_shop_variants_on_shop_product_id", using: :btree
     t.index ["sku"], name: "index_shop_variants_on_sku", unique: true, using: :btree
   end
@@ -456,6 +485,8 @@ ActiveRecord::Schema.define(version: 20161208181716) do
   add_foreign_key "shop_payments", "shop_payment_methods"
   add_foreign_key "shop_products_tags", "shop_products"
   add_foreign_key "shop_products_tags", "shop_tags"
+  add_foreign_key "shop_properties", "shop_property_fields"
+  add_foreign_key "shop_properties", "shop_variants"
   add_foreign_key "shop_return_authorizations", "shop_orders"
   add_foreign_key "shop_return_authorizations", "shop_shipping_methods"
   add_foreign_key "shop_shipments", "shop_orders"

@@ -9,7 +9,7 @@ zh-CN:
     can_markdown: 可以使用markdown语法
   buttons:
     submit: 提交
-    new: 新建
+    new: 添加
     edit: 编辑
     remove: 删除
     manage: 管理
