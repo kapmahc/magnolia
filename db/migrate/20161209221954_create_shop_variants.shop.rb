@@ -13,6 +13,10 @@ class CreateShopVariants < ActiveRecord::Migration[5.0]
       t.decimal :width, precision: 12, scale: 2
       t.decimal :length, precision: 12, scale: 2
 
+      t.integer :state, null:false
+      t.integer :latest_order, null:false, default:0
+      t.integer :hot_order, null:false, default:0
+
       t.belongs_to :shop_product, foreign_key: true
 
       t.timestamps

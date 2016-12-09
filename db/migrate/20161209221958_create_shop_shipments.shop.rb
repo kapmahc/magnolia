@@ -5,8 +5,7 @@ class CreateShopShipments < ActiveRecord::Migration[5.0]
       t.string :tracking, null:false
       t.string :uid, null:false
 
-      # :ready, :pending, :assemble, :cancelled, :shipped
-      t.string :state, null:false, limit:16
+      t.integer :state, null:false
 
       t.monetize :cost
 

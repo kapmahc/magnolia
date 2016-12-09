@@ -5,7 +5,7 @@ GIT
 
 GIT
   remote: https://github.com/kapmahc/ops.git
-  revision: f72c0e5b59ab649864c2567a704625667781406b
+  revision: 9ca07cb49355830bd2d599c771607134aab3a054
   specs:
 
 GIT
@@ -15,7 +15,7 @@ GIT
 
 GIT
   remote: https://github.com/kapmahc/shop.git
-  revision: a551067b7c36d82cd4bd2a3e381a5849203f9ba5
+  revision: e711989d959ec3ba70783f8d83785b605e13a7f5
   specs:
 
 GIT
@@ -134,7 +134,7 @@ GEM
     coffee-script-source (1.11.1)
     concurrent-ruby (1.0.2)
     connection_pool (2.2.1)
-    countries (2.0.4)
+    countries (2.0.5)
       i18n_data (~> 0.7.0)
       money (~> 6.7)
       unicode_utils (~> 1.4)

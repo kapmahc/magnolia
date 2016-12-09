@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161209014967) do
+ActiveRecord::Schema.define(version: 20161209221966) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -188,15 +188,14 @@ ActiveRecord::Schema.define(version: 20161209014967) do
   end
 
   create_table "shop_chargebacks", force: :cascade do |t|
-    t.string   "state",           limit: 16,                 null: false
-    t.integer  "amount_cents",               default: 0,     null: false
-    t.string   "amount_currency",            default: "USD", null: false
+    t.integer  "state",                           null: false
+    t.integer  "amount_cents",    default: 0,     null: false
+    t.string   "amount_currency", default: "USD", null: false
     t.integer  "operator_id"
     t.integer  "shop_order_id"
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.index ["shop_order_id"], name: "index_shop_chargebacks_on_shop_order_id", using: :btree
-    t.index ["state"], name: "index_shop_chargebacks_on_state", using: :btree
   end
 
   create_table "shop_comments", force: :cascade do |t|
@@ -211,19 +210,18 @@ ActiveRecord::Schema.define(version: 20161209014967) do
   end
 
   create_table "shop_inventory_units", force: :cascade do |t|
-    t.integer  "lock_version",                            null: false
-    t.string   "state",                        limit: 16, null: false
+    t.integer  "lock_version",                 null: false
+    t.integer  "state",                        null: false
     t.integer  "shop_order_id"
     t.integer  "shop_variant_id"
     t.integer  "shop_shipment_id"
     t.integer  "shop_return_authorization_id"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.index ["shop_order_id"], name: "index_shop_inventory_units_on_shop_order_id", using: :btree
     t.index ["shop_return_authorization_id"], name: "index_shop_inventory_units_on_shop_return_authorization_id", using: :btree
     t.index ["shop_shipment_id"], name: "index_shop_inventory_units_on_shop_shipment_id", using: :btree
     t.index ["shop_variant_id"], name: "index_shop_inventory_units_on_shop_variant_id", using: :btree
-    t.index ["state"], name: "index_shop_inventory_units_on_state", using: :btree
   end
 
   create_table "shop_line_items", force: :cascade do |t|
@@ -240,10 +238,7 @@ ActiveRecord::Schema.define(version: 20161209014967) do
 
   create_table "shop_orders", force: :cascade do |t|
     t.string   "uid",                       limit: 36,                 null: false
-    t.string   "state",                     limit: 8,                  null: false
-    t.string   "shipment_state",            limit: 8,                  null: false
-    t.string   "payment_state",             limit: 8,                  null: false
-    t.string   "address",                                              null: false
+    t.integer  "state",                                                null: false
     t.integer  "item_total_cents",                     default: 0,     null: false
     t.string   "item_total_currency",                  default: "USD", null: false
     t.integer  "total_cents",                          default: 0,     null: false
@@ -253,12 +248,11 @@ ActiveRecord::Schema.define(version: 20161209014967) do
     t.integer  "payment_total_cents",                  default: 0,     null: false
     t.string   "payment_total_currency",               default: "USD", null: false
     t.integer  "user_id"
+    t.integer  "shop_address_id"
     t.datetime "completed_at"
     t.datetime "created_at",                                           null: false
     t.datetime "updated_at",                                           null: false
-    t.index ["payment_state"], name: "index_shop_orders_on_payment_state", using: :btree
-    t.index ["shipment_state"], name: "index_shop_orders_on_shipment_state", using: :btree
-    t.index ["state"], name: "index_shop_orders_on_state", using: :btree
+    t.index ["shop_address_id"], name: "index_shop_orders_on_shop_address_id", using: :btree
     t.index ["uid"], name: "index_shop_orders_on_uid", unique: true, using: :btree
     t.index ["user_id"], name: "index_shop_orders_on_user_id", using: :btree
   end
@@ -276,27 +270,24 @@ ActiveRecord::Schema.define(version: 20161209014967) do
   end
 
   create_table "shop_payments", force: :cascade do |t|
-    t.string   "state",                  limit: 8,                 null: false
+    t.integer  "state",                                  null: false
     t.string   "response_code"
     t.string   "avs_response"
-    t.integer  "amount_cents",                     default: 0,     null: false
-    t.string   "amount_currency",                  default: "USD", null: false
+    t.integer  "amount_cents",           default: 0,     null: false
+    t.string   "amount_currency",        default: "USD", null: false
     t.integer  "shop_order_id"
     t.integer  "shop_payment_method_id"
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.index ["shop_order_id"], name: "index_shop_payments_on_shop_order_id", using: :btree
     t.index ["shop_payment_method_id"], name: "index_shop_payments_on_shop_payment_method_id", using: :btree
-    t.index ["state"], name: "index_shop_payments_on_state", using: :btree
   end
 
   create_table "shop_products", force: :cascade do |t|
-    t.string   "name",                     null: false
-    t.text     "description",              null: false
-    t.integer  "latest_order", default: 0, null: false
-    t.integer  "hot_order",    default: 0, null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "name",        null: false
+    t.text     "description", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.index ["name"], name: "index_shop_products_on_name", using: :btree
   end
 
@@ -334,33 +325,33 @@ ActiveRecord::Schema.define(version: 20161209014967) do
   end
 
   create_table "shop_return_authorizations", force: :cascade do |t|
-    t.string   "tracking",                                           null: false
-    t.string   "uid",                                                null: false
-    t.string   "state",                   limit: 16,                 null: false
-    t.integer  "amount_cents",                       default: 0,     null: false
-    t.string   "amount_currency",                    default: "USD", null: false
-    t.text     "reason",                                             null: false
+    t.string   "tracking",                                null: false
+    t.string   "uid",                                     null: false
+    t.integer  "state",                                   null: false
+    t.integer  "amount_cents",            default: 0,     null: false
+    t.string   "amount_currency",         default: "USD", null: false
+    t.text     "reason",                                  null: false
     t.integer  "enter_by"
     t.datetime "enter_at"
     t.integer  "shop_order_id"
     t.integer  "shop_shipping_method_id"
-    t.datetime "created_at",                                         null: false
-    t.datetime "updated_at",                                         null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.index ["shop_order_id"], name: "index_shop_return_authorizations_on_shop_order_id", using: :btree
     t.index ["shop_shipping_method_id"], name: "index_shop_return_authorizations_on_shop_shipping_method_id", using: :btree
   end
 
   create_table "shop_shipments", force: :cascade do |t|
-    t.string   "tracking",                                           null: false
-    t.string   "uid",                                                null: false
-    t.string   "state",                   limit: 16,                 null: false
-    t.integer  "cost_cents",                         default: 0,     null: false
-    t.string   "cost_currency",                      default: "USD", null: false
+    t.string   "tracking",                                null: false
+    t.string   "uid",                                     null: false
+    t.integer  "state",                                   null: false
+    t.integer  "cost_cents",              default: 0,     null: false
+    t.string   "cost_currency",           default: "USD", null: false
     t.datetime "shipped_at"
     t.integer  "shop_order_id"
     t.integer  "shop_shipping_method_id"
-    t.datetime "created_at",                                         null: false
-    t.datetime "updated_at",                                         null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.index ["shop_order_id"], name: "index_shop_shipments_on_shop_order_id", using: :btree
     t.index ["shop_shipping_method_id"], name: "index_shop_shipments_on_shop_shipping_method_id", using: :btree
     t.index ["uid"], name: "index_shop_shipments_on_uid", unique: true, using: :btree
@@ -382,8 +373,8 @@ ActiveRecord::Schema.define(version: 20161209014967) do
     t.integer "ancestor_id",   null: false
     t.integer "descendant_id", null: false
     t.integer "generations",   null: false
-    t.index ["ancestor_id", "descendant_id", "generations"], name: "tag_anc_desc_idx", unique: true, using: :btree
-    t.index ["descendant_id"], name: "tag_desc_idx", using: :btree
+    t.index ["ancestor_id", "descendant_id", "generations"], name: "shop_tag_anc_desc_idx", unique: true, using: :btree
+    t.index ["descendant_id"], name: "shop_tag_desc_idx", using: :btree
   end
 
   create_table "shop_tags", force: :cascade do |t|
@@ -406,6 +397,9 @@ ActiveRecord::Schema.define(version: 20161209014967) do
     t.decimal  "height",                         precision: 12, scale: 2
     t.decimal  "width",                          precision: 12, scale: 2
     t.decimal  "length",                         precision: 12, scale: 2
+    t.integer  "state",                                                                   null: false
+    t.integer  "latest_order",                                            default: 0,     null: false
+    t.integer  "hot_order",                                               default: 0,     null: false
     t.integer  "shop_product_id"
     t.datetime "created_at",                                                              null: false
     t.datetime "updated_at",                                                              null: false
@@ -480,6 +474,7 @@ ActiveRecord::Schema.define(version: 20161209014967) do
   add_foreign_key "shop_inventory_units", "shop_variants"
   add_foreign_key "shop_line_items", "shop_orders"
   add_foreign_key "shop_line_items", "shop_variants"
+  add_foreign_key "shop_orders", "shop_addresses"
   add_foreign_key "shop_orders", "users"
   add_foreign_key "shop_payments", "shop_orders"
   add_foreign_key "shop_payments", "shop_payment_methods"
