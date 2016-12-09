@@ -1,6 +1,6 @@
 CarrierWave.configure do |config|
-  config.permissions = 0600
-  config.directory_permissions = 0700
+  config.permissions = 0644
+  config.directory_permissions = 0755
   config.storage = :fog
 
   config.fog_credentials = Rails.application.config.magnolia['fog']

@@ -26,11 +26,11 @@ set :deploy_to, -> { "/var/www/#{fetch :app_domain, 'localhost'}" }
 
 # Default value for :linked_files is []
 # append :linked_files, 'config/database.yml', 'config/secrets.yml'
-append :linked_files, 'config/app.yml', 'config/database.yml', 'config/sidekiq.yml', '.rbenv-vars'
+append :linked_files, 'config/app.yml', 'config/database.yml', 'config/magnolia.yml', 'config/sidekiq.yml', '.rbenv-vars'
 
 # Default value for linked_dirs is []
 # append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system'
-append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'tmp/sessions', 'public/system', 'tmp/books', 'node_modules'
+append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'tmp/sessions', 'public/system', 'public/attachments', 'tmp/books', 'node_modules'
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }

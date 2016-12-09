@@ -91,10 +91,10 @@ gem 'sinatra', require: nil
 gem 'geoip'
 gem 'sitemap_generator'
 
-gem 'reading', git: 'https://github.com/kapmahc/reading.git'#, path: '../reading'
-gem 'forum', git: 'https://github.com/kapmahc/forum.git'#, path: '../forum'
-gem 'shop', git: 'https://github.com/kapmahc/shop.git'#, path: '../shop'
-gem 'ops', git: 'https://github.com/kapmahc/ops.git'#, path: '../ops'
+gem 'reading', git: 'https://github.com/kapmahc/reading.git', path: '../reading'
+gem 'forum', git: 'https://github.com/kapmahc/forum.git', path: '../forum'
+gem 'shop', git: 'https://github.com/kapmahc/shop.git', path: '../shop'
+gem 'ops', git: 'https://github.com/kapmahc/ops.git', path: '../ops'
 
 group :development do
   gem 'capistrano', '~> 3.6'
