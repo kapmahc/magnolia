@@ -23,6 +23,7 @@
 *.un~
 /public/3rd/*
 /public/attachments/*
+/public/sitemap*
 
 # Build
 /public/assets

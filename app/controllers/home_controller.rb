@@ -17,6 +17,7 @@ class HomeController < ApplicationController
 # To ban all spiders from the entire site uncomment the next two lines:
 # User-agent: *
 # Disallow: /
+Sitemap: https://#{ENV['HOST']}/sitemap.xml.gz
 EOF
   end
 
