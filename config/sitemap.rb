@@ -5,7 +5,9 @@ SitemapGenerator::Sitemap.default_host = "https://#{ENV['HOST']}"
 # Forum.sitemap
 
 SitemapGenerator::Sitemap.create do
-  %w(Forum Ops).each do |en|
+
+  Rails.application.config.magnolia['engines'].each do |en|
+    puts "find engine #{en}"
     Object.const_get(en).sitemap.each do |l|
       add l.fetch(:url), lastmod: l[:lastmod]
     end

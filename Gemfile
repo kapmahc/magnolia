@@ -86,12 +86,13 @@ gem 'mini_magick'
 gem 'fog'
 
 gem 'sidekiq'
-gem 'sinatra', require: false
+gem 'sinatra', require: nil
 gem 'sidekiq-failures'
 gem 'sidekiq-cron', '~> 0.4.0'
 
 gem 'geoip'
 gem 'sitemap_generator'
+gem 'whenever', require: false
 
 gem 'reading', git: 'https://github.com/kapmahc/reading.git', path: '../reading'
 gem 'forum', git: 'https://github.com/kapmahc/forum.git', path: '../forum'

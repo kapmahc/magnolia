@@ -81,6 +81,8 @@ bundle exec cap production deploy:sitemap:create
 
 ```bash
 bundle exec rake db:seed
+whenever --update-crontab
+crontab -l
 ```
 
 ## Notes
