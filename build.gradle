@@ -10,10 +10,15 @@ buildscript {
     }
 }
 
+plugins {
+    id "org.flywaydb.flyway" version "4.0.3"
+}
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
+
 
 jar {
     baseName = 'magnolia'
@@ -33,7 +38,8 @@ repositories {
 
 dependencies {
     compile group: 'org.postgresql', name: 'postgresql', version: '9.4.1212.jre7'
-    compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.5'
+//    compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.5'
+    compile group: 'com.alibaba', name: 'druid', version: '1.0.27'
 
     compile('org.springframework.boot:spring-boot-starter-cache')
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
@@ -42,4 +48,11 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     runtime('org.springframework.boot:spring-boot-devtools')
     testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+flyway {
+    url = 'jdbc:postgresql://localhost:5432/magnolia_dev'
+    user = 'postgres'
+
+    encoding = 'UTF-8'
 }
