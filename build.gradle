@@ -37,6 +37,9 @@ repositories {
 
 
 dependencies {
+    compile group: 'com.google.guava', name: 'guava', version: '20.0'
+
+
     compile group: 'org.postgresql', name: 'postgresql', version: '9.4.1212.jre7'
 //    compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.5'
     compile group: 'com.alibaba', name: 'druid', version: '1.0.27'

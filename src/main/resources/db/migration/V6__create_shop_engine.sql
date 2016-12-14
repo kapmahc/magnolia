@@ -1,3 +1,3 @@
-create table t1 (
+CREATE TABLE t1 (
   ID SERIAL
 );

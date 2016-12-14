@@ -1,134 +1,157 @@
-create table users(
-  id serial primary key,
-  name varchar(32) not null,
-  email varchar(255) not null,
-  uid varchar(36) not null,
-  password bytea,
-  provider_id varchar(255) not null,
-  provider_type varchar(32) not null,
-  home varchar(255),
-  logo varchar(255),
-  sign_in_count int not null default 0,
-  current_sign_in_at timestamp without time zone,
-  current_sign_in_ip inet,
-  last_sign_in_at timestamp without time zone,
-  last_sign_in_ip inet,
-  confirmed_at timestamp without time zone,
-  locked_at timestamp without time zone,
-  created_at timestamp without time zone not null default now(),
-  updated_at timestamp without time zone not null
+CREATE TABLE users (
+  id                 SERIAL PRIMARY KEY,
+  name               VARCHAR(32)                 NOT NULL,
+  email              VARCHAR(255)                NOT NULL,
+  uid                VARCHAR(36)                 NOT NULL,
+  password           BYTEA,
+  provider_id        VARCHAR(255)                NOT NULL,
+  provider_type      VARCHAR(32)                 NOT NULL,
+  home               VARCHAR(255),
+  logo               VARCHAR(255),
+  sign_in_count      INT                         NOT NULL DEFAULT 0,
+  current_sign_in_at TIMESTAMP WITHOUT TIME ZONE,
+  current_sign_in_ip INET,
+  last_sign_in_at    TIMESTAMP WITHOUT TIME ZONE,
+  last_sign_in_ip    INET,
+  confirmed_at       TIMESTAMP WITHOUT TIME ZONE,
+  locked_at          TIMESTAMP WITHOUT TIME ZONE,
+  created_at         TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now(),
+  updated_at         TIMESTAMP WITHOUT TIME ZONE NOT NULL
 );
-create unique index idx_users_uid on users(uid);
-create unique index idx_users_email on users(email);
-create unique index idx_users_provider_id_type on users(provider_id, provider_type);
-create index idx_users_name on users(name);
-create index idx_users_provider_id on users(provider_id);
-create index idx_users_provider_type on users(provider_type);
+CREATE UNIQUE INDEX idx_users_uid
+  ON users (uid);
+CREATE UNIQUE INDEX idx_users_email
+  ON users (email);
+CREATE UNIQUE INDEX idx_users_provider_id_type
+  ON users (provider_id, provider_type);
+CREATE INDEX idx_users_name
+  ON users (name);
+CREATE INDEX idx_users_provider_id
+  ON users (provider_id);
+CREATE INDEX idx_users_provider_type
+  ON users (provider_type);
 
 
-create table contacts(
-  id serial primary key,
-  user_id int not null,
-  key varchar(32) not null,
-  val varchar(255) not null,
-  created_at timestamp without time zone not null default now(),
-  updated_at timestamp without time zone not null
+CREATE TABLE contacts (
+  id         SERIAL PRIMARY KEY,
+  user_id    INT                         NOT NULL,
+  key        VARCHAR(32)                 NOT NULL,
+  val        VARCHAR(255)                NOT NULL,
+  created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now(),
+  updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL
 );
-create unique index idx_contacts on contacts(user_id, key);
-create index idx_contacts_key on contacts(key);
+CREATE UNIQUE INDEX idx_contacts
+  ON contacts (user_id, key);
+CREATE INDEX idx_contacts_key
+  ON contacts (key);
 
-create table logs(
-  id serial primary key,
-  user_id int not null,
-  type varchar(8) not null default 'info',
-  message varchar(255) not null,
-  created_at timestamp without time zone not null default now()
+CREATE TABLE logs (
+  id         SERIAL PRIMARY KEY,
+  user_id    INT                         NOT NULL,
+  type       VARCHAR(8)                  NOT NULL DEFAULT 'info',
+  message    VARCHAR(255)                NOT NULL,
+  created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now()
 );
-create index idx_logs_type on logs(type);
+CREATE INDEX idx_logs_type
+  ON logs (type);
 
-create table roles(
-  id serial primary key,
-  name varchar(32) not null,
-  resource_id int,
-  resource_type varchar(255),
-  created_at timestamp without time zone not null default now(),
-  updated_at timestamp without time zone not null
+CREATE TABLE roles (
+  id            SERIAL PRIMARY KEY,
+  name          VARCHAR(32)                 NOT NULL,
+  resource_id   INT,
+  resource_type VARCHAR(255),
+  created_at    TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now(),
+  updated_at    TIMESTAMP WITHOUT TIME ZONE NOT NULL
 );
-create unique index idx_roles_name_resource_type_id on roles(name, resource_type, resource_id);
-create index idx_roles_name on roles(name);
-create index idx_roles_resource_type on roles(resource_type);
+CREATE UNIQUE INDEX idx_roles_name_resource_type_id
+  ON roles (name, resource_type, resource_id);
+CREATE INDEX idx_roles_name
+  ON roles (name);
+CREATE INDEX idx_roles_resource_type
+  ON roles (resource_type);
 
-create table policies(
-  id serial primary key,
-  user_id int not null,
-  role_id int not null,
-  start_up date not null default current_date,
-  shut_down date not null default '2016-12-13',
-  created_at timestamp without time zone not null default now(),
-  updated_at timestamp without time zone not null
+CREATE TABLE policies (
+  id         SERIAL PRIMARY KEY,
+  user_id    INT                         NOT NULL,
+  role_id    INT                         NOT NULL,
+  start_up   DATE                        NOT NULL DEFAULT current_date,
+  shut_down  DATE                        NOT NULL DEFAULT '2016-12-13',
+  created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now(),
+  updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL
 );
-create unique index idx_policies on policies(user_id, role_id);
+CREATE UNIQUE INDEX idx_policies
+  ON policies (user_id, role_id);
 
-create table settings(
-  id serial primary key,
-  key varchar(255) not null,
-  val bytea not null,
-  flag boolean not null default false,
-  created_at timestamp without time zone not null default now(),
-  updated_at timestamp without time zone not null
+CREATE TABLE settings (
+  id         SERIAL PRIMARY KEY,
+  key        VARCHAR(255)                NOT NULL,
+  val        BYTEA                       NOT NULL,
+  flag       BOOLEAN                     NOT NULL DEFAULT FALSE,
+  created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now(),
+  updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL
 );
-create unique index idx_settings_key on settings(key);
+CREATE UNIQUE INDEX idx_settings_key
+  ON settings (key);
 
-create table votes(
-  id serial primary key,
-  resource_type varchar(255) not null,
-  resource_id int not null,
-  point int not null default 0,
-  created_at timestamp without time zone not null default now(),
-  updated_at timestamp without time zone not null
+CREATE TABLE votes (
+  id            SERIAL PRIMARY KEY,
+  resource_type VARCHAR(255)                NOT NULL,
+  resource_id   INT                         NOT NULL,
+  point         INT                         NOT NULL DEFAULT 0,
+  created_at    TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now(),
+  updated_at    TIMESTAMP WITHOUT TIME ZONE NOT NULL
 );
-create unique index idx_votes_resources on votes(resource_type, resource_id);
-create index idx_votes_resource_type on votes(resource_type);
+CREATE UNIQUE INDEX idx_votes_resources
+  ON votes (resource_type, resource_id);
+CREATE INDEX idx_votes_resource_type
+  ON votes (resource_type);
 
-create table locales(
-  id serial primary key,
-  code varchar(255) not null,
-  lang varchar(8) not null default 'en-US',
-  message text not null,
-  created_at timestamp without time zone not null default now(),
-  updated_at timestamp without time zone not null
+CREATE TABLE locales (
+  id         SERIAL PRIMARY KEY,
+  code       VARCHAR(255)                NOT NULL,
+  lang       VARCHAR(8)                  NOT NULL DEFAULT 'en-US',
+  message    TEXT                        NOT NULL,
+  created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now(),
+  updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL
 );
-create unique index idx_locales_code_lang on locales(code, lang);
-create index idx_locales_code on locales(code);
-create index idx_locales_lang on locales(lang);
+CREATE UNIQUE INDEX idx_locales_code_lang
+  ON locales (code, lang);
+CREATE INDEX idx_locales_code
+  ON locales (code);
+CREATE INDEX idx_locales_lang
+  ON locales (lang);
 
-create table notices(
-  id serial primary key,
-  body text not null,
-  type varchar(8) not null default 'markdown',
-  created_at timestamp without time zone not null default now(),
-  updated_at timestamp without time zone not null
-);
-
-create table leave_words(
-  id serial primary key,
-  body text not null,
-  type varchar(8) not null default 'markdown',
-  created_at timestamp without time zone not null default now()
+CREATE TABLE notices (
+  id         SERIAL PRIMARY KEY,
+  body       TEXT                        NOT NULL,
+  type       VARCHAR(8)                  NOT NULL DEFAULT 'markdown',
+  created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now(),
+  updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL
 );
 
-create table attachments(
-  id serial primary key,
-  title varchar(255) not null,
-  url varchar(255) not null,
-  length int not null,
-  media_type varchar(32) not null,
-  resource_type varchar(255) not null,
-  resource_id int not null,
-  user_id int not null,
-  created_at timestamp without time zone not null default now()
+CREATE TABLE leave_words (
+  id         SERIAL PRIMARY KEY,
+  body       TEXT                        NOT NULL,
+  type       VARCHAR(8)                  NOT NULL DEFAULT 'markdown',
+  created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now()
 );
-create unique index idx_attachments_url on attachments(url);
-create unique index idx_attachments_resources on attachments(resource_type, resource_id);
-create index idx_attachments_title on attachments(title);
-create index idx_attachments_media_type on attachments(media_type);
+
+CREATE TABLE attachments (
+  id            SERIAL PRIMARY KEY,
+  title         VARCHAR(255)                NOT NULL,
+  url           VARCHAR(255)                NOT NULL,
+  length        INT                         NOT NULL,
+  media_type    VARCHAR(32)                 NOT NULL,
+  resource_type VARCHAR(255)                NOT NULL,
+  resource_id   INT                         NOT NULL,
+  user_id       INT                         NOT NULL,
+  created_at    TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now()
+);
+CREATE UNIQUE INDEX idx_attachments_url
+  ON attachments (url);
+CREATE UNIQUE INDEX idx_attachments_resources
+  ON attachments (resource_type, resource_id);
+CREATE INDEX idx_attachments_title
+  ON attachments (title);
+CREATE INDEX idx_attachments_media_type
+  ON attachments (media_type);

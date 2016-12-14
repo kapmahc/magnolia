@@ -8,7 +8,7 @@ import java.util.Date;
  * Created by flamen on 16-12-13.
  */
 @Entity(name = "leave_wrods")
-public class LeaveWord implements Serializable{
+public class LeaveWord implements Serializable {
     @Enumerated(EnumType.STRING)
     private Model.Type type;
     @Id

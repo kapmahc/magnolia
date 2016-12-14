@@ -8,11 +8,12 @@ import java.util.Date;
  * Created by flamen on 16-12-13.
  */
 @Entity
-@Inheritance(strategy= InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Model implements Serializable {
-    public enum Type{
+    public enum Type {
         MARKDOWN, HTML
     }
+
     @Id
     @GeneratedValue
     private long id;

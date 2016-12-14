@@ -15,9 +15,10 @@ import java.util.List;
  */
 @Entity(name = "reading_books")
 public class Book extends Model {
-    public enum Type{
+    public enum Type {
         EPUB3, EPUB2
     }
+
     private String author;
     private String publisher;
     private String title;

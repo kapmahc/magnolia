@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity(name =  "mail_domain")
+@Entity(name = "mail_domain")
 public class Domain extends Model {
     private String name;
     @OneToMany

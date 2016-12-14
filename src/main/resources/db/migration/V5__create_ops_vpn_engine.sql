@@ -1,26 +1,27 @@
-create table vpn_users (
-  id serial primary key,
-  email varchar(255) not null,
-  password varchar(255) not null,
-  details text,
-  online bool not null default false,
-  enable bool not null default false,
-  start_up date not null default '2016-12-13',
-  shut_down date not null default current_date,
-  created_at timestamp without time zone not null default now(),
-  updated_at timestamp without time zone not null
+CREATE TABLE vpn_users (
+  id         SERIAL PRIMARY KEY,
+  email      VARCHAR(255)                NOT NULL,
+  password   VARCHAR(255)                NOT NULL,
+  details    TEXT,
+  online     BOOL                        NOT NULL DEFAULT FALSE,
+  enable     BOOL                        NOT NULL DEFAULT FALSE,
+  start_up   DATE                        NOT NULL DEFAULT '2016-12-13',
+  shut_down  DATE                        NOT NULL DEFAULT current_date,
+  created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now(),
+  updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL
 );
-create unique index idx_vpn_users_email on vpn_users(email);
+CREATE UNIQUE INDEX idx_vpn_users_email
+  ON vpn_users (email);
 
-create table vpn_logs (
-  id serial primary key,
-  user_id int not null,
-  trusted_ip inet,
-  trusted_port smallint,
-  remote_ip inet,
-  remote_port smallint,
-  start_up timestamp without time zone not null default CURRENT_TIMESTAMP,
-  shut_down timestamp without time zone,
-  received float not null default '0.0',
-  send float not null default '0.0'
+CREATE TABLE vpn_logs (
+  id           SERIAL PRIMARY KEY,
+  user_id      INT                         NOT NULL,
+  trusted_ip   INET,
+  trusted_port SMALLINT,
+  remote_ip    INET,
+  remote_port  SMALLINT,
+  start_up     TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  shut_down    TIMESTAMP WITHOUT TIME ZONE,
+  received     FLOAT                       NOT NULL DEFAULT '0.0',
+  send         FLOAT                       NOT NULL DEFAULT '0.0'
 );

@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
  * Created by flamen on 16-12-13.
  */
 @Entity(name = "mail_users")
-public class User extends Model{
+public class User extends Model {
     private String name;
     private String email;
     private String password;

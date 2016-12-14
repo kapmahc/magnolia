@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity(name="roles")
+@Entity(name = "roles")
 public class Role extends Model {
     private String name;
     private String resourceType;

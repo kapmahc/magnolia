@@ -1,30 +1,35 @@
-create table mail_domains (
-  id serial primary key,
-  name varchar(128) not null,
-  created_at timestamp without time zone not null default now(),
-  updated_at timestamp without time zone not null
+CREATE TABLE mail_domains (
+  id         SERIAL PRIMARY KEY,
+  name       VARCHAR(128)                NOT NULL,
+  created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now(),
+  updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL
 );
-create unique index idx_mail_domains_name on mail_domains(name);
+CREATE UNIQUE INDEX idx_mail_domains_name
+  ON mail_domains (name);
 
-create table mail_users (
-  id serial primary key,
-  domain_id int not null,
-  email varchar(255) not null,
-  name varchar(128) not null,
-  password varchar(255) not null,
-  created_at timestamp without time zone not null default now(),
-  updated_at timestamp without time zone not null
+CREATE TABLE mail_users (
+  id         SERIAL PRIMARY KEY,
+  domain_id  INT                         NOT NULL,
+  email      VARCHAR(255)                NOT NULL,
+  name       VARCHAR(128)                NOT NULL,
+  password   VARCHAR(255)                NOT NULL,
+  created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now(),
+  updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL
 );
-create unique index idx_mail_users_email on mail_users(email);
-create index idx_mail_users_name on mail_users(name);
+CREATE UNIQUE INDEX idx_mail_users_email
+  ON mail_users (email);
+CREATE INDEX idx_mail_users_name
+  ON mail_users (name);
 
-create table mail_aliases (
-  id serial primary key,
-  domain_id int not null,
-  source varchar(255) not null,
-  destination varchar(255) not null,
-  created_at timestamp without time zone not null default now(),
-  updated_at timestamp without time zone not null
+CREATE TABLE mail_aliases (
+  id          SERIAL PRIMARY KEY,
+  domain_id   INT                         NOT NULL,
+  source      VARCHAR(255)                NOT NULL,
+  destination VARCHAR(255)                NOT NULL,
+  created_at  TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now(),
+  updated_at  TIMESTAMP WITHOUT TIME ZONE NOT NULL
 );
-create unique index idx_mail_aliases_source on mail_aliases(source);
-create index idx_mail_aliases_destination on mail_aliases(destination);
+CREATE UNIQUE INDEX idx_mail_aliases_source
+  ON mail_aliases (source);
+CREATE INDEX idx_mail_aliases_destination
+  ON mail_aliases (destination);

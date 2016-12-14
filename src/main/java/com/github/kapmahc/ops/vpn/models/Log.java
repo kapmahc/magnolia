@@ -11,7 +11,7 @@ import java.util.Date;
  * Created by flamen on 16-12-13.
  */
 @Entity(name = "vpn_logs")
-public class Log implements Serializable{
+public class Log implements Serializable {
     @Id
     @GeneratedValue
     private long id;

@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity(name="cms_articles")
+@Entity(name = "cms_articles")
 public class Article extends Model {
     private String title;
     private String body;

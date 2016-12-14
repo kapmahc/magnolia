@@ -10,7 +10,7 @@ import java.util.Date;
  * Created by flamen on 16-12-13.
  */
 @Entity(name = "attachments")
-public class Attachment implements Serializable{
+public class Attachment implements Serializable {
     @Id
     @GeneratedValue
     private long id;

@@ -25,6 +25,12 @@ gradle flywayClean
 gradle flywayInfo
 ```
 
+* Test
+```
+gradle test
+firefox build/reports/tests/test/index.html
+```
+
 * Documents
 - http://mvnrepository.com/
 - http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html

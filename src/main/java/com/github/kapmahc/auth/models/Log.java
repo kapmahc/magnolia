@@ -12,6 +12,7 @@ public class Log implements Serializable {
     public enum Type {
         INFO, WARNING, ERROR
     }
+
     @Id
     @GeneratedValue
     private long id;

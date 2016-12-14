@@ -1,30 +1,36 @@
-create table reading_books(
-  id serial primary key,
-  author varchar(255) not null,
-  publisher varchar(255) not null,
-  title varchar(255) not null,
-  type varchar(36) not null default 'epub3',
-  lang varchar(32) not null default 'en-US',
-  file varchar(255) not null,
-  subject varchar(255),
-  description text,
-  published_at date not null default current_date,
-  created_at timestamp without time zone not null default now(),
-  updated_at timestamp without time zone not null
+CREATE TABLE reading_books (
+  id           SERIAL PRIMARY KEY,
+  author       VARCHAR(255)                NOT NULL,
+  publisher    VARCHAR(255)                NOT NULL,
+  title        VARCHAR(255)                NOT NULL,
+  type         VARCHAR(36)                 NOT NULL DEFAULT 'epub3',
+  lang         VARCHAR(32)                 NOT NULL DEFAULT 'en-US',
+  file         VARCHAR(255)                NOT NULL,
+  subject      VARCHAR(255),
+  description  TEXT,
+  published_at DATE                        NOT NULL DEFAULT current_date,
+  created_at   TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now(),
+  updated_at   TIMESTAMP WITHOUT TIME ZONE NOT NULL
 );
-create unique index idx_reading_books_file on reading_books(file);
-create index idx_reading_books_author on reading_books(author);
-create index idx_reading_books_publisher on reading_books(publisher);
-create index idx_reading_books_type on reading_books(type);
-create index idx_reading_books_lang on reading_books(lang);
+CREATE UNIQUE INDEX idx_reading_books_file
+  ON reading_books (file);
+CREATE INDEX idx_reading_books_author
+  ON reading_books (author);
+CREATE INDEX idx_reading_books_publisher
+  ON reading_books (publisher);
+CREATE INDEX idx_reading_books_type
+  ON reading_books (type);
+CREATE INDEX idx_reading_books_lang
+  ON reading_books (lang);
 
-create table reading_notes(
-  id serial primary key,
-  user_id int not null,
-  book_id int not null,
-  body text not null,
-  type varchar(8) not null default 'markdown',
-  created_at timestamp without time zone not null default now(),
-  updated_at timestamp without time zone not null
+CREATE TABLE reading_notes (
+  id         SERIAL PRIMARY KEY,
+  user_id    INT                         NOT NULL,
+  book_id    INT                         NOT NULL,
+  body       TEXT                        NOT NULL,
+  type       VARCHAR(8)                  NOT NULL DEFAULT 'markdown',
+  created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now(),
+  updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL
 );
-create index idx_reading_notes_type on reading_notes(type);
+CREATE INDEX idx_reading_notes_type
+  ON reading_notes (type);
