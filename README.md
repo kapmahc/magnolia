@@ -34,5 +34,6 @@ firefox build/reports/tests/test/index.html
 * Documents
 - http://mvnrepository.com/
 - http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+- http://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html
 - https://flywaydb.org/documentation/gradle/
 - https://github.com/alibaba/druid/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98

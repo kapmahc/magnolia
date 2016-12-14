@@ -1,7 +1,6 @@
 package com.github.kapmahc.ops.vpn.models;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import java.io.Serializable;
@@ -13,7 +12,6 @@ import java.util.Date;
 @Entity(name = "vpn_logs")
 public class Log implements Serializable {
     @Id
-    @GeneratedValue
     private long id;
     private String trustedIp;
     private int trustedPort;

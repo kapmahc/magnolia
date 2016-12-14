@@ -1,7 +1,6 @@
 package com.github.kapmahc.auth.models;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
@@ -12,7 +11,6 @@ import java.util.Date;
 @Entity(name = "attachments")
 public class Attachment implements Serializable {
     @Id
-    @GeneratedValue
     private long id;
     private String name;
     private String title;

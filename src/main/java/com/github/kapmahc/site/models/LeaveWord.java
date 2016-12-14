@@ -1,6 +1,9 @@
 package com.github.kapmahc.site.models;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -9,12 +12,11 @@ import java.util.Date;
  */
 @Entity(name = "leave_words")
 public class LeaveWord implements Serializable {
-    @Enumerated(EnumType.STRING)
-    private Model.Type type;
     @Id
-    @GeneratedValue
     private long id;
     private String body;
+    @Enumerated(EnumType.STRING)
+    private Model.Type type;
     private Date createdAt;
 
     public long getId() {

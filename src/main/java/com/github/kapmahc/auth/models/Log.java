@@ -14,7 +14,6 @@ public class Log implements Serializable {
     }
 
     @Id
-    @GeneratedValue
     private long id;
     @Enumerated(EnumType.STRING)
     private Type type;

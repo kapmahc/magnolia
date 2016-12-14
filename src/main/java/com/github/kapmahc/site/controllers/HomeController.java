@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller("site.homeController")
 public class HomeController {
-    @GetMapping("/home")
-    public String home(Model model){
+    @GetMapping("/")
+    public String home(Model model) {
         return "home";
     }
 }
