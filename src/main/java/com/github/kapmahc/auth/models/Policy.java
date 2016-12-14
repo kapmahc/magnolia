@@ -1,7 +1,5 @@
 package com.github.kapmahc.auth.models;
 
-import com.github.kapmahc.site.models.Model;
-
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import java.util.Date;

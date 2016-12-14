@@ -1,9 +1,6 @@
-package com.github.kapmahc.site.models;
+package com.github.kapmahc.auth.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -19,6 +16,7 @@ public class Model implements Serializable {
 
     @Id
     private long id;
+    @Version
     private Date updatedAt;
     private Date createdAt;
 

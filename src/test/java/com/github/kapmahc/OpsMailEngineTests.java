@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class OpsMailTests {
+public class OpsMailEngineTests {
 
     @Test
     public void ssha512() {

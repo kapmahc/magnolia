@@ -1,4 +1,4 @@
-package com.github.kapmahc.site.models;
+package com.github.kapmahc.auth.models;
 
 import javax.persistence.Entity;
 

@@ -1,7 +1,7 @@
 package com.github.kapmahc.reading.models;
 
+import com.github.kapmahc.auth.models.Model;
 import com.github.kapmahc.auth.models.User;
-import com.github.kapmahc.site.models.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

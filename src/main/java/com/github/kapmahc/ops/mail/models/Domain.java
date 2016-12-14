@@ -1,6 +1,6 @@
 package com.github.kapmahc.ops.mail.models;
 
-import com.github.kapmahc.site.models.Model;
+import com.github.kapmahc.auth.models.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;

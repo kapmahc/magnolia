@@ -1,7 +1,5 @@
 package com.github.kapmahc.auth.models;
 
-import com.github.kapmahc.site.models.Model;
-
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
@@ -13,12 +11,16 @@ import java.util.List;
  */
 @Entity(name = "users")
 public class User extends Model {
+    public enum Type {
+        EMAIL
+    }
+
     private String fullName;
     private String email;
     private String uid;
     private byte[] password;
     private String providerId;
-    private String providerType;
+    private Type providerType;
     private String home;
     private String logo;
     private String signInCount;
@@ -94,11 +96,11 @@ public class User extends Model {
         this.providerId = providerId;
     }
 
-    public String getProviderType() {
+    public Type getProviderType() {
         return providerType;
     }
 
-    public void setProviderType(String providerType) {
+    public void setProviderType(Type providerType) {
         this.providerType = providerType;
     }
 
