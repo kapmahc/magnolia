@@ -13,6 +13,7 @@ import java.util.List;
  */
 @Entity(name = "vpn_users")
 public class User extends Model {
+    private String fullName;
     private String email;
     private String password;
     private String details;
@@ -22,6 +23,14 @@ public class User extends Model {
     private Date shutDown;
     @OneToMany
     private List<Log> logs;
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 
     public User() {
         logs = new ArrayList<>();

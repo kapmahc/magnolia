@@ -8,9 +8,29 @@
 <body>
 
 <div layout:fragment="content" class="row">
-    <h1>安装</h1>
-    <h1 th:text="#{buttons.clear}">FooBar</h1>
-    <form>
+    <h2 th:text="#{ops.install.title}">Install</h2>
+    <hr/>
+    <form th:action="@{/ops/install}" th:object="${installForm}" method="post">
+        <div class="form-group" th:classappend="${#fields.hasErrors('domain')} ? 'has-danger' : ''">
+            <label class="form-control-label" th:for="domain" th:text="#{ops.install.domain}">Domain</label>
+            <input type="text" class="form-control" th:field="*{domain}"/>
+            <div class="form-control-feedback" th:errors="*{domain}"></div>
+        </div>
+        <div class="form-group" th:classappend="${#fields.hasErrors('email')} ? 'has-danger' : ''">
+            <label class="form-control-label" th:for="email" th:text="#{attributes.email}">Email</label>
+            <input type="email" class="form-control" th:field="*{email}"/>
+            <div class="form-control-feedback" th:errors="*{email}"></div>
+        </div>
+        <div class="form-group" th:classappend="${#fields.hasErrors('password')} ? 'has-danger' : ''">
+            <label class="form-control-label" th:for="password" th:text="#{attributes.password}">Password</label>
+            <input type="password" class="form-control" th:field="*{password}"/>
+            <div class="form-control-feedback" th:errors="*{password}"></div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" th:for="passwordConfirmation"
+                   th:text="#{attributes.passwordConfirmation}">Password confirmation</label>
+            <input type="password" class="form-control" th:field="*{passwordConfirmation}"/>
+        </div>
         <div th:replace="fragments/form :: buttons">Buttons</div>
     </form>
 </div>

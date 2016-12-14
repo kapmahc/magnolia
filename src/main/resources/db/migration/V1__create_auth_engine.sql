@@ -1,6 +1,6 @@
 CREATE TABLE users (
   id                 SERIAL PRIMARY KEY,
-  name               VARCHAR(32)                 NOT NULL,
+  full_name          VARCHAR(32)                 NOT NULL,
   email              VARCHAR(255)                NOT NULL,
   uid                VARCHAR(36)                 NOT NULL,
   password           BYTEA,
@@ -24,8 +24,8 @@ CREATE UNIQUE INDEX idx_users_email
   ON users (email);
 CREATE UNIQUE INDEX idx_users_provider_id_type
   ON users (provider_id, provider_type);
-CREATE INDEX idx_users_name
-  ON users (name);
+CREATE INDEX idx_users_full_name
+  ON users (full_name);
 CREATE INDEX idx_users_provider_id
   ON users (provider_id);
 CREATE INDEX idx_users_provider_type
@@ -85,12 +85,15 @@ CREATE UNIQUE INDEX idx_policies
 CREATE TABLE settings (
   id         SERIAL PRIMARY KEY,
   key        VARCHAR(255)                NOT NULL,
+  user_id    INT,
   val        BYTEA                       NOT NULL,
   flag       BOOLEAN                     NOT NULL DEFAULT FALSE,
   created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now(),
   updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL
 );
-CREATE UNIQUE INDEX idx_settings_key
+CREATE UNIQUE INDEX idx_settings
+  ON settings (key, user_id);
+CREATE INDEX idx_settings_key
   ON settings (key);
 
 CREATE TABLE votes (

@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Entity(name = "users")
 public class User extends Model {
-    private String name;
+    private String fullName;
     private String email;
     private String uid;
     private byte[] password;
@@ -54,12 +54,12 @@ public class User extends Model {
         this.contacts = contacts;
     }
 
-    public String getName() {
-        return name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getEmail() {

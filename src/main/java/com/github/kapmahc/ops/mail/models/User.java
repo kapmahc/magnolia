@@ -10,18 +10,18 @@ import javax.persistence.ManyToOne;
  */
 @Entity(name = "mail_users")
 public class User extends Model {
-    private String name;
+    private String fullName;
     private String email;
     private String password;
     @ManyToOne
     private Domain domain;
 
-    public String getName() {
-        return name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getEmail() {
