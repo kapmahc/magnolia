@@ -1,4 +1,4 @@
-package com.github.kapmahc.ops.models.mail;
+package com.github.kapmahc.ops.mail.models;
 
 import com.github.kapmahc.auth.models.Model;
 

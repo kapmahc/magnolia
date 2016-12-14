@@ -1,4 +1,4 @@
-package com.github.kapmahc.ops.models.vpn;
+package com.github.kapmahc.ops.vpn.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -1,4 +1,4 @@
-package com.github.kapmahc.ops.models.vpn;
+package com.github.kapmahc.ops.vpn.models;
 
 import com.github.kapmahc.auth.models.Model;
 
