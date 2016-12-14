@@ -1,5 +1,7 @@
 package com.github.kapmahc.auth.models;
 
+import com.github.kapmahc.site.models.Model;
+
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;

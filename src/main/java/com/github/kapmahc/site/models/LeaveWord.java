@@ -1,4 +1,4 @@
-package com.github.kapmahc.auth.models;
+package com.github.kapmahc.site.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -7,17 +7,14 @@ import java.util.Date;
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Model implements Serializable {
-    public enum Type {
-        MARKDOWN, HTML
-    }
-
+@Entity(name = "leave_words")
+public class LeaveWord implements Serializable {
+    @Enumerated(EnumType.STRING)
+    private Model.Type type;
     @Id
     @GeneratedValue
     private long id;
-    private Date updatedAt;
+    private String body;
     private Date createdAt;
 
     public long getId() {
@@ -28,12 +25,20 @@ public class Model implements Serializable {
         this.id = id;
     }
 
-    public Date getUpdatedAt() {
-        return updatedAt;
+    public Model.Type getType() {
+        return type;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setType(Model.Type type) {
+        this.type = type;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
     }
 
     public Date getCreatedAt() {
