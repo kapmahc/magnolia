@@ -19,8 +19,17 @@ public class Attachment implements Serializable {
     private long resourceId;
     private long length;
     private Date createdAt;
+    private int sortOrder;
 
     private User user;
+
+    public int getSortOrder() {
+        return sortOrder;
+    }
+
+    public void setSortOrder(int sortOrder) {
+        this.sortOrder = sortOrder;
+    }
 
     public long getLength() {
         return length;

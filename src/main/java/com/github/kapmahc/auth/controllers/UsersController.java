@@ -1,8 +1,11 @@
 package com.github.kapmahc.auth.controllers;
 
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.annotation.Resource;
 
 /**
  * Created by flamen on 16-12-13.
@@ -24,4 +27,7 @@ public class UsersController {
     public String getUnlock() {
         return "auth/users/unlock";
     }
+
+    @Resource
+    MessageSource messageSource;
 }

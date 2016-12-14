@@ -145,6 +145,7 @@ CREATE TABLE attachments (
   resource_type VARCHAR(255)                NOT NULL,
   resource_id   INT                         NOT NULL,
   user_id       INT                         NOT NULL,
+  sort_order    INT                         NOT NULL DEFAULT 0,
   created_at    TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now()
 );
 CREATE UNIQUE INDEX idx_attachments_url
