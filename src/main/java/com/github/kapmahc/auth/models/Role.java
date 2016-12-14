@@ -3,10 +3,18 @@ package com.github.kapmahc.auth.models;
 /**
  * Created by flamen on 16-12-13.
  */
-
-public class Vote extends Model {
+public class Role extends Model {
+    private String name;
     private String resourceType;
-    private int resourceId;
+    private Integer resourceId;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getResourceType() {
         return resourceType;
@@ -16,11 +24,11 @@ public class Vote extends Model {
         this.resourceType = resourceType;
     }
 
-    public int getResourceId() {
+    public Integer getResourceId() {
         return resourceId;
     }
 
-    public void setResourceId(int resourceId) {
+    public void setResourceId(Integer resourceId) {
         this.resourceId = resourceId;
     }
 }

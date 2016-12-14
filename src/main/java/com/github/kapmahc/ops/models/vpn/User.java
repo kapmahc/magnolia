@@ -1,0 +1,90 @@
+package com.github.kapmahc.ops.models.vpn;
+
+import com.github.kapmahc.auth.models.Model;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+/**
+ * Created by flamen on 16-12-13.
+ */
+public class User extends Model{
+    private String email;
+    private String password;
+    private String details;
+    private boolean online;
+    private boolean enable;
+    private Date startUp;
+    private Date shutDown;
+
+    private List<Log> logs;
+
+    public User() {
+        logs = new ArrayList<>();
+    }
+
+    public List<Log> getLogs() {
+        return logs;
+    }
+
+    public void setLogs(List<Log> logs) {
+        this.logs = logs;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
+    public boolean isOnline() {
+        return online;
+    }
+
+    public void setOnline(boolean online) {
+        this.online = online;
+    }
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
+
+    public Date getStartUp() {
+        return startUp;
+    }
+
+    public void setStartUp(Date startUp) {
+        this.startUp = startUp;
+    }
+
+    public Date getShutDown() {
+        return shutDown;
+    }
+
+    public void setShutDown(Date shutDown) {
+        this.shutDown = shutDown;
+    }
+}

@@ -6,10 +6,12 @@ import java.util.Date;
 /**
  * Created by flamen on 16-12-13.
  */
-public class LeaveWord implements Serializable{
-    private Model.Type type;
+public class Model implements Serializable {
+    public enum Type{
+        MARKDOWN, HTML
+    }
     private int id;
-    private String body;
+    private Date updatedAt;
     private Date createdAt;
 
     public int getId() {
@@ -20,20 +22,12 @@ public class LeaveWord implements Serializable{
         this.id = id;
     }
 
-    public Model.Type getType() {
-        return type;
+    public Date getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setType(Model.Type type) {
-        this.type = type;
-    }
-
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public Date getCreatedAt() {
