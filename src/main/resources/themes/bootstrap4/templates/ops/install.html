@@ -8,10 +8,10 @@
 <body>
 
 <div layout:fragment="content" class="row">
+    <h1>安装</h1>
     <h1 th:text="#{buttons.clear}">FooBar</h1>
     <form>
-        <input type="submit" th:value="#{buttons.submit}" class="btn btn-primary">
-        <input type="reset" th:value="#{buttons.reset}" class="btn btn-secondary">
+        <div th:replace="fragments/form :: buttons">Buttons</div>
     </form>
 </div>
 

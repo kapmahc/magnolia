@@ -4,7 +4,8 @@
 </head>
 <body>
 <div th:fragment="buttons" class="">
-
+    <input type="submit" th:value="#{buttons.submit}" class="btn btn-primary">
+    <input type="reset" th:value="#{buttons.reset}" class="btn btn-secondary">
 </div>
 </body>
 </html>
