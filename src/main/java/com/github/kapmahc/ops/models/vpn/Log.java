@@ -1,12 +1,20 @@
 package com.github.kapmahc.ops.models.vpn;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by flamen on 16-12-13.
  */
-public class Log {
-    private int id;
+@Entity(name = "vpn_logs")
+public class Log implements Serializable{
+    @Id
+    @GeneratedValue
+    private long id;
     private String trustedIp;
     private int trustedPort;
     private String remoteIp;
@@ -15,14 +23,14 @@ public class Log {
     private double received;
     private Date startUp;
     private Date shutDown;
-
+    @ManyToOne
     private User user;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

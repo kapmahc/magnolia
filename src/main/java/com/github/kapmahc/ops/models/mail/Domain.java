@@ -2,15 +2,20 @@ package com.github.kapmahc.ops.models.mail;
 
 import com.github.kapmahc.auth.models.Model;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by flamen on 16-12-13.
  */
+@Entity(name =  "mail_domain")
 public class Domain extends Model {
     private String name;
+    @OneToMany
     private List<User> users;
+    @OneToMany
     private List<Alias> aliases;
 
     public Domain() {

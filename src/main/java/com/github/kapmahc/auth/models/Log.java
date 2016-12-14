@@ -1,20 +1,26 @@
 package com.github.kapmahc.auth.models;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by flamen on 16-12-13.
  */
+@Entity(name = "logs")
 public class Log implements Serializable {
     public enum Type {
         INFO, WARNING, ERROR
     }
-    private int id;
-    private User user;
+    @Id
+    @GeneratedValue
+    private long id;
+    @Enumerated(EnumType.STRING)
     private Type type;
     private String message;
     private Date createdAt;
+    @ManyToOne
+    private User user;
 
     public Date getCreatedAt() {
         return createdAt;
@@ -24,11 +30,11 @@ public class Log implements Serializable {
         this.createdAt = createdAt;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

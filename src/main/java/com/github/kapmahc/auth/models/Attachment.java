@@ -1,26 +1,42 @@
 package com.github.kapmahc.auth.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by flamen on 16-12-13.
  */
-public class Attachment {
-    private int id;
+@Entity(name = "attachments")
+public class Attachment implements Serializable{
+    @Id
+    @GeneratedValue
+    private long id;
     private String name;
     private String title;
     private String mediaType;
     private String resourceType;
-    private int resourceId;
+    private long resourceId;
+    private long length;
     private Date createdAt;
 
     private User user;
 
-    public int getId() {
+    public long getLength() {
+        return length;
+    }
+
+    public void setLength(long length) {
+        this.length = length;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -56,11 +72,11 @@ public class Attachment {
         this.resourceType = resourceType;
     }
 
-    public int getResourceId() {
+    public long getResourceId() {
         return resourceId;
     }
 
-    public void setResourceId(int resourceId) {
+    public void setResourceId(long resourceId) {
         this.resourceId = resourceId;
     }
 

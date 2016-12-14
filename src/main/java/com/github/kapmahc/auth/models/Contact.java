@@ -1,15 +1,17 @@
 package com.github.kapmahc.auth.models;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity(name = "settings")
-public class Setting extends Model {
+@Entity(name="contacts")
+public class Contact extends Model {
     private String key;
-    private byte[] val;
-    private boolean flag;
+    private String val;
+    @ManyToOne
+    private User user;
 
     public String getKey() {
         return key;
@@ -19,19 +21,19 @@ public class Setting extends Model {
         this.key = key;
     }
 
-    public byte[] getVal() {
+    public String getVal() {
         return val;
     }
 
-    public void setVal(byte[] val) {
+    public void setVal(String val) {
         this.val = val;
     }
 
-    public boolean isFlag() {
-        return flag;
+    public User getUser() {
+        return user;
     }
 
-    public void setFlag(boolean flag) {
-        this.flag = flag;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

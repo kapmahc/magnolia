@@ -25,6 +25,18 @@ create index idx_users_name on users(name);
 create index idx_users_provider_id on users(provider_id);
 create index idx_users_provider_type on users(provider_type);
 
+
+create table contacts(
+  id serial primary key,
+  user_id int not null,
+  key varchar(32) not null,
+  val varchar(255) not null,
+  created_at timestamp without time zone not null default now(),
+  updated_at timestamp without time zone not null
+);
+create unique index idx_contacts on contacts(user_id, key);
+create index idx_contacts_key on contacts(key);
+
 create table logs(
   id serial primary key,
   user_id int not null,
@@ -71,6 +83,7 @@ create table votes(
   id serial primary key,
   resource_type varchar(255) not null,
   resource_id int not null,
+  point int not null default 0,
   created_at timestamp without time zone not null default now(),
   updated_at timestamp without time zone not null
 );
@@ -108,6 +121,7 @@ create table attachments(
   id serial primary key,
   title varchar(255) not null,
   url varchar(255) not null,
+  length int not null,
   media_type varchar(32) not null,
   resource_type varchar(255) not null,
   resource_id int not null,

@@ -3,14 +3,22 @@ package com.github.kapmahc.reading.models;
 import com.github.kapmahc.auth.models.Model;
 import com.github.kapmahc.auth.models.User;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
+
 /**
  * Created by flamen on 16-12-13.
  */
+@Entity(name = "reading_notes")
 public class Note extends Model {
+    @Enumerated(EnumType.STRING)
     private Type type;
     private String body;
-
+    @ManyToOne
     private Book book;
+    @ManyToOne
     private User user;
 
     public Type getType() {

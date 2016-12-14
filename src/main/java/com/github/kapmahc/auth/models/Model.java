@@ -1,24 +1,29 @@
 package com.github.kapmahc.auth.models;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by flamen on 16-12-13.
  */
+@Entity
+@Inheritance(strategy= InheritanceType.TABLE_PER_CLASS)
 public class Model implements Serializable {
     public enum Type{
         MARKDOWN, HTML
     }
-    private int id;
+    @Id
+    @GeneratedValue
+    private long id;
     private Date updatedAt;
     private Date createdAt;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

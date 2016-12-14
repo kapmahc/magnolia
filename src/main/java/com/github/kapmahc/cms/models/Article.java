@@ -3,19 +3,24 @@ package com.github.kapmahc.cms.models;
 import com.github.kapmahc.auth.models.Model;
 import com.github.kapmahc.auth.models.User;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by flamen on 16-12-13.
  */
+@Entity(name="cms_articles")
 public class Article extends Model {
     private String title;
     private String body;
+    @Enumerated(EnumType.STRING)
     private Type type;
-
+    @OneToMany
     private List<Tag> tags;
+    @OneToMany
     private List<Comment> comments;
+    @ManyToOne
     private User user;
 
     public Article() {

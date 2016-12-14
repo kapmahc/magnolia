@@ -2,6 +2,10 @@ package com.github.kapmahc.reading.models;
 
 import com.github.kapmahc.auth.models.Model;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,6 +13,7 @@ import java.util.List;
 /**
  * Created by flamen on 16-12-13.
  */
+@Entity(name = "reading_books")
 public class Book extends Model {
     public enum Type{
         EPUB3, EPUB2
@@ -16,13 +21,14 @@ public class Book extends Model {
     private String author;
     private String publisher;
     private String title;
+    @Enumerated(EnumType.STRING)
     private Type type;
     private String lang;
     private String file;
     private String subject;
     private String description;
     private Date publishedAt;
-
+    @OneToMany
     private List<Note> notes;
 
     public Book() {

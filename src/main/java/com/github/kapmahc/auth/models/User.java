@@ -1,5 +1,7 @@
 package com.github.kapmahc.auth.models;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -7,6 +9,7 @@ import java.util.List;
 /**
  * Created by flamen on 16-12-13.
  */
+@Entity(name="users")
 public class User extends Model {
     private String name;
     private String email;
@@ -23,11 +26,30 @@ public class User extends Model {
     private String lastSignInIp;
     private Date confirmedAt;
     private Date lockedAt;
-
+    @OneToMany
     private List<Log> logs;
+    @OneToMany
+    private List<Contact> contacts;
 
     public User() {
         logs = new ArrayList<>();
+        contacts = new ArrayList<>();
+    }
+
+    public List<Log> getLogs() {
+        return logs;
+    }
+
+    public void setLogs(List<Log> logs) {
+        this.logs = logs;
+    }
+
+    public List<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<Contact> contacts) {
+        this.contacts = contacts;
     }
 
     public String getName() {

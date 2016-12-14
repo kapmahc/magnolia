@@ -2,6 +2,8 @@ package com.github.kapmahc.ops.models.vpn;
 
 import com.github.kapmahc.auth.models.Model;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.List;
 /**
  * Created by flamen on 16-12-13.
  */
+@Entity(name = "vpn_users")
 public class User extends Model{
     private String email;
     private String password;
@@ -17,7 +20,7 @@ public class User extends Model{
     private boolean enable;
     private Date startUp;
     private Date shutDown;
-
+    @OneToMany
     private List<Log> logs;
 
     public User() {

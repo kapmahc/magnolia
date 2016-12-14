@@ -2,13 +2,18 @@ package com.github.kapmahc.ops.models.mail;
 
 import com.github.kapmahc.auth.models.Model;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+
 /**
  * Created by flamen on 16-12-13.
  */
+@Entity(name = "mail_users")
 public class User extends Model{
     private String name;
     private String email;
     private String password;
+    @ManyToOne
     private Domain domain;
 
     public String getName() {

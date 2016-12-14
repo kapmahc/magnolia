@@ -1,22 +1,27 @@
 package com.github.kapmahc.auth.models;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by flamen on 16-12-13.
  */
+@Entity(name = "leave_wrods")
 public class LeaveWord implements Serializable{
+    @Enumerated(EnumType.STRING)
     private Model.Type type;
-    private int id;
+    @Id
+    @GeneratedValue
+    private long id;
     private String body;
     private Date createdAt;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
