@@ -2,7 +2,6 @@ package com.github.kapmahc.ops.forms;
 
 import org.hibernate.validator.constraints.Email;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
@@ -10,7 +9,7 @@ import java.io.Serializable;
  * Created by flamen on 16-12-13.
  */
 public class InstallForm implements Serializable {
-    @Size(min=3, max=255)
+    @Size(min = 3, max = 255)
     private String domain;
     @Email
     private String email;
