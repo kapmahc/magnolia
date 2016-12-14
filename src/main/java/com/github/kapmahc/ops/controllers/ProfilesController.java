@@ -5,6 +5,6 @@ import org.springframework.stereotype.Controller;
 /**
  * Created by flamen on 16-12-13.
  */
-@Controller("ops.siteController")
-public class SiteController {
+@Controller("ops.profilesController")
+public class ProfilesController {
 }
