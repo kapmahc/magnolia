@@ -58,6 +58,9 @@ public class InstallController {
         for (String r : new String[]{"root", "admin"}) {
             policyService.apply(user, r);
         }
+
+        localeService.load();
+
         return "redirect:/users/sign-in";
     }
 

@@ -1,10 +1,9 @@
 package com.github.kapmahc.ops.config;
 
+import com.github.kapmahc.auth.ExposedResourceBundleMessageSource;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
@@ -21,11 +20,13 @@ import java.util.Locale;
 @EnableWebMvc
 public class LocaleConfig extends WebMvcConfigurerAdapter {
     @Bean(name = "ops.messageSource")
-    public MessageSource getMessageSource() {
-        ReloadableResourceBundleMessageSource ms = new ReloadableResourceBundleMessageSource();
+    public ExposedResourceBundleMessageSource getMessageSource() {
+        //can't ust classpath:messages
+        ExposedResourceBundleMessageSource ms = new ExposedResourceBundleMessageSource();
         ms.setBasename(msBasename);
         ms.setDefaultEncoding("UTF-8");
         ms.setCacheSeconds(msCacheSeconds);
+        ms.setUseCodeAsDefaultMessage(true);
         ms.setFallbackToSystemLocale(true);
         return ms;
     }
