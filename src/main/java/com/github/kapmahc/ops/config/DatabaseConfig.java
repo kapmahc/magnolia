@@ -1,6 +1,8 @@
 package com.github.kapmahc.ops.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.bind.RelaxedPropertyResolver;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
@@ -8,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.sql.DataSource;
 import java.sql.SQLException;
 
 /**
@@ -16,7 +19,7 @@ import java.sql.SQLException;
 @Configuration
 @EnableTransactionManagement
 public class DatabaseConfig implements EnvironmentAware {
-    @Bean(initMethod = "init", destroyMethod = "close")
+    @Bean(name = "dataSource", initMethod = "init", destroyMethod = "close")
     public DruidDataSource dataSource() throws SQLException {
         DruidDataSource druidDataSource = new DruidDataSource();
         druidDataSource.setDriverClassName(propertyResolver.getProperty("driver-class-name"));
@@ -35,17 +38,16 @@ public class DatabaseConfig implements EnvironmentAware {
         druidDataSource.setTestOnReturn(Boolean.parseBoolean(propertyResolver.getProperty("testOnReturn")));
         druidDataSource.setPoolPreparedStatements(Boolean.parseBoolean(propertyResolver.getProperty("poolPreparedStatements")));
         druidDataSource.setMaxPoolPreparedStatementPerConnectionSize(Integer.parseInt(propertyResolver.getProperty("maxPoolPreparedStatementPerConnectionSize")));
-
         druidDataSource.setFilters(propertyResolver.getProperty("filters"));
         return druidDataSource;
     }
 
     @Override
     public void setEnvironment(Environment environment) {
-        this.environment = environment;
         this.propertyResolver = new RelaxedPropertyResolver(environment, "spring.datasource.");
     }
 
-    private Environment environment;
+
     private RelaxedPropertyResolver propertyResolver;
+    private final Logger logger = LoggerFactory.getLogger(DatabaseConfig.class);
 }

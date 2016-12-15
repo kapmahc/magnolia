@@ -16,28 +16,26 @@ import org.springframework.context.annotation.Scope;
  * Created by flamen on 16-12-13.
  */
 @Configuration
-public class DruidConfig {
+public class DruidMonitorConfig {
 
     @Bean
     public ServletRegistrationBean druidServlet() {
         ServletRegistrationBean reg = new ServletRegistrationBean();
         reg.setServlet(new StatViewServlet());
         reg.addUrlMappings("/druid/*");
-        //todo
-        //reg.addInitParameter("allow", "127.0.0.1"); //白名单
-        //reg.addInitParameter("deny",""); //黑名单
-//        reg.addInitParameter("loginUsername", "admin");
-//        reg.addInitParameter("loginPassword", "admin");
-
         return reg;
     }
 
     @Bean
     public FilterRegistrationBean filterRegistrationBean() {
-        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
-        filterRegistrationBean.setFilter(new WebStatFilter());
-        filterRegistrationBean.addUrlPatterns("/*");
-        filterRegistrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
-        return filterRegistrationBean;
+        FilterRegistrationBean frb = new FilterRegistrationBean();
+        frb.setFilter(new WebStatFilter());
+        frb.addUrlPatterns("/*");
+        frb.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
+        frb.addInitParameter("profileEnable", "true");
+        frb.addInitParameter("sessionStatMaxCount", "1000");
+        //todo
+//        frb.addInitParameter("principalSessionName", "current.user");
+        return frb;
     }
 }

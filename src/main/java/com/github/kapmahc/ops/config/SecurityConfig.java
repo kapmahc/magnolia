@@ -22,9 +22,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeRequests()
+                .antMatchers("/druid/**").hasRole("admin")
                 .and().formLogin().loginPage("/users/sign-in").permitAll()
                 .and().logout().logoutUrl("/users/sign-out")
-        ;
+                .and().csrf().ignoringAntMatchers("/druid/**")
+                .and();
     }
 
     @Autowired
