@@ -2,10 +2,7 @@ package com.github.kapmahc.ops.vpn.models;
 
 import com.github.kapmahc.auth.models.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,19 +10,30 @@ import java.util.List;
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity(name = "vpn_users")
+@Entity
+@Table(
+        name = "vpn_users",
+        indexes = {@Index(columnList = "fullName")}
+)
 public class User extends Model {
+    @Column(nullable = false)
     private String fullName;
+    @Column(nullable = false, unique = true)
     private String email;
+    @Column(nullable = false)
     private String password;
+    @Lob
+    @Column(nullable = false)
     private String details;
     private boolean online;
     private boolean enable;
     @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
     private Date startUp;
+    @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Date shutDown;
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     private List<Log> logs;
 
     public String getFullName() {

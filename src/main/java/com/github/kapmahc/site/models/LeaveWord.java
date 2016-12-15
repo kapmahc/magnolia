@@ -23,7 +23,7 @@ public class LeaveWord implements Serializable {
     @Column(nullable = false)
     private String body;
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = false, length = 8)
     private Model.Type type;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)

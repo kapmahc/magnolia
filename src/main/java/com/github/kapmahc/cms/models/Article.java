@@ -10,17 +10,29 @@ import java.util.List;
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity(name = "cms_articles")
+@Entity
+@Table(
+        name = "cms_articles",
+        indexes = {
+                @Index(columnList = "title"),
+                @Index(columnList = "type"),
+        }
+)
 public class Article extends Model {
+    @Column(nullable = false)
     private String title;
+    @Lob
+    @Column(nullable = false)
     private String body;
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 8)
     private Type type;
-    @OneToMany
+    @ManyToMany(mappedBy = "articles")
     private List<Tag> tags;
-    @OneToMany
+    @OneToMany(mappedBy = "article")
     private List<Comment> comments;
     @ManyToOne
+    @JoinColumn(nullable = false)
     private User user;
 
     public Article() {

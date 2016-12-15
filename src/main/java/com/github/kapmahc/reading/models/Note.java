@@ -3,22 +3,28 @@ package com.github.kapmahc.reading.models;
 import com.github.kapmahc.auth.models.Model;
 import com.github.kapmahc.auth.models.User;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity(name = "reading_notes")
+@Entity
+@Table(
+        name = "reading_notes",
+        indexes = {@Index(columnList = "type")}
+)
 public class Note extends Model {
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 8)
     private Type type;
+    @Lob
+    @Column(nullable = false)
     private String body;
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Book book;
     @ManyToOne
+    @JoinColumn(nullable = false)
     private User user;
 
     public Type getType() {

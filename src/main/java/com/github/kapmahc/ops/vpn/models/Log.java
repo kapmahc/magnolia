@@ -1,8 +1,6 @@
 package com.github.kapmahc.ops.vpn.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -19,9 +17,14 @@ public class Log implements Serializable {
     private int remotePort;
     private double send;
     private double received;
-    private Date startUp;
-    private Date shutDown;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "_begin")
+    private Date begin;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "_end")
+    private Date end;
     @ManyToOne
+    @JoinColumn(nullable = false)
     private User user;
 
     public long getId() {
@@ -80,20 +83,20 @@ public class Log implements Serializable {
         this.received = received;
     }
 
-    public Date getStartUp() {
-        return startUp;
+    public Date getBegin() {
+        return begin;
     }
 
-    public void setStartUp(Date startUp) {
-        this.startUp = startUp;
+    public void setBegin(Date begin) {
+        this.begin = begin;
     }
 
-    public Date getShutDown() {
-        return shutDown;
+    public Date getEnd() {
+        return end;
     }
 
-    public void setShutDown(Date shutDown) {
-        this.shutDown = shutDown;
+    public void setEnd(Date end) {
+        this.end = end;
     }
 
     public User getUser() {

@@ -19,7 +19,7 @@ public class Notice extends Model {
     @Column(nullable = false)
     private String body;
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = false, length = 8)
     private Type type;
 
     public String getBody() {

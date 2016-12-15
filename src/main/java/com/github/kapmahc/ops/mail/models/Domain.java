@@ -2,6 +2,7 @@ package com.github.kapmahc.ops.mail.models;
 
 import com.github.kapmahc.auth.models.Model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
@@ -10,12 +11,13 @@ import java.util.List;
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity(name = "mail_domain")
+@Entity(name = "mail_domains")
 public class Domain extends Model {
+    @Column(nullable = false, unique = true, length = 128)
     private String name;
-    @OneToMany
+    @OneToMany(mappedBy = "domain")
     private List<User> users;
-    @OneToMany
+    @OneToMany(mappedBy = "domain")
     private List<Alias> aliases;
 
     public Domain() {

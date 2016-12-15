@@ -2,12 +2,13 @@ TODO LIST
 ---
 
 ## Development
-* Druid监控
-* logback
+* Druid monitor
+* logback.xml
 
 
-## Deployment
-* spring.jpa.hibernate.ddl-auto=none
-* backup table schemes
-* flyway.enabled=true
+## Publish release steps
+* test postgresql and mysql's ddl script.
+* diff sql scripts.
+* set `spring.jpa.hibernate.ddl-auto=none`
+* set `flyway.enabled=true`
 

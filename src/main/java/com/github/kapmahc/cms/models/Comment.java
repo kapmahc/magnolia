@@ -3,22 +3,28 @@ package com.github.kapmahc.cms.models;
 import com.github.kapmahc.auth.models.Model;
 import com.github.kapmahc.auth.models.User;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity(name = "cms_comments")
+@Entity
+@Table(
+        name = "cms_comments",
+        indexes = @Index(columnList = "type")
+)
 public class Comment extends Model {
+    @Lob
+    @Column(nullable = false)
     private String body;
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 8)
     private Type type;
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Article article;
     @ManyToOne
+    @JoinColumn(nullable = false)
     private User user;
 
     public String getBody() {
