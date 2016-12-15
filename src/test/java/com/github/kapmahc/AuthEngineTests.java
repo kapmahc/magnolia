@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.annotation.Resource;
 import java.util.Base64;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by flamen on 16-12-14.
@@ -18,6 +19,15 @@ import java.util.Date;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class AuthEngineTests {
+    @Test
+    public void names(){
+        for(String s:new String[]{
+                Locale.US.toLanguageTag(),
+                Locale.class.getName(),
+        }){
+            System.out.println(s);
+        }
+    }
 
     @Test
     public void hmac() {
