@@ -1,10 +1,29 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{application}">
 <head>
-    <title>Home</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>install</title>
 </head>
 <body>
-<h1>sign in</h1>
+
+<div layout:fragment="content" class="row">
+    <h2 th:text="#{ops.install.title}">Install</h2>
+    <hr/>
+    <form th:action="@{/users/sign-in}" th:object="${signInForm}" method="post">
+        <div class="form-group" th:classappend="${#fields.hasErrors('email')} ? 'has-danger' : ''">
+            <label class="form-control-label" th:for="email" th:text="#{attributes.email}">Email</label>
+            <input type="email" class="form-control" th:field="*{email}"/>
+            <div class="form-control-feedback" th:errors="*{email}"></div>
+        </div>
+        <div class="form-group" th:classappend="${#fields.hasErrors('password')} ? 'has-danger' : ''">
+            <label class="form-control-label" th:for="password" th:text="#{attributes.password}">Password</label>
+            <input type="password" class="form-control" th:field="*{password}"/>
+            <div class="form-control-feedback" th:errors="*{password}"></div>
+        </div>
+        <div th:replace="fragments/form :: buttons">Buttons</div>
+    </form>
+</div>
+
 </body>
 </html>
