@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">My website</title>
+    <title th:text="#{pages.error.title}">error</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css"
           integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
     <link th:href="${@mvcResourceUrlProvider.getForLookupPath('/static/application.css')}" rel="stylesheet"
@@ -18,16 +18,19 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"
             integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK"
             crossorigin="anonymous"></script>
-    <script th:src="${@mvcResourceUrlProvider.getForLookupPath('/static/application.js')}"></script>
 </head>
 <body>
-<div th:replace="fragments/header :: header">Header</div>
 <div class="container">
-    <section layout:fragment="content">
-        <p>Page content goes here</p>
-    </section>
-    <hr/>
-    <div th:replace="fragments/footer :: footer">Footer</div>
+    <div class="row">
+        <div class="card">
+            <img class="card-img-top" th:src="${@mvcResourceUrlProvider.getForLookupPath('/static/fail.png')}">
+            <div class="card-block">
+                <h4 class="card-title" th:text="#{pages.error.title}">title</h4>
+                <p class="card-text" th:text="#{pages.error.body}"></p>
+                <a th:href="@{/leave_words/new}" class="btn btn-primary" th:text="#{buttons.goto}">Go </a>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

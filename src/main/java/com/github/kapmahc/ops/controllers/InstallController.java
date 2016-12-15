@@ -1,5 +1,6 @@
 package com.github.kapmahc.ops.controllers;
 
+import com.github.kapmahc.auth.ForbiddenException;
 import com.github.kapmahc.auth.models.User;
 import com.github.kapmahc.auth.repositories.UserRepository;
 import com.github.kapmahc.auth.services.LocaleService;
@@ -32,7 +33,7 @@ public class InstallController {
     @PreAuthorize("permitAll()")
     public String postInstall(@Valid InstallForm installForm, BindingResult bindingResult, Locale locale) throws IOException, GeneralSecurityException {
         if (userRepository.count() > 0) {
-            throw new IllegalArgumentException();
+            throw new ForbiddenException();
         }
 
         if (!bindingResult.hasErrors()) {
@@ -64,7 +65,7 @@ public class InstallController {
     @PreAuthorize("permitAll()")
     public Object getInstall(InstallForm installForm) {
         if (userRepository.count() > 0) {
-            throw new IllegalArgumentException();
+            throw new ForbiddenException();
         }
         installForm.setDomain("www.change-me.com");
         installForm.setEmail("admin@change-me.com");
