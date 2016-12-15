@@ -1,19 +1,20 @@
 package com.github.kapmahc.site.models;
 
 import com.github.kapmahc.auth.models.Model;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity
+@Entity(name = "notices")
 @Table(
-        name = "notices",
         indexes = {
                 @Index(columnList = "type"),
         }
 )
+@DynamicUpdate
 public class Notice extends Model {
     @Lob
     @Column(nullable = false)

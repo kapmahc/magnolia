@@ -2,6 +2,7 @@ package com.github.kapmahc.cms.models;
 
 import com.github.kapmahc.auth.models.Model;
 import com.github.kapmahc.auth.models.User;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,14 +11,14 @@ import java.util.List;
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity
+@Entity(name = "cms_articles")
 @Table(
-        name = "cms_articles",
         indexes = {
                 @Index(columnList = "title"),
                 @Index(columnList = "type"),
         }
 )
+@DynamicUpdate
 public class Article extends Model {
     @Column(nullable = false)
     private String title;

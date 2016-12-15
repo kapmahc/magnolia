@@ -9,15 +9,15 @@ import java.util.Date;
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity
+@Entity(name = "leave_words")
 @Table(
-        name = "leave_words",
         indexes = {
                 @Index(columnList = "type"),
         }
 )
 public class LeaveWord implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @Lob
     @Column(nullable = false)

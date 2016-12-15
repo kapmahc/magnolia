@@ -1,5 +1,7 @@
 package com.github.kapmahc.ops.vpn.models;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -8,8 +10,10 @@ import java.util.Date;
  * Created by flamen on 16-12-13.
  */
 @Entity(name = "vpn_logs")
+@DynamicUpdate
 public class Log implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String trustedIp;
     private int trustedPort;

@@ -1,18 +1,20 @@
 package com.github.kapmahc.auth.models;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
 
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity
+@Entity(name = "settings")
 @Table(
-        name = "settings",
         indexes = {
                 @Index(columnList = "key"),
                 @Index(columnList = "key, user_id", unique = true),
         }
 )
+@DynamicUpdate
 public class Setting extends Model {
     @Column(nullable = false)
     private String key;

@@ -1,18 +1,20 @@
 package com.github.kapmahc.auth.models;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity
+@Entity(name = "policies")
 @Table(
-        name = "policies",
         indexes = {
                 @Index(columnList = "role_id, user_id", unique = true),
         }
 )
+@DynamicUpdate
 public class Policy extends Model {
     @ManyToOne
     @JoinColumn(nullable = false)

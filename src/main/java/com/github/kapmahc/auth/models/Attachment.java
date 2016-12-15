@@ -7,9 +7,8 @@ import java.util.Date;
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity
+@Entity(name = "attachments")
 @Table(
-        name = "attachments",
         indexes = {
                 @Index(columnList = "title"),
                 @Index(columnList = "name", unique = true),
@@ -19,6 +18,7 @@ import java.util.Date;
 )
 public class Attachment implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @Column(nullable = false, unique = true)
     private String name;

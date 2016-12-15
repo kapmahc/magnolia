@@ -15,6 +15,7 @@ import java.util.UUID;
  */
 @Service("auth.userService")
 public class UserService {
+
     public User addUser(String fullName, String email, String password) {
         User u = new User();
         u.setFullName(fullName);
@@ -41,7 +42,7 @@ public class UserService {
         logRepository.save(l);
     }
 
-    @Resource
+    @Resource(name = "auth.userRepository")
     UserRepository userRepository;
     @Resource
     LogRepository logRepository;

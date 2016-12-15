@@ -1,19 +1,21 @@
 package com.github.kapmahc.auth.models;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
 
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity
+@Entity(name = "locales")
 @Table(
-        name = "locales",
         indexes = {
                 @Index(columnList = "code"),
                 @Index(columnList = "lang"),
                 @Index(columnList = "code, lang", unique = true),
         }
 )
+@DynamicUpdate
 public class Locale extends Model {
     @Column(nullable = false)
     private String code;

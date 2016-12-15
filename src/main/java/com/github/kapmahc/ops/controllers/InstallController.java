@@ -49,6 +49,7 @@ public class InstallController {
         User user = userService.addUser("Administrator", installForm.getEmail(), installForm.getPassword());
         userService.log(user, localeService.t("auth.logs.sign-in", null, locale));
 
+
         user.setConfirmedAt(new Date());
         userRepository.save(user);
         userService.log(user, localeService.t("auth.logs.confirm", null, locale));
@@ -70,8 +71,7 @@ public class InstallController {
         return "ops/install";
     }
 
-    @Resource
-    UserRepository userRepository;
+
     @Resource
     UserService userService;
     @Resource
@@ -82,4 +82,6 @@ public class InstallController {
     MessageSource messageSource;
     @Resource
     SettingService settingService;
+    @Resource(name = "auth.userRepository")
+    UserRepository userRepository;
 }

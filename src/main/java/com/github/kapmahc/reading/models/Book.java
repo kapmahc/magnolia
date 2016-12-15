@@ -11,21 +11,22 @@ import java.util.List;
  * Created by flamen on 16-12-13.
  */
 @Entity
-        @Table(
-                name = "reading_books",
-                indexes = {
-                        @Index(columnList = "author"),
-                        @Index(columnList = "publisher"),
-                        @Index(columnList = "title"),
-                        @Index(columnList = "type"),
-                        @Index(columnList = "lang"),
-                        @Index(columnList = "subject"),
-                }
-        )
+@Table(
+        name = "reading_books",
+        indexes = {
+                @Index(columnList = "author"),
+                @Index(columnList = "publisher"),
+                @Index(columnList = "title"),
+                @Index(columnList = "type"),
+                @Index(columnList = "lang"),
+                @Index(columnList = "subject"),
+        }
+)
 public class Book extends Model {
     public enum Type {
         EPUB3, EPUB2
     }
+
     @Column(nullable = false)
     private String author;
     @Column(nullable = false)

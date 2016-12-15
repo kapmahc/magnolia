@@ -1,6 +1,7 @@
 package com.github.kapmahc.ops.vpn.models;
 
 import com.github.kapmahc.auth.models.Model;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,11 +11,11 @@ import java.util.List;
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity
+@Entity(name = "vpn_users")
 @Table(
-        name = "vpn_users",
         indexes = {@Index(columnList = "fullName")}
 )
+@DynamicUpdate
 public class User extends Model {
     @Column(nullable = false)
     private String fullName;

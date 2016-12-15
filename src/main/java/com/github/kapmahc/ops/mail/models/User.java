@@ -1,19 +1,20 @@
 package com.github.kapmahc.ops.mail.models;
 
 import com.github.kapmahc.auth.models.Model;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity
+@Entity(name = "mail_users")
 @Table(
-        name = "mail_users",
         indexes = {
                 @Index(columnList = "fullName"),
         }
 )
+@DynamicUpdate
 public class User extends Model {
     @Column(nullable = false)
     private String fullName;

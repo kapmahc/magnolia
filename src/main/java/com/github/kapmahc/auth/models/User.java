@@ -1,5 +1,7 @@
 package com.github.kapmahc.auth.models;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,15 +10,15 @@ import java.util.List;
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity
+@Entity(name = "users")
 @Table(
-        name = "users",
         indexes = {
                 @Index(columnList = "fullName"),
                 @Index(columnList = "providerType"),
                 @Index(columnList = "providerId, providerType", unique = true),
         }
 )
+@DynamicUpdate
 public class User extends Model {
     public enum Type {
         EMAIL

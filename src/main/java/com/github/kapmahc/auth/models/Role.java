@@ -1,5 +1,7 @@
 package com.github.kapmahc.auth.models;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,14 +9,14 @@ import java.util.List;
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity
+@Entity(name = "roles")
 @Table(
-        name = "roles",
         indexes = {
                 @Index(columnList = "name"),
                 @Index(columnList = "resourceType"),
         }
 )
+@DynamicUpdate
 public class Role extends Model {
     @Column(nullable = false, length = 32)
     private String name;

@@ -7,9 +7,8 @@ import java.util.Date;
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity
+@Entity(name = "logs")
 @Table(
-        name = "logs",
         indexes = {
                 @Index(columnList = "type")
         }
@@ -20,6 +19,7 @@ public class Log implements Serializable {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

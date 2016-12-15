@@ -2,17 +2,18 @@ package com.github.kapmahc.cms.models;
 
 import com.github.kapmahc.auth.models.Model;
 import com.github.kapmahc.auth.models.User;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity
+@Entity(name = "cms_comments")
 @Table(
-        name = "cms_comments",
         indexes = @Index(columnList = "type")
 )
+@DynamicUpdate
 public class Comment extends Model {
     @Lob
     @Column(nullable = false)

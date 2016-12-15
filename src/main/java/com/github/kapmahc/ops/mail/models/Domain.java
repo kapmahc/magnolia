@@ -1,6 +1,7 @@
 package com.github.kapmahc.ops.mail.models;
 
 import com.github.kapmahc.auth.models.Model;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import java.util.List;
  * Created by flamen on 16-12-13.
  */
 @Entity(name = "mail_domains")
+@DynamicUpdate
 public class Domain extends Model {
     @Column(nullable = false, unique = true, length = 128)
     private String name;

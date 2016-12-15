@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 /**
@@ -97,9 +98,9 @@ public class PolicyService {
     }
 
     private Date years(Date d, int n) {
-        LocalDateTime ld = LocalDateTime.from(d.toInstant());
-        ld.plusYears(n);
-        return Date.from(d.toInstant());
+        ZoneId zi = ZoneId.systemDefault();
+        LocalDateTime ldt = d.toInstant().atZone(zi).toLocalDateTime().plusYears(n);
+        return Date.from(ldt.atZone(zi).toInstant());
     }
 
     @Resource

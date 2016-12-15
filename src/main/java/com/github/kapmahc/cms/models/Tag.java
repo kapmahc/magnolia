@@ -1,6 +1,7 @@
 package com.github.kapmahc.cms.models;
 
 import com.github.kapmahc.auth.models.Model;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import java.util.List;
  * Created by flamen on 16-12-13.
  */
 @Entity(name = "cms_tags")
+@DynamicUpdate
 public class Tag extends Model {
     @Column(nullable = false, unique = true)
     private String name;
