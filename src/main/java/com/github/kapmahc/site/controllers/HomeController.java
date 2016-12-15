@@ -18,7 +18,7 @@ public class HomeController {
 
     @GetMapping("/dashboard")
     @PreAuthorize("isAuthenticated()")
-    public String dashboard(Model model){
+    public String dashboard(Model model) {
         return "site/home";
     }
 }

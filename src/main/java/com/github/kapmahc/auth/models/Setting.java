@@ -1,14 +1,22 @@
 package com.github.kapmahc.auth.models;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity(name = "settings")
+@Entity
+@Table(
+        name = "settings",
+        indexes = {
+                @Index(columnList = "key"),
+                @Index(columnList = "key, user_id", unique = true),
+        }
+)
 public class Setting extends Model {
+    @Column(nullable = false)
     private String key;
+    @Column(nullable = false)
     private byte[] val;
     private boolean flag;
     @ManyToOne

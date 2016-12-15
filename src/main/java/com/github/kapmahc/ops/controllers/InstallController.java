@@ -19,6 +19,7 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -47,8 +48,11 @@ public class InstallController {
 
         User user = userService.addUser("Administrator", installForm.getEmail(), installForm.getPassword());
         userService.log(user, localeService.t("auth.logs.sign-in", null, locale));
-        userService.setConfirmedAt(user.getId());
+
+        user.setConfirmedAt(new Date());
+        userRepository.save(user);
         userService.log(user, localeService.t("auth.logs.confirm", null, locale));
+
         for (String r : new String[]{"root", "admin"}) {
             policyService.apply(user, r);
         }

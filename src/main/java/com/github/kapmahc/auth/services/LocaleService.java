@@ -20,8 +20,7 @@ public class LocaleService {
             l.setLang(locale.getDisplayName());
             l.setCode(code);
         }
-        l.setMessage(message);
-        l.setUpdatedAt(new Date());
+        l.setMessage(message);;
         localeRepository.save(l);
     }
 

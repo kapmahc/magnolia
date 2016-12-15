@@ -7,7 +7,13 @@ import java.util.Date;
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity(name = "logs")
+@Entity
+@Table(
+        name = "logs",
+        indexes = {
+                @Index(columnList = "type")
+        }
+)
 public class Log implements Serializable {
     public enum Type {
         INFO, WARNING, ERROR
@@ -16,15 +22,19 @@ public class Log implements Serializable {
     @Id
     private long id;
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Type type;
+    @Column(nullable = false)
     private String message;
     @ManyToOne
+    @JoinColumn(nullable = false)
     private User user;
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
     private Date createdAt;
 
     @PrePersist
-    public void setCreatedAt(){
+    public void setCreatedAt() {
         createdAt = new Date();
     }
 

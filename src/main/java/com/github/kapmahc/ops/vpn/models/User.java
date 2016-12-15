@@ -4,6 +4,8 @@ import com.github.kapmahc.auth.models.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,7 +21,9 @@ public class User extends Model {
     private String details;
     private boolean online;
     private boolean enable;
+    @Temporal(TemporalType.DATE)
     private Date startUp;
+    @Temporal(TemporalType.DATE)
     private Date shutDown;
     @OneToMany
     private List<Log> logs;

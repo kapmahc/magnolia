@@ -49,7 +49,6 @@ public class PolicyService {
         }
         p.setStartUp(begin);
         p.setShutDown(end);
-        p.setUpdatedAt(new Date());
         policyRepository.save(p);
     }
 

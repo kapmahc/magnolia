@@ -7,10 +7,11 @@ import org.springframework.stereotype.Controller;
  */
 @Controller("ops.profilesController")
 public class ProfilesController {
-    public void nginx(){
+    public void nginx() {
 
     }
-    public void openssl(){
+
+    public void openssl() {
 
     }
 }

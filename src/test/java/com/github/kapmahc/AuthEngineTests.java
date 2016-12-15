@@ -44,12 +44,12 @@ public class AuthEngineTests {
     }
 
     @Test
-    public void setting(){
+    public void setting() {
         try {
-            for(String k: new String[]{"aaa", "bbb", "ccc"}){
+            for (String k : new String[]{"aaa", "bbb", "ccc"}) {
                 settingService.set(k, k);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             Assert.fail();
         }

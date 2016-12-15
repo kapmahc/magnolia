@@ -1,16 +1,25 @@
 package com.github.kapmahc.auth.models;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity(name = "contacts")
+@Entity
+@Table(
+        name = "contacts",
+        indexes = {
+                @Index(columnList = "key, user_id", unique = true),
+                @Index(columnList = "key")
+        }
+)
 public class Contact extends Model {
+    @Column(nullable = false)
     private String key;
+    @Column(nullable = false)
     private String val;
     @ManyToOne
+    @JoinColumn(nullable = false)
     private User user;
 
     public String getKey() {

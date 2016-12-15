@@ -1,7 +1,5 @@
 package com.github.kapmahc.auth.models;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -9,29 +7,32 @@ import java.util.Date;
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity
+@MappedSuperclass
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Model implements Serializable {
+public abstract class Model implements Serializable {
     public enum Type {
         MARKDOWN, HTML
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
     private Date updatedAt;
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
     private Date createdAt;
 
     @PrePersist
-    public void setCreatedAt(){
+    public void setCreatedAt() {
         Date now = new Date();
         createdAt = now;
         updatedAt = now;
     }
+
     @PreUpdate
-    public void setUpdatedAt(){
+    public void setUpdatedAt() {
         updatedAt = new Date();
     }
 

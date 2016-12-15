@@ -16,11 +16,11 @@ public class LeaveWord implements Serializable {
     private String body;
     @Enumerated(EnumType.STRING)
     private Model.Type type;
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
     @PrePersist
-    public void setCreatedAt(){
+    public void setCreatedAt() {
         createdAt = new Date();
     }
 

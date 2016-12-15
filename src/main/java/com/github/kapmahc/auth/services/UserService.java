@@ -24,7 +24,6 @@ public class UserService {
         u.setProviderId(email);
         u.setProviderType(User.Type.EMAIL);
         u.setUid(UUID.randomUUID().toString());
-        u.setUpdatedAt(new Date());
 
         userRepository.save(u);
         return u;
@@ -34,12 +33,6 @@ public class UserService {
         log(user, message, Log.Type.INFO);
     }
 
-    public void setConfirmedAt(long user) {
-        User u = new User();
-        Date now = new Date();
-        u.setConfirmedAt(now);
-        u.setUpdatedAt(now);
-    }
 
     public void log(User user, String message, Log.Type type) {
         Log l = new Log();

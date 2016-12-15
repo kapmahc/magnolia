@@ -36,7 +36,7 @@ CREATE INDEX idx_users_provider_type
 
 CREATE TABLE contacts (
   id         SERIAL PRIMARY KEY,
-  user_id    BIGINT                         NOT NULL,
+  user_id    BIGINT                      NOT NULL,
   key        VARCHAR(32)                 NOT NULL,
   val        VARCHAR(255)                NOT NULL,
   created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now(),
@@ -49,7 +49,7 @@ CREATE INDEX idx_contacts_key
 
 CREATE TABLE logs (
   id         SERIAL PRIMARY KEY,
-  user_id    BIGINT                         NOT NULL,
+  user_id    BIGINT                      NOT NULL,
   type       VARCHAR(8)                  NOT NULL DEFAULT 'info',
   message    VARCHAR(255)                NOT NULL,
   created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now()
@@ -74,8 +74,8 @@ CREATE INDEX idx_roles_resource_type
 
 CREATE TABLE policies (
   id         SERIAL PRIMARY KEY,
-  user_id    BIGINT                         NOT NULL,
-  role_id    BIGINT                         NOT NULL,
+  user_id    BIGINT                      NOT NULL,
+  role_id    BIGINT                      NOT NULL,
   start_up   DATE                        NOT NULL DEFAULT current_date,
   shut_down  DATE                        NOT NULL DEFAULT '2016-12-13',
   created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now(),
@@ -101,7 +101,7 @@ CREATE INDEX idx_settings_key
 CREATE TABLE votes (
   id            SERIAL PRIMARY KEY,
   resource_type VARCHAR(255)                NOT NULL,
-  resource_id   BIGINT                         NOT NULL,
+  resource_id   BIGINT                      NOT NULL,
   point         INT                         NOT NULL DEFAULT 0,
   created_at    TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now(),
   updated_at    TIMESTAMP WITHOUT TIME ZONE NOT NULL
@@ -148,8 +148,8 @@ CREATE TABLE attachments (
   length        INT                         NOT NULL,
   media_type    VARCHAR(32)                 NOT NULL,
   resource_type VARCHAR(255)                NOT NULL,
-  resource_id   BIGINT                         NOT NULL,
-  user_id       BIGINT                         NOT NULL,
+  resource_id   BIGINT                      NOT NULL,
+  user_id       BIGINT                      NOT NULL,
   sort_order    INT                         NOT NULL DEFAULT 0,
   created_at    TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now()
 );

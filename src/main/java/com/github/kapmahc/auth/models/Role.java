@@ -1,19 +1,26 @@
 package com.github.kapmahc.auth.models;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity(name = "roles")
+@Entity
+@Table(
+        name = "roles",
+        indexes = {
+                @Index(columnList = "name"),
+                @Index(columnList = "resourceType"),
+        }
+)
 public class Role extends Model {
+    @Column(nullable = false, length = 32)
     private String name;
     private String resourceType;
     private Long resourceId;
-    @OneToMany
+    @OneToMany(mappedBy = "role")
     private List<Policy> policies;
 
     public Role() {

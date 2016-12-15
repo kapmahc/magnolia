@@ -1,19 +1,30 @@
 package com.github.kapmahc.auth.models;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity(name = "policies")
+@Entity
+@Table(
+        name = "policies",
+        indexes = {
+                @Index(columnList = "role_id, user_id", unique = true),
+        }
+)
 public class Policy extends Model {
     @ManyToOne
+    @JoinColumn(nullable = false)
     private User user;
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Role role;
+    @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
     private Date startUp;
+    @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
     private Date shutDown;
 
     public User getUser() {

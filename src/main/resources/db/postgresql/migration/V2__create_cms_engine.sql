@@ -1,6 +1,6 @@
 CREATE TABLE cms_articles (
   id         SERIAL PRIMARY KEY,
-  user_id    BIGINT                         NOT NULL,
+  user_id    BIGINT                      NOT NULL,
   title      VARCHAR(255)                NOT NULL,
   summary    VARCHAR(800)                NOT NULL,
   body       TEXT                        NOT NULL,
@@ -32,8 +32,8 @@ CREATE UNIQUE INDEX idx_cms_articles_tags
 
 CREATE TABLE cms_comments (
   id         SERIAL PRIMARY KEY,
-  article_id BIGINT                         NOT NULL,
-  user_id    BIGINT                         NOT NULL,
+  article_id BIGINT                      NOT NULL,
+  user_id    BIGINT                      NOT NULL,
   body       TEXT                        NOT NULL,
   type       VARCHAR(8)                  NOT NULL DEFAULT 'markdown',
   created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT now(),

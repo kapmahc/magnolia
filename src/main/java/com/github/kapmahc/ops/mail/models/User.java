@@ -15,6 +15,15 @@ public class User extends Model {
     private String password;
     @ManyToOne
     private Domain domain;
+    private boolean enable;
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
 
     public String getFullName() {
         return fullName;

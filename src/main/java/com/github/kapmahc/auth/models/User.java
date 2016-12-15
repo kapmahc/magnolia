@@ -1,7 +1,6 @@
 package com.github.kapmahc.auth.models;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,31 +8,46 @@ import java.util.List;
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity(name = "users")
+@Entity
+        @Table(
+                name = "users",
+                indexes = {
+                        @Index(columnList = "fullName"),
+                        @Index(columnList = "providerType"),
+                        @Index(columnList = "providerId, providerType", unique = true),
+                }
+        )
 public class User extends Model {
     public enum Type {
         EMAIL
     }
-
+    @Column(nullable = false)
     private String fullName;
+    @Column(nullable = false, unique = true)
     private String email;
+    @Column(nullable = false, length = 36, unique = true)
     private String uid;
     private byte[] password;
+    @Column(nullable = false)
     private String providerId;
+    @Column(nullable = false, length = 16)
     private Type providerType;
     private String home;
     private String logo;
-    private String signInCount;
+    private int signInCount;
     private Date currentSignInAt;
     private String currentSignInIp;
     private Date lastSignInAt;
     private String lastSignInIp;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date confirmedAt;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date lockedAt;
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     private List<Log> logs;
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     private List<Contact> contacts;
+
 
     public User() {
         logs = new ArrayList<>();
@@ -120,11 +134,12 @@ public class User extends Model {
         this.logo = logo;
     }
 
-    public String getSignInCount() {
+
+    public int getSignInCount() {
         return signInCount;
     }
 
-    public void setSignInCount(String signInCount) {
+    public void setSignInCount(int signInCount) {
         this.signInCount = signInCount;
     }
 

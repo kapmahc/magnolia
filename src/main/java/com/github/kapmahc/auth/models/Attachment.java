@@ -7,26 +7,41 @@ import java.util.Date;
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity(name = "attachments")
+@Entity
+@Table(
+        name = "attachments",
+        indexes = {
+                @Index(columnList = "title"),
+                @Index(columnList = "name", unique = true),
+                @Index(columnList = "mediaType"),
+                @Index(columnList = "resourceType"),
+        }
+)
 public class Attachment implements Serializable {
     @Id
     private long id;
+    @Column(nullable = false, unique = true)
     private String name;
+    @Column(nullable = false)
     private String title;
+    @Column(length = 32, nullable = false)
     private String mediaType;
+    @Column(nullable = false)
     private String resourceType;
     private long resourceId;
     private long length;
     private int sortOrder;
-    @Temporal(TemporalType.DATE)
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private User user;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
     private Date createdAt;
 
     @PrePersist
-    public void setCreatedAt(){
+    public void setCreatedAt() {
         createdAt = new Date();
     }
-
-    private User user;
 
     public int getSortOrder() {
         return sortOrder;
