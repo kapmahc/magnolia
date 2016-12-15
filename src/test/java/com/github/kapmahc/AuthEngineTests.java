@@ -1,6 +1,7 @@
 package com.github.kapmahc;
 
 import com.github.kapmahc.auth.helpers.EncryptHelper;
+import com.github.kapmahc.auth.services.SettingService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,8 +43,23 @@ public class AuthEngineTests {
         }
     }
 
+    @Test
+    public void setting(){
+        try {
+            for(String k: new String[]{"aaa", "bbb", "ccc"}){
+                settingService.set(k, k);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            Assert.fail();
+        }
+
+    }
+
 
     @Resource
     EncryptHelper encryptHelper;
+    @Resource
+    SettingService settingService;
     private final String hello = "Hello, Magnolia!";
 }

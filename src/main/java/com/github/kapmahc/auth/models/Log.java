@@ -18,9 +18,15 @@ public class Log implements Serializable {
     @Enumerated(EnumType.STRING)
     private Type type;
     private String message;
-    private Date createdAt;
     @ManyToOne
     private User user;
+    @Temporal(TemporalType.DATE)
+    private Date createdAt;
+
+    @PrePersist
+    public void setCreatedAt(){
+        createdAt = new Date();
+    }
 
     public Date getCreatedAt() {
         return createdAt;

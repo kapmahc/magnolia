@@ -1,5 +1,7 @@
 package com.github.kapmahc.auth.models;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -15,10 +17,23 @@ public class Model implements Serializable {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
-    @Version
+    @Temporal(TemporalType.DATE)
     private Date updatedAt;
+    @Temporal(TemporalType.DATE)
     private Date createdAt;
+
+    @PrePersist
+    public void setCreatedAt(){
+        Date now = new Date();
+        createdAt = now;
+        updatedAt = now;
+    }
+    @PreUpdate
+    public void setUpdatedAt(){
+        updatedAt = new Date();
+    }
 
     public long getId() {
         return id;

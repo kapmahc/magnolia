@@ -1,7 +1,6 @@
 package com.github.kapmahc.auth.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -18,8 +17,14 @@ public class Attachment implements Serializable {
     private String resourceType;
     private long resourceId;
     private long length;
-    private Date createdAt;
     private int sortOrder;
+    @Temporal(TemporalType.DATE)
+    private Date createdAt;
+
+    @PrePersist
+    public void setCreatedAt(){
+        createdAt = new Date();
+    }
 
     private User user;
 

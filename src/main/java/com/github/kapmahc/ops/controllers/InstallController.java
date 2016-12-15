@@ -8,12 +8,12 @@ import com.github.kapmahc.auth.services.SettingService;
 import com.github.kapmahc.auth.services.UserService;
 import com.github.kapmahc.ops.forms.InstallForm;
 import org.springframework.context.MessageSource;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -21,20 +21,17 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.Locale;
 
-import static com.github.kapmahc.auth.Constants.FLASH_ALERT;
-import static com.github.kapmahc.auth.Constants.FLASH_NOTICE;
-
 /**
  * Created by flamen on 16-12-13.
  */
-@Controller("ops.installController")
+@Controller("site.installController")
 @RequestMapping("/ops")
 public class InstallController {
     @PostMapping("/install")
-    public String postInstall(@Valid InstallForm installForm, BindingResult bindingResult, RedirectAttributes redirectAttrs, Locale locale) throws IOException, GeneralSecurityException {
+    @PreAuthorize("permitAll()")
+    public String postInstall(@Valid InstallForm installForm, BindingResult bindingResult, Locale locale) throws IOException, GeneralSecurityException {
         if (userRepository.count() > 0) {
-            redirectAttrs.addFlashAttribute(FLASH_ALERT, messageSource.getMessage("ops.messages.database-not-empty", null, locale));
-            return "redirect:/";
+            throw new IllegalArgumentException();
         }
 
         if (!bindingResult.hasErrors()) {
@@ -55,15 +52,14 @@ public class InstallController {
         for (String r : new String[]{"root", "admin"}) {
             policyService.apply(user, r);
         }
-        redirectAttrs.addFlashAttribute(FLASH_NOTICE, "");
         return "redirect:/users/sign-in";
     }
 
     @GetMapping("/install")
-    public String getInstall(InstallForm installForm, RedirectAttributes redirectAttrs, Locale locale) {
+    @PreAuthorize("permitAll()")
+    public Object getInstall(InstallForm installForm) {
         if (userRepository.count() > 0) {
-            redirectAttrs.addFlashAttribute(FLASH_ALERT, messageSource.getMessage("ops.messages.database-not-empty", null, locale));
-            return "redirect:/";
+            throw new IllegalArgumentException();
         }
         installForm.setDomain("www.change-me.com");
         installForm.setEmail("admin@change-me.com");

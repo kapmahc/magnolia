@@ -2,10 +2,7 @@ package com.github.kapmahc.site.models;
 
 import com.github.kapmahc.auth.models.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -19,7 +16,13 @@ public class LeaveWord implements Serializable {
     private String body;
     @Enumerated(EnumType.STRING)
     private Model.Type type;
+    @Temporal(TemporalType.DATE)
     private Date createdAt;
+
+    @PrePersist
+    public void setCreatedAt(){
+        createdAt = new Date();
+    }
 
     public long getId() {
         return id;
