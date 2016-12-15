@@ -5,6 +5,7 @@ import com.github.kapmahc.auth.repositories.LocaleRepository;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -26,7 +27,8 @@ public class LocaleService {
         localeRepository.save(l);
     }
 
-    @Cacheable(cacheNames = "locales", key = "{#code, #locale.toLanguageTag()}")
+    @Cacheable(cacheNames = "locales", key = "#code+'/'+#locale.toLanguageTag()")
+    @Transactional(readOnly = true)
     public String get(String code, java.util.Locale locale) {
         Locale l = localeRepository.findByLangAndCode(locale.toLanguageTag(), code);
         return l == null ? null : l.getMessage();
