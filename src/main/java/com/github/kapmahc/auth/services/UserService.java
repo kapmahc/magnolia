@@ -8,7 +8,6 @@ import com.github.kapmahc.auth.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Date;
 import java.util.UUID;
 
 /**

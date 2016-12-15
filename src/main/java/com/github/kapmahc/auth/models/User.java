@@ -9,18 +9,19 @@ import java.util.List;
  * Created by flamen on 16-12-13.
  */
 @Entity
-        @Table(
-                name = "users",
-                indexes = {
-                        @Index(columnList = "fullName"),
-                        @Index(columnList = "providerType"),
-                        @Index(columnList = "providerId, providerType", unique = true),
-                }
-        )
+@Table(
+        name = "users",
+        indexes = {
+                @Index(columnList = "fullName"),
+                @Index(columnList = "providerType"),
+                @Index(columnList = "providerId, providerType", unique = true),
+        }
+)
 public class User extends Model {
     public enum Type {
         EMAIL
     }
+
     @Column(nullable = false)
     private String fullName;
     @Column(nullable = false, unique = true)

@@ -9,14 +9,24 @@ import java.util.Date;
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity(name = "leave_words")
+@Entity
+@Table(
+        name = "leave_words",
+        indexes = {
+                @Index(columnList = "type"),
+        }
+)
 public class LeaveWord implements Serializable {
     @Id
     private long id;
+    @Lob
+    @Column(nullable = false)
     private String body;
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Model.Type type;
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
     private Date createdAt;
 
     @PrePersist

@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import java.util.Base64;
+import java.util.Date;
 
 /**
  * Created by flamen on 16-12-14.
@@ -47,7 +48,7 @@ public class AuthEngineTests {
     public void setting() {
         try {
             for (String k : new String[]{"aaa", "bbb", "ccc"}) {
-                settingService.set(k, k);
+                settingService.set(k, new Date());
             }
         } catch (Exception e) {
             e.printStackTrace();

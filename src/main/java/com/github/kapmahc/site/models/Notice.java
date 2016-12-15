@@ -2,17 +2,24 @@ package com.github.kapmahc.site.models;
 
 import com.github.kapmahc.auth.models.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity(name = "notices")
+@Entity
+@Table(
+        name = "notices",
+        indexes = {
+                @Index(columnList = "type"),
+        }
+)
 public class Notice extends Model {
+    @Lob
+    @Column(nullable = false)
     private String body;
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Type type;
 
     public String getBody() {

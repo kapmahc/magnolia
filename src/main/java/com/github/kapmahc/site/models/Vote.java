@@ -2,13 +2,24 @@ package com.github.kapmahc.site.models;
 
 import com.github.kapmahc.auth.models.Model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.Table;
 
 /**
  * Created by flamen on 16-12-13.
  */
-@Entity(name = "votes")
+@Entity
+@Table(
+        name = "votes",
+        indexes = {
+                @Index(columnList = "resourceType"),
+                @Index(columnList = "resourceType, resourceId", unique = true),
+        }
+)
 public class Vote extends Model {
+    @Column(nullable = false)
     private String resourceType;
     private int resourceId;
     private int point;
