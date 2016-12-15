@@ -2,8 +2,6 @@ TODO LIST
 ---
 
 ## Development
-* Druid monitor
-* logback.xml
 
 
 ## Publish release steps
