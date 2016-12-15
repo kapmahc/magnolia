@@ -26,6 +26,7 @@ public class LocaleConfig extends WebMvcConfigurerAdapter {
         resource.setBasename(msBasename);
         resource.setDefaultEncoding("UTF-8");
         resource.setCacheSeconds(msCacheSeconds);
+        resource.setFallbackToSystemLocale(true);
         return resource;
     }
 
