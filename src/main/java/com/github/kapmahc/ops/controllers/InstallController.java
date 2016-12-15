@@ -1,6 +1,6 @@
 package com.github.kapmahc.ops.controllers;
 
-import com.github.kapmahc.auth.ForbiddenException;
+import com.github.kapmahc.auth.errors.ForbiddenException;
 import com.github.kapmahc.auth.models.User;
 import com.github.kapmahc.auth.repositories.UserRepository;
 import com.github.kapmahc.auth.services.LocaleService;
@@ -48,12 +48,12 @@ public class InstallController {
         settingService.set("site.domain", installForm.getDomain());
 
         User user = userService.addUser("Administrator", installForm.getEmail(), installForm.getPassword());
-        userService.log(user, localeService.t("auth.logs.sign-in", null, locale));
+        userService.log(user, messageSource.getMessage("auth.logs.sign-in", null, locale));
 
 
         user.setConfirmedAt(new Date());
         userRepository.save(user);
-        userService.log(user, localeService.t("auth.logs.confirm", null, locale));
+        userService.log(user, messageSource.getMessage("auth.logs.confirm", null, locale));
 
         for (String r : new String[]{"root", "admin"}) {
             policyService.apply(user, r);

@@ -1,6 +1,7 @@
 package com.github.kapmahc;
 
 import com.github.kapmahc.auth.helpers.EncryptHelper;
+import com.github.kapmahc.auth.services.LocaleService;
 import com.github.kapmahc.auth.services.SettingService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -20,13 +21,17 @@ import java.util.Locale;
 @SpringBootTest
 public class AuthEngineTests {
     @Test
-    public void names(){
-        for(String s:new String[]{
-                Locale.US.toLanguageTag(),
+    public void locale() {
+        Locale l = Locale.US;
+        for (String s : new String[]{
+                l.toLanguageTag(),
                 Locale.class.getName(),
-        }){
+        }) {
             System.out.println(s);
         }
+
+        localeService.set(l, "buttons.submit", "SUBMIT");
+
     }
 
     @Test
@@ -67,7 +72,8 @@ public class AuthEngineTests {
 
     }
 
-
+    @Resource
+    LocaleService localeService;
     @Resource
     EncryptHelper encryptHelper;
     @Resource

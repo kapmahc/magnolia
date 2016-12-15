@@ -2,15 +2,10 @@ package com.github.kapmahc.ops.config;
 
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
-import com.alibaba.druid.support.spring.stat.DruidStatInterceptor;
-import org.springframework.aop.support.AbstractRegexpMethodPointcut;
-import org.springframework.aop.support.JdkRegexpMethodPointcut;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
 
 /**
  * Created by flamen on 16-12-13.

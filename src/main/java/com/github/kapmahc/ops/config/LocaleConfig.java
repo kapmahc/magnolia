@@ -20,14 +20,14 @@ import java.util.Locale;
 @Configuration
 @EnableWebMvc
 public class LocaleConfig extends WebMvcConfigurerAdapter {
-    @Bean(name = "messageSource")
+    @Bean(name = "ops.messageSource")
     public MessageSource getMessageSource() {
-        ReloadableResourceBundleMessageSource resource = new ReloadableResourceBundleMessageSource();
-        resource.setBasename(msBasename);
-        resource.setDefaultEncoding("UTF-8");
-        resource.setCacheSeconds(msCacheSeconds);
-        resource.setFallbackToSystemLocale(true);
-        return resource;
+        ReloadableResourceBundleMessageSource ms = new ReloadableResourceBundleMessageSource();
+        ms.setBasename(msBasename);
+        ms.setDefaultEncoding("UTF-8");
+        ms.setCacheSeconds(msCacheSeconds);
+        ms.setFallbackToSystemLocale(true);
+        return ms;
     }
 
     @Bean
@@ -71,5 +71,6 @@ public class LocaleConfig extends WebMvcConfigurerAdapter {
     protected String msBasename;
     @Value("${spring.messages.cache-seconds}")
     protected int msCacheSeconds;
+
 
 }

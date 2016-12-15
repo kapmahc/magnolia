@@ -4,7 +4,6 @@ import com.github.kapmahc.auth.models.Locale;
 import com.github.kapmahc.auth.repositories.LocaleRepository;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -16,28 +15,23 @@ import javax.annotation.Resource;
 public class LocaleService {
     @CacheEvict(cacheNames = "locales", allEntries = true)
     public void set(java.util.Locale locale, String code, String message) {
-        Locale l = localeRepository.findByLangAndCode(locale.toLanguageTag(), code);
+        String lang = locale.toLanguageTag();
+        Locale l = localeRepository.findByLangAndCode(lang, code);
         if (l == null) {
             l = new Locale();
-            l.setLang(locale.getDisplayName());
+            l.setLang(lang);
             l.setCode(code);
         }
         l.setMessage(message);
-        ;
         localeRepository.save(l);
     }
 
-    @Cacheable(cacheNames="locales", key="(#code)/(#locale.toLanguageTag())")
-    public String t(String code, Object[] args, java.util.Locale locale) {
+    @Cacheable(cacheNames = "locales", key = "{#code, #locale.toLanguageTag()}")
+    public String get(String code, java.util.Locale locale) {
         Locale l = localeRepository.findByLangAndCode(locale.toLanguageTag(), code);
-        if (l == null) {
-            return messageSource.getMessage(code, args, locale);
-        }
-        return String.format(l.getMessage(), args);
+        return l == null ? null : l.getMessage();
     }
 
-    @Resource
-    MessageSource messageSource;
     @Resource
     LocaleRepository localeRepository;
 }

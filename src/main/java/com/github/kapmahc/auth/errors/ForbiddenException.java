@@ -1,4 +1,4 @@
-package com.github.kapmahc.auth;
+package com.github.kapmahc.auth.errors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 /**
  * Created by flamen on 16-12-15.
  */
-@ResponseStatus(value = HttpStatus.NOT_FOUND)
-public class NotFoundException extends RuntimeException {
+@ResponseStatus(value = HttpStatus.FORBIDDEN)
+public class ForbiddenException extends RuntimeException {
 }
