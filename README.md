@@ -23,7 +23,7 @@ grails run-app
 ## Deployment
 ```bash
 cd magnolia
-grails package
+grails war
 java -Dgrails.env=prod -jar build/libs/magnolia-grails-0.1.war -server -Xmx768M -XX:MaxPermSize=256m
 ```
 
@@ -33,6 +33,8 @@ grails run-app                                  # start
 grails grails create-app --inplace              # create project
 grails create-domain-class org.bookstore.Book   # create model
 grails create-controller org.bookstore.book     # create controller
+grails clean
+grails war
 ```
 
 ## Documents
