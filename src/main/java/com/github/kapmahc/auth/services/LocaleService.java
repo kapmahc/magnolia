@@ -18,6 +18,7 @@ import java.util.List;
 @Service("auth.localeService")
 public class LocaleService {
     @CacheEvict(cacheNames = "locales", allEntries = true)
+    @Transactional
     public void set(java.util.Locale locale, String code, String message) {
         String lang = locale.toLanguageTag();
         Locale l = localeRepository.findByLangAndCode(lang, code);

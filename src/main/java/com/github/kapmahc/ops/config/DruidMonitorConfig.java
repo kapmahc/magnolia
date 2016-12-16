@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * Created by flamen on 16-12-13.
+ * <p>
+ * https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_%E9%85%8D%E7%BD%AEWebStatFilter
  */
 @Configuration
 public class DruidMonitorConfig {
@@ -22,15 +24,16 @@ public class DruidMonitorConfig {
     }
 
     @Bean
-    public FilterRegistrationBean filterRegistrationBean() {
+    public FilterRegistrationBean druidFilterRegistrationBean() {
         FilterRegistrationBean frb = new FilterRegistrationBean();
+        frb.setName("druid");
+
         frb.setFilter(new WebStatFilter());
         frb.addUrlPatterns("/*");
         frb.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
         frb.addInitParameter("profileEnable", "true");
         frb.addInitParameter("sessionStatMaxCount", "1000");
-        //todo
-//        frb.addInitParameter("principalSessionName", "current.user");
+
         return frb;
     }
 }
