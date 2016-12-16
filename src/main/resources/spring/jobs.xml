@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd">
+
+    <rabbit:queue id="echoQueue" name="${app.name}.echo" durable="true" auto-delete="false" exclusive="false"/>
+    <rabbit:direct-exchange name="${app.name}.exchange" durable="true" auto-delete="false">
+        <rabbit:bindings>
+            <rabbit:binding key="echo" queue="echoQueue"/>
+        </rabbit:bindings>
+    </rabbit:direct-exchange>
+    <rabbit:template id="rabbitTemplate" connection-factory="rabbitConnectionFactory" exchange="${app.name}.exchange"/>
+
+
+    <rabbit:listener-container connection-factory="rabbitConnectionFactory">
+        <rabbit:listener queues="echoQueue" ref="ops.echoJob"/>
+    </rabbit:listener-container>
+
+</beans>
