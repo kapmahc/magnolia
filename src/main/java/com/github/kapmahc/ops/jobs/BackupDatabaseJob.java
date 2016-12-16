@@ -64,7 +64,7 @@ public class BackupDatabaseJob {
                     BACKUP,
                     fmt.format(new Date())
             );
-
+            logger.debug(cmd);
             Process p = Runtime.getRuntime().exec(cmd);
             p.waitFor();
         } catch (SQLException | IOException | InterruptedException e) {
