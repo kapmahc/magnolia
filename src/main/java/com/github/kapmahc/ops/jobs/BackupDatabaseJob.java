@@ -2,8 +2,9 @@ package com.github.kapmahc.ops.jobs;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageListener;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -24,8 +25,10 @@ import java.util.Date;
  */
 @Component("ops.backupDatabaseJob")
 public class BackupDatabaseJob {
+
+
     //every day 3am
-    @Scheduled(cron = "0 0 3 * * ?")
+//    @Scheduled(cron = "0 0 3 * * ?")
     public void run() {
         try (Connection conn = dataSource.getConnection()) {
             DatabaseMetaData meta = conn.getMetaData();
@@ -83,4 +86,5 @@ public class BackupDatabaseJob {
     String password;
     private final String BACKUP = "tmp/backups";
     private static final Logger logger = LoggerFactory.getLogger(BackupDatabaseJob.class);
+
 }

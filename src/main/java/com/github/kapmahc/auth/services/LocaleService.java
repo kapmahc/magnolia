@@ -53,7 +53,7 @@ public class LocaleService {
     LocaleRepository localeRepository;
     @Resource(name = "ops.messageSource")
     ExposedResourceBundleMessageSource messageSource;
-    @Value("#{'${app.languages}'.split(',')}")
+    @Value("c")
     List<String> languages;
 
 }

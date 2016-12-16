@@ -1,12 +1,14 @@
 package com.github.kapmahc.ops.controllers;
 
+import com.github.kapmahc.ops.jobs.JobReceiver;
+import com.github.kapmahc.ops.jobs.JobSender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.Date;
 
@@ -19,11 +21,20 @@ public class TestController {
     @GetMapping("/test")
     @ResponseBody
     public void testTask() {
-        template.convertAndSend("echo", "Hello, " + new Date().toString());
+        jobSender.send("echo", "Hello, " + new Date());
     }
 
+    @PostConstruct
+    void init() {
+        jobReceiver.register("echo", (id, type, body) -> {
+            logger.info(new String(body));
+        });
+    }
 
     @Resource
-    AmqpTemplate template;
+    JobSender jobSender;
+    @Resource
+    JobReceiver jobReceiver;
+
     private static final Logger logger = LoggerFactory.getLogger(TestController.class);
 }
