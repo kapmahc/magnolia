@@ -1,40 +1,26 @@
 package com.github.kapmahc.auth.forms;
 
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
- * Created by flamen on 16-12-13.
+ * Created by flamen on 16-12-16.
  */
-
-public class SignUpForm implements Serializable {
-    @Email
-    @NotEmpty
-    private String email;
-    @Size(min = 2, max = 255)
-    private String fullName;
+public class ResetPasswordForm implements Serializable {
+    private String token;
     @NotEmpty
     @Size(min = 6)
     private String password;
     private String passwordConfirmation;
 
-    public String getEmail() {
-        return email;
+    public String getToken() {
+        return token;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getPassword() {

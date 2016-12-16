@@ -31,13 +31,13 @@ import java.util.Locale;
 public class InstallController {
     @PostMapping("/install")
     @PreAuthorize("permitAll()")
-    public String postInstall(@Valid InstallForm installForm, BindingResult bindingResult, Locale locale) throws IOException, GeneralSecurityException {
+    public String postInstall(@Valid InstallForm form, BindingResult bindingResult, Locale locale) throws IOException, GeneralSecurityException {
         if (userRepository.count() > 0) {
             throw new ForbiddenException();
         }
 
         if (!bindingResult.hasErrors()) {
-            if (!installForm.getPassword().equals(installForm.getPasswordConfirmation())) {
+            if (!form.getPassword().equals(form.getPasswordConfirmation())) {
                 bindingResult.rejectValue("password", "messages.passwords-not-match");
             }
         }
@@ -45,9 +45,9 @@ public class InstallController {
             return "ops/install";
         }
 
-        settingService.set("site.domain", installForm.getDomain());
+        settingService.set("site.domain", form.getDomain());
 
-        User user = userService.addUser("Administrator", installForm.getEmail(), installForm.getPassword());
+        User user = userService.addUser("Administrator", form.getEmail(), form.getPassword());
         userService.log(user, messageSource.getMessage("auth.logs.sign-in", null, locale));
 
 
@@ -66,12 +66,12 @@ public class InstallController {
 
     @GetMapping("/install")
     @PreAuthorize("permitAll()")
-    public Object getInstall(InstallForm installForm) {
+    public Object getInstall(InstallForm form) {
         if (userRepository.count() > 0) {
             throw new ForbiddenException();
         }
-        installForm.setDomain("www.change-me.com");
-        installForm.setEmail("admin@change-me.com");
+        form.setDomain("www.change-me.com");
+        form.setEmail("admin@change-me.com");
         return "ops/install";
     }
 

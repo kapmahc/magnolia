@@ -4,7 +4,6 @@
 </head>
 <body>
 <div th:fragment="buttons" class="form-group">
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
     <input type="submit" th:value="#{buttons.submit}" class="btn btn-primary">
     <input type="reset" th:value="#{buttons.reset}" class="btn btn-secondary">
 </div>

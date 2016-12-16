@@ -46,6 +46,9 @@ dependencies {
     compile group: 'com.itextpdf.tool', name: 'xmlworker', version: '5.5.10'
     compile group: 'org.apache.commons', name: 'commons-imaging', version: '1.0-R1534292'
 
+    compile group: 'com.auth0', name: 'java-jwt', version: '3.0.2'
+
+
     compile group: 'net.bull.javamelody', name: 'javamelody-core', version: '1.62.0'
 
     compile group: 'com.google.guava', name: 'guava', version: '20.0'
