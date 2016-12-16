@@ -10,14 +10,17 @@ import com.github.kapmahc.auth.forms.SignUpForm;
 import com.github.kapmahc.auth.helpers.EncryptHelper;
 import com.github.kapmahc.auth.helpers.JwtHelper;
 import com.github.kapmahc.auth.models.Log;
+import com.github.kapmahc.auth.models.Setting;
 import com.github.kapmahc.auth.models.User;
 import com.github.kapmahc.auth.repositories.UserRepository;
+import com.github.kapmahc.auth.services.SettingService;
 import com.github.kapmahc.auth.services.UserService;
 import com.github.kapmahc.ops.jobs.JobSender;
 import org.msgpack.core.MessageBufferPacker;
 import org.msgpack.core.MessagePack;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -30,6 +33,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.Date;
 import java.util.Locale;
 
@@ -59,7 +63,7 @@ public class UsersController {
     }
 
     @PostMapping("/sign-up")
-    public String postSignUp(SignUpForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes, Locale locale) throws IOException {
+    public String postSignUp(@Valid SignUpForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes, Locale locale) throws IOException, GeneralSecurityException {
         if (!bindingResult.hasErrors()) {
             if (form.getPassword().equals(form.getPasswordConfirmation())) {
                 if (userRepository.findByEmail(form.getEmail()) == null) {
@@ -102,7 +106,7 @@ public class UsersController {
     }
 
     @PostMapping("/unlock")
-    public String postUnlock(EmailForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes, Locale locale) throws IOException {
+    public String postUnlock(@Valid EmailForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes, Locale locale) throws IOException, GeneralSecurityException {
         if (!bindingResult.hasErrors()) {
             User user = userRepository.findByEmail(form.getEmail());
             if (user == null) {
@@ -144,7 +148,7 @@ public class UsersController {
     }
 
     @PostMapping("/confirm")
-    public String postConfirm(EmailForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes, Locale locale) throws IOException {
+    public String postConfirm(@Valid EmailForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes, Locale locale) throws IOException, GeneralSecurityException {
         if (!bindingResult.hasErrors()) {
             User user = userRepository.findByEmail(form.getEmail());
             if (user == null) {
@@ -168,7 +172,7 @@ public class UsersController {
     }
 
     @PostMapping("/forgot-password")
-    public String postForgotPassword(EmailForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes, Locale locale) throws IOException {
+    public String postForgotPassword(@Valid EmailForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes, Locale locale) throws IOException, GeneralSecurityException {
         if (!bindingResult.hasErrors()) {
             User user = userRepository.findByEmail(form.getEmail());
             if (user == null) {
@@ -193,7 +197,7 @@ public class UsersController {
     }
 
     @PostMapping("/reset-password")
-    public String postChangePassword(ResetPasswordForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes, Locale locale) {
+    public String postChangePassword(@Valid ResetPasswordForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes, Locale locale) {
         if (!bindingResult.hasErrors()) {
             if (form.getPassword().equals(form.getPasswordConfirmation())) {
                 User user = parseToken(form.getToken(), Action.RESET_PASSWORD);
@@ -225,14 +229,20 @@ public class UsersController {
         return userRepository.findByEmail(jwt.getClaim("uid").asString());
     }
 
-    private void sendEmail(User user, Action action, Locale locale) throws IOException {
+    private void sendEmail(User user, Action action, Locale locale) throws IOException, GeneralSecurityException {
         String token = jwtHelper.generate(
                 JWT.create().withClaim("uid", user.getUid()).withClaim("act", action.name()).withClaim("mod", "auth"),
                 1);
+        String path;
         switch (action) {
             case CONFIRM:
+                path = "confirm";
+                break;
             case UNLOCK:
+                path = "unlock";
+                break;
             case RESET_PASSWORD:
+                path = "reset-password";
                 break;
             default:
                 throw new ForbiddenException();
@@ -242,12 +252,20 @@ public class UsersController {
         packer
                 .packString(user.getEmail())
                 .packString(messageSource.getMessage(
-                        String.format("auth.emails.%s.subject", action.name()),
+                        String.format("auth.emails.%s.subject", path),
                         null,
                         locale))
                 .packString(messageSource.getMessage(
-                        String.format("auth.emails.%s.body", action.name()),
-                        new Object[]{user.getFullName(), token},
+                        String.format("auth.emails.%s.body", path),
+                        new Object[]{
+                                user.getFullName(),
+                                String.format(
+                                        "https://%s/users/%s/%s",
+                                        settingService.get("site.domain",String.class),
+                                        path,
+                                        token
+                                        ),
+                        },
                         locale));
         packer.close();
 
@@ -266,5 +284,7 @@ public class UsersController {
     JobSender jobSender;
     @Resource
     JwtHelper jwtHelper;
+    @Resource
+    SettingService settingService;
     private static final Logger logger = LoggerFactory.getLogger(UsersController.class);
 }

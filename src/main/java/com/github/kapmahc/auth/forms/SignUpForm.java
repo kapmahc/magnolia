@@ -17,7 +17,7 @@ public class SignUpForm implements Serializable {
     @Size(min = 2, max = 255)
     private String fullName;
     @NotEmpty
-    @Size(min = 6)
+    @Size(min = 6, max=255)
     private String password;
     private String passwordConfirmation;
 

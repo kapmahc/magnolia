@@ -23,6 +23,7 @@
 <body>
 <div th:replace="fragments/header :: header">Header</div>
 <div class="container">
+    <div th:replace="fragments/flash :: flash">Flash</div>
     <section layout:fragment="content">
         <p>Page content goes here</p>
     </section>

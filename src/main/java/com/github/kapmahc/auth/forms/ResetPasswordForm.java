@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class ResetPasswordForm implements Serializable {
     private String token;
     @NotEmpty
-    @Size(min = 6)
+    @Size(min = 6, max=255)
     private String password;
     private String passwordConfirmation;
 
